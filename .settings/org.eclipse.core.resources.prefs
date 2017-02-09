@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/coin/coin_projec/UserController.java=UTF-8
+encoding//src/main/java/mapper/userMapper.xml=UTF-8
+encoding//src/main/java/org/zerock/persistence/User.java=UTF-8
+encoding//src/main/java/org/zerock/persistence/UserDAO.java=UTF-8
+encoding//src/main/java/org/zerock/persistence/UserDAOImpl.java=UTF-8
+encoding//src/main/java/org/zerock/persistence/UserMapper.java=UTF-8
+encoding//src/main/java/org/zerock/service/UserService.java=UTF-8
+encoding//src/main/java/org/zerock/service/UserServiceImpl.java=UTF-8
+encoding/<project>=UTF-8

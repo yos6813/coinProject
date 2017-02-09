@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.UserDAO">
+	<insert id="create" parameterType="org.zerock.persistence.User">
+		insert into usertbl (email, username, photoURL, nickname, slackID, joinDate, address, address2, extension, workPhone, phone, coin) values
+		(#{email},#{username},#{photoURL},#{nickname},#{slackID},#{joinDate},#{address},#{address2},#{extension},#{workPhone},#{phone},"1000")
+	</insert>
+	
+	<select id="listAll" resultType="org.zerock.persistence.User">
+		select email, username, photoURL, slackID, coin from usertbl
+	</select>
+	
+	<update id="update">
+		update usertbl set coin=#{coin} where email = #{email}
+	</update>
+	
+	<select id="read" resultType="org.zerock.persistence.User">
+		select * from usertbl where email = #{email}
+	</select>
+</mapper>
