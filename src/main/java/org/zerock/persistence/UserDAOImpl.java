@@ -2,6 +2,7 @@ package org.zerock.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,13 +24,18 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public List<User> listAll() {
-		return session.selectList(namespace + ".listAll");
+	public List<User> listAll(String email) {
+		return session.selectList(namespace + ".listAll", email);
 	}
 
 	@Override
 	public void update(User vo) {
 		session.update(namespace + ".update", vo);
+	}
+	
+	@Override
+	public void update2(User vo) {
+		session.update(namespace + ".update2", vo);
 	}
 
 	@Override

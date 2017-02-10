@@ -8,12 +8,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{email},#{username},#{photoURL},#{nickname},#{slackID},#{joinDate},#{address},#{address2},#{extension},#{workPhone},#{phone},"1000")
 	</insert>
 	
-	<select id="listAll" resultType="org.zerock.persistence.User">
-		select email, username, photoURL, slackID, coin from usertbl
+	<select id="listAll" parameterType="map" resultType="org.zerock.persistence.User">
+		select email, username, photoURL, slackID, coin from usertbl where not email = #{email}
 	</select>
 	
 	<update id="update">
-		update usertbl set coin=#{coin} where email = #{email}
+		update usertbl set coin=#{coin2} where email = #{email};
+	</update>
+	
+	<update id="update2">
+		<if test="email2 != '' and coin != null">
+			update usertbl set coin=coin+ #{coin} where email in
+<!-- 			<foreach collection="email2" item="email2" open="('" separator="','" close="')"> -->
+				(${email2})
+<!-- 			</foreach> -->
+		</if>
 	</update>
 	
 	<select id="read" resultType="org.zerock.persistence.User">

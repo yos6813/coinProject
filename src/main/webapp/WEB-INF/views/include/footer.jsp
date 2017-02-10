@@ -20,8 +20,10 @@
     <script src="/resources/dist/js/main.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/resources/dist/js/demo.js" type="text/javascript"></script>
+    <!-- sweetalert -->
+    <script src="/resources/plugins/sweetalert/sweetalert.min.js"></script>
     <script>
-    	$('input[type="radio"].minimal').iCheck({
+    	$('input[type="checkbox"].minimal').iCheck({
 	        checkboxClass: 'icheckbox_minimal-blue',
 	        radioClass: 'iradio_minimal-blue'
 	    });

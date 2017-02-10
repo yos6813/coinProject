@@ -13,7 +13,30 @@ public class User {
 	String workPhone;
 	String phone;
 	String coin;
+	
+	String coin2;
+	String email2;
+	
+	String email3;
 
+	public String getEmail3() {
+		return email3;
+	}
+	public void setEmail3(String email3) {
+		this.email3 = email3;
+	}
+	public String getCoin2() {
+		return coin2;
+	}
+	public void setCoin2(String coin2) {
+		this.coin2 = coin2;
+	}
+	public String getEmail2() {
+		return email2;
+	}
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
 	public String getCoin() {
 		return coin;
 	}

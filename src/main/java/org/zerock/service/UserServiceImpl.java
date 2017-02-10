@@ -1,6 +1,7 @@
 package org.zerock.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,13 +20,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> listAll() {
-		return dao.listAll();
+	public List<User> listAll(String email) {
+		return dao.listAll(email);
 	}
 
 	@Override
 	public void update(User vo) {
 		dao.update(vo);
+	}
+	
+	@Override
+	public void update2(User vo) {
+		dao.update2(vo);
 	}
 
 	@Override

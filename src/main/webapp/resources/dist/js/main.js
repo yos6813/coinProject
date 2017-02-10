@@ -17,7 +17,7 @@ $('#login').click(function(){
 			console.log('success');
 			firebase.database().ref('users/' + user.uid).on('value', function(snapshot){
 				if(snapshot.val() != undefined){
-					location.href = '/';
+					location.href = '/home?email=' + user.email;
 				}else {
 					location.href = '/register';
 				}
@@ -28,7 +28,7 @@ $('#login').click(function(){
 
 $('#signout').click(function(){
 	firebase.auth().signOut();
-	location.href="/login"
+	location.href="/"
 })
 
 function writeUserInfo(userId, name, email, imageUrl){
@@ -107,6 +107,7 @@ function sample6_execDaumPostcode() {
 $(document).ready(function(){
 	firebase.auth().onAuthStateChanged(function(user){
 		if(user){
+			$('#user').text(user.email);
 			$('#userImg').attr('src', user.photoURL);
 			$('#username').text(user.displayName);
 			$('#dropUserImg1').attr('src', user.photoURL);
@@ -114,13 +115,28 @@ $(document).ready(function(){
 			$('#sideuserImg').attr('src', user.photoURL);
 			$('#sideusername').text(user.displayName);
 			$('#sideEmail').text(user.email);
+			$('#email').val(user.email);
+			$('#userEmail').val(user.email);
+		}
+		
+		$("input[type=checkbox]").change(function(){
+	        if($("input[type=checkbox]").is(":checked")){
+	        	$('#coin1').val(parseInt($('#coin4').text()) - $('input[type="checkbox"]:checked').length * parseInt($('#coin').val()));
+				if(parseInt($('#coin1').text()) < 0){
+					alert("코인이 부족합니다.");
+				}
+	        }
+	    });
+	})
+	
+	$('#coin').keyup(function(){
+		$('#coin1').val(parseInt($('#coin4').text()) - $('input[type="checkbox"]:checked').length * parseInt($('#coin').val()));
+		if(parseInt($('#coin1').val()) < 0){
+			alert("코인이 부족합니다.");
 		}
 	})
 	
-	$('#exchange').click(function(){
-		$('#sendUsername').val($('input[type="radio"]:checked').parents('tr').children('.username').text());
-		$('#sendEmail').val($('input[type="radio"]:checked').val());
-		$('#coin1').val(1000 - parseInt($('#minusCoin').text()));
-		console.log($('#minusCoin').val());
+	$('#exchange2').click(function(){
+		alert("코인을 보냈습니다.");
 	})
 })
