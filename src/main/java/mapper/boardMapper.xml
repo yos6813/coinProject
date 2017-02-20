@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.BoardDAO">
+	<insert id="insertBoard" parameterType="org.zerock.persistence.Board">
+		insert into boardTbl(writeUser, writeDate, pNo, projectDate, text, budget, pm, status)
+		values(#{writeUser}, #{writeDate}, #{pNo}, #{projectDate}, #{text}, #{budget}, #{pm}, #{status});
+	</insert>
+	
+	<select id="listBoard" parameterType="list" resultType="org.zerock.persistence.Board">
+		select * from v_boardTbl 
+		<choose>
+			<when test="type=='pName'">
+				where pName like CONCAT('%', #{keyword} , '%')
+			</when>
+			<when test="type=='pm'">
+				where pm like CONCAT('%', #{keyword} , '%')
+			</when>
+		</choose>
+		order by bNo desc;
+	</select>
+	
+	<select id="viewBoard" resultType="org.zerock.persistence.Board">
+		select * from v_boardTbl where bNo = #{bNo};
+	</select>
+	
+	<select id="getBoard" resultType="org.zerock.persistence.Board">
+		select * from v_getBoard where bNo = #{bNo};
+	</select>
+	
+	<insert id="insertActivity" parameterType="org.zerock.persistence.Board">
+		insert into activityTbl(bNo, aName, aDate, aM, aText, aWriteD, aWriteU)
+		values(#{bNo}, #{aName}, #{aDate}, #{aM}, #{aText}, #{aWriteD}, #{aWriteU});
+	</insert>
+	
+	<select id="ActivityList" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} order by aNo desc;
+	</select>
+	
+	<select id="viewActivity" resultType="org.zerock.persistence.Board">
+		select * from v_getActivity where aNo = #{aNo};
+	</select>
+</mapper>

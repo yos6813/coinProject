@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.persistence.Project;
 import org.zerock.persistence.User;
+import org.zerock.service.ProjectService;
 import org.zerock.service.UserService;
 
 /**
@@ -37,6 +39,7 @@ public class HomeController {
 	public String home(@RequestParam("email") String email, Locale locale, Model model, User user) {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list", service.listAll(email));
+		
 		return "home";
 	}
 	

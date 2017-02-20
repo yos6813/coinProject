@@ -13,12 +13,19 @@ public class User {
 	String workPhone;
 	String phone;
 	String coin;
+	String grade;
 	
 	String coin2;
 	String email2;
 	
 	String email3;
 
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public String getEmail3() {
 		return email3;
 	}

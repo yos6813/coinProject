@@ -1,32 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.0
-        </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-      </footer>
-    </div>
-    <!-- firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='/resources/plugins/fastclick/fastclick.min.js'></script>
-    <!-- iCheck -->
-    <script src="/resources/plugins/iCheck/icheck.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/resources/dist/js/app.min.js" type="text/javascript"></script>
-    <script src="/resources/dist/js/main.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="/resources/dist/js/demo.js" type="text/javascript"></script>
-    <!-- sweetalert -->
-    <script src="/resources/plugins/sweetalert/sweetalert.min.js"></script>
-    <script>
-    	$('input[type="checkbox"].minimal').iCheck({
-	        checkboxClass: 'icheckbox_minimal-blue',
-	        radioClass: 'iradio_minimal-blue'
-	    });
-    </script>
-  </body>
-</html>
+			<div class="footer">
+	            <div class="pull-right">
+	                10GB of <strong>250GB</strong> Free.
+	            </div>
+	            <div>
+	                <strong>Copyright</strong> Example Company &copy; 2014-2017
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    
+<!-- Mainly scripts -->
+<script src="/resources/js/jquery-2.1.1.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/resources/js/main.js"></script>
+
+<!-- Flot -->
+<script src="/resources/js/plugins/flot/jquery.flot.js"></script>
+<script src="/resources/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="/resources/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="/resources/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="/resources/js/plugins/flot/jquery.flot.pie.js"></script>
+
+<!-- Peity -->
+<script src="/resources/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="/resources/js/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/resources/js/inspinia.js"></script>
+<script src="/resources/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="/resources/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- GITTER -->
+<script src="/resources/js/plugins/gritter/jquery.gritter.min.js"></script>
+
+<!-- Sparkline -->
+<script src="/resources/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="/resources/js/demo/sparkline-demo.js"></script>
+
+<!-- ChartJS-->
+<script src="/resources/js/plugins/chartJs/Chart.min.js"></script>
+
+<!-- Toastr -->
+<script src="/resources/js/plugins/toastr/toastr.min.js"></script>
+<script src="/resources/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/resources/js/plugins/daterangepicker/moment.min.js"></script>
+<script src="/resources/js/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/resources/js/plugins/select2/select2.full.min.js"></script>
+<script>
+ $('#aDate').daterangepicker({
+     format: 'YYYY/MM/DD'
+ });
+ 
+ $('#registerDate').datepicker({
+     autoclose: true,
+     format: 'yyyy-mm-dd'
+ });
+ 
+ $('#projectDate').daterangepicker({
+	 format: 'YYYY/MM/DD',
+	 timePicker: true,
+ 	 timePickerIncrement: 30
+ });
+ 
+ $('input[type="checkbox"].minimal').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue',
+    radioClass: 'iradio_minimal-blue'
+ });
+ 
+ $(".select2").select2();
+</script>

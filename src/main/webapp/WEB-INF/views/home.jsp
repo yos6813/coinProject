@@ -3,17 +3,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="include/header.jsp" %>
-	<section class="content">
+<!-- Content Wrapper. Contains page content -->
+ <div class="row wrapper border-bottom white-bg page-heading">
+    <!-- Content Header (Page header) -->
+      <h1>
+        Board Management
+        <small>Preview</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li class="active">General Elements</li>
+      </ol>
+    </div>
+    <div class="wrapper-content">
+	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header text-center with-border">
-						<button id="coinbtn" class="btn bg-navy" data-toggle="modal" data-target="#myModal">코인 교환</button>
+						<button id="coinbtn" class="btn btn-white" data-toggle="modal" data-target="#myModal">코인 교환</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -42,9 +56,9 @@
 		      			<tr>
 		      				<td>
 			      				<label>
-			                  		<input type="checkbox" class="minimal" value="${user.email}">
+			                  		<input type="checkbox" value="${user.email}">
 			                  		<input type="text" style="display: none;" name="email2" value="'${user.email}'" />
-			                	</label>
+		                		</label>
 		                	</td>
 		      				<td><img src="${user.photoURL}" class="img-circle"></td>
 							<td class="username">${user.username}</td>

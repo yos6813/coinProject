@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.ProjectDAO">
+	<select id="listProject" parameterType="list" resultType="org.zerock.persistence.Project">
+			SELECT * FROM projectTbl ORDER BY (
+    		CASE pNo
+    		WHEN #{pNo} THEN 1
+            ELSE 2
+    		END);
+	</select>
+	
+	<select id="readProject" parameterType="list" resultType="org.zerock.persistence.Project">
+		select * from projectTbl where pNo = #{pNo};
+	</select>
+	
+	<select id="viewList" parameterType="list" resultType="org.zerock.persistence.Project">
+			select * from projectTbl order by pNo desc;
+	</select>
+	
+	<select id="listTOA" parameterType="list" resultType="org.zerock.persistence.Project">
+			select * from toaTbl where pNo = #{pNo};
+	</select>
+	
+	<select id="viewPT" parameterType="list" resultType="org.zerock.persistence.Project">
+			select t.tNo, t.pNo, p.pName, t.tName from toaTbl t left outer join projectTbl p on p.pNo = t.pNo order by t.tNo desc;
+	</select>
+	
+	<insert id="insertProject" parameterType="org.zerock.persistence.Project">
+		insert into projectTbl(pName, projectDate, adminUser, status) values(#{pName}, #{projectDate}, #{adminUser}, #{status});
+	</insert>
+	
+	<insert id="insertTOA" parameterType="org.zerock.persistence.Project">
+		insert into toaTbl(tNo, tName, pNo) values(#{tNo}, #{tName}, #{pNo});
+	</insert>
+</mapper>
