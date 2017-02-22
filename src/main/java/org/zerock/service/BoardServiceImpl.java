@@ -47,4 +47,29 @@ public class BoardServiceImpl implements BoardService{
 	public Board viewActivity(int aNo) {
 		return dao.viewActivity(aNo);
 	}
+
+	@Override
+	public List<Board> countList1(Board board) {
+		return dao.countList1(board);
+	}
+
+	@Override
+	public List<Board> countList2(Board board) {
+		return dao.countList2(board);
+	}
+
+	@Override
+	public List<Board> countList3(Board board) {
+		return dao.countList3(board);
+	}
+
+	@Override
+	public List<Board> countList4(Board board) {
+		return dao.countList4(board);
+	}
+
+	@Override
+	public List<Board> countList5(Board board) {
+		return dao.countList5(board);
+	}
 }

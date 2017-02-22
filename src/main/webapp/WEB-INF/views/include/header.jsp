@@ -44,7 +44,7 @@
                             F
                         </div>
                     </li>
-                    <li><a href="/home?email=${user.email}"><i class="fa fa-home"></i><span>Home</span></a></li>
+                    <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>Home</span></a></li>
 		            <li><a href="/task?email=${user.email}"><i class="fa fa-list-alt"></i> <span>업무관리</span></a></li>
 		            <li><a href="/admit?email=${user.email}"><i class="fa fa-table"></i> <span>관리페이지</span></a></li>
                 </ul>

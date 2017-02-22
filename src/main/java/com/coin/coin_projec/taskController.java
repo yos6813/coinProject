@@ -1,11 +1,7 @@
 package com.coin.coin_projec;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.persistence.Board;
-import org.zerock.persistence.Paging;
+import org.zerock.persistence.PageMaker;
 import org.zerock.persistence.Project;
 import org.zerock.persistence.User;
 import org.zerock.service.BoardService;
@@ -45,14 +42,6 @@ public class taskController {
 		try {
 			model.addAttribute(service.read(email));
 			model.addAttribute("list", bService.listBoard(board));
-			
-			Paging paging = new Paging();
-	        paging.setPageNo(1);
-	        paging.setPageSize(10);
-			paging.setTotalCount();
-
-
-	        // (After) Doing...
 	    } catch (Exception e) {
 	        throw e;
 	    }

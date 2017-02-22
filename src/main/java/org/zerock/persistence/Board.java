@@ -39,7 +39,14 @@ public class Board {
 	String aText;
 	String aWriteD;
 	String aWriteU;
+	String aStatus;
 	
+	public String getaStatus() {
+		return aStatus;
+	}
+	public void setaStatus(String aStatus) {
+		this.aStatus = aStatus;
+	}
 	public String getType() {
 		return type;
 	}

@@ -3,6 +3,7 @@ package org.zerock.persistence;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.management.Query;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -47,5 +48,30 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public Board viewActivity(int aNo) {
 		return session.selectOne(namespace + ".viewActivity", aNo);
+	}
+
+	@Override
+	public List<Board> countList1(Board board) {
+		return session.selectList(namespace + ".countList1", board);
+	}
+
+	@Override
+	public List<Board> countList2(Board board) {
+		return session.selectList(namespace + ".countList2", board);
+	}
+
+	@Override
+	public List<Board> countList3(Board board) {
+		return session.selectList(namespace + ".countList3", board);
+	}
+
+	@Override
+	public List<Board> countList4(Board board) {
+		return session.selectList(namespace + ".countList4", board);
+	}
+
+	@Override
+	public List<Board> countList5(Board board) {
+		return session.selectList(namespace + ".countList5", board);
 	}
 }

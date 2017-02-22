@@ -268,3 +268,97 @@ $(document).ready(function(){
 		location.href = "/viewActivity?email=" + firebase.auth().currentUser.email + "&bNo=" + bno + "&aNo=" + $(this).attr('value');
 	})
 })
+
+/* Project List */
+$(document).ready(function(){
+	$(".projectList").click(function(){
+		location.href = "/projectView?email=" + firebase.auth().currentUser.email + "&bNo=" + $(this).attr('value');
+	})
+	var pieChartDataSource = [
+	    { category: '진행중', value: $('#ongoing').attr('value') },
+	    { category: '대기', value: $('#standby').attr('value') },
+	    { category: '완료', value: $('#c​omplete').attr('value') },
+	    { category: '보류', value: $('#defer').attr('value') },
+	    { category: '기간초과', value: $('#excess').attr('value') }
+	];
+
+	$(function () {
+	    $("#pie").dxPieChart({
+	    	type: "doughnut",
+	    	palette: "Harmony Light",
+	        dataSource: pieChartDataSource,
+	        series: {
+	        	palette: "Harmony Light",
+	        	type: "doughnut",
+	            argumentField: 'category',
+	            valueField: 'value'
+	        },
+	        loadingIndicator:{
+	        	show:true
+	        },
+	        legend: {
+	            horizontalAlignment: 'center',
+	            verticalAlignment: 'bottom'
+	        },
+	        pathModified: true,
+	        tooltip: {
+	            enabled: true,
+	            customizeTooltip: function (value) {
+	                return { text: value.valueText };
+	            }
+	        }
+	    });
+	});
+	
+	var dataSource = [];
+	for(var i=0; i<$('.activityList').size(); i++){
+		var date1 = $('.activityList').eq(i).children('td').eq(1).attr('value');
+		var date2 = date1.split('-');
+		var date3 = date2[0].split('/');
+		var date4 = date2[1].split('/');
+		
+		dataSource.push({
+			date: $('.activityList').eq(i).children('td').eq(0).attr('value'),
+			aVal1: new Date(date3[0], date3[1]-1, date3[2]),
+			aVal2: new Date(date4[0], date4[1]-1, date4[2])
+		})
+	}
+	
+	$(function(){
+	    $("#chart").dxChart({
+	        palette: "violet",
+//	        rotated: true,
+	        dataSource: dataSource,
+	        commonSeriesSettings: {
+	        	argumentField: "date",
+	            type: "rangeBar"      
+	        },
+	        loadingIndicator:{
+	        	show:true
+	        },
+	        series: [
+	            { 
+	                rangeValue1Field: "aVal1", 
+	                rangeValue2Field: "aVal2"
+	            }
+	        ],
+	        "export": {
+	            enabled: true
+	        },
+	        legend: {
+	        	visible: false
+	        },
+	        tooltip: {
+	            enabled: true,
+	            customizeTooltip: function (value) {
+	            	var day = value.valueText;
+	            	var day1 = day.split('-');
+	            	var day2 = day1[0].split('00');
+	            	var day3 = day1[1].split('00');
+	            	
+	                return { text: day2[0] + "-" + day3[0] };
+	            }
+	        }
+	    });
+	});
+})

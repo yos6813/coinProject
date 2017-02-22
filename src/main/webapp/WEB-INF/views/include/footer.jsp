@@ -56,6 +56,11 @@
 <script src="/resources/js/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="/resources/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/resources/js/plugins/select2/select2.full.min.js"></script>
+<!-- DevExtreme dependencies -->
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+<!-- A DevExtreme library -->
+<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/15.1.11/js/dx.chartjs.js"></script>
+<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/15.1.11/js/dx.all.js"></script>
 <script>
  $('#aDate').daterangepicker({
      format: 'YYYY/MM/DD'
@@ -79,3 +84,5 @@
  
  $(".select2").select2();
 </script>
+</body>
+</html>

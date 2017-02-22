@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where pm like CONCAT('%', #{keyword} , '%')
 			</when>
 		</choose>
-		order by bNo desc;
+		order by bNo desc
 	</select>
 	
 	<select id="viewBoard" resultType="org.zerock.persistence.Board">
@@ -30,15 +30,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertActivity" parameterType="org.zerock.persistence.Board">
-		insert into activityTbl(bNo, aName, aDate, aM, aText, aWriteD, aWriteU)
-		values(#{bNo}, #{aName}, #{aDate}, #{aM}, #{aText}, #{aWriteD}, #{aWriteU});
+		insert into activityTbl(bNo, aName, aDate, aM, aText, aWriteD, aWriteU, aStatus)
+		values(#{bNo}, #{aName}, #{aDate}, #{aM}, #{aText}, #{aWriteD}, #{aWriteU}, #{aStatus});
 	</insert>
 	
 	<select id="ActivityList" resultType="org.zerock.persistence.Board">
 		select * from v_activityTbl where bNo = #{bNo} order by aNo desc;
 	</select>
 	
+	<select id="countList1" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} and aStatus = '진행중';
+	</select>
+	<select id="countList2" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} and aStatus = '대기';
+	</select>
+	<select id="countList3" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} and aStatus = '완료';
+	</select>
+	<select id="countList4" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} and aStatus = '보류';
+	</select>
+	<select id="countList5" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} and aStatus = '기간초과';
+	</select>
+	
 	<select id="viewActivity" resultType="org.zerock.persistence.Board">
-		select * from v_getActivity where aNo = #{aNo};
+		select * from v_getactivityTbl where aNo = #{aNo};
 	</select>
 </mapper>
