@@ -41,8 +41,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> ActivityList(Board board) {
-		return session.selectList(namespace + ".ActivityList", board);
+	public List<Board> ActivityList(Criteria cri) {
+		return session.selectList(namespace + ".ActivityList", cri);
 	}
 
 	@Override
@@ -71,7 +71,58 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> countList5(Board board) {
-		return session.selectList(namespace + ".countList5", board);
+	public List<Board> listPage(int page) {
+		if(page<=0){
+			page = 1;
+		}
+		
+		page = (page - 1) * 10;
+		
+		return session.selectList(namespace + ".listPage", page);
+	}
+
+	@Override
+	public List<Board> listCriteria(Criteria cri) {
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) {
+		return session.selectOne(namespace + ".countPaging", cri);
+	}
+
+	@Override
+	public int countAPaging(Criteria cri) {
+		return session.selectOne(namespace + ".countAPaging", cri);
+	}
+
+	@Override
+	public List<Board> ActivityList1(Board board) {
+		return session.selectList(namespace + ".ActivityList1", board);
+	}
+
+	@Override
+	public void insertTask(Board board) {
+		session.insert(namespace + ".insertTask", board);
+	}
+
+	@Override
+	public List<Board> listTask(Criteria cri) {
+		return session.selectList(namespace + ".listTask", cri);
+	}
+
+	@Override
+	public List<Board> countTask(Board board) {
+		return session.selectList(namespace + ".countTask", board);
+	}
+
+	@Override
+	public int countTPaging(Criteria cri) {
+		return session.selectOne(namespace + ".countTPaging", cri);
+	}
+
+	@Override
+	public List<Board> taskView(Board board) {
+		return session.selectList(namespace + ".taskView", board);
 	}
 }

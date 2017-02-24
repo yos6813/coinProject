@@ -8432,3 +8432,9 @@ body.md-skin {
 	border-top:0px;
 	border-left: 0px;
 }
+
+#chart{
+	max-height: 100%;
+/* 	height: 600px; */
+	padding: 25px;
+}

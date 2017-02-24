@@ -61,5 +61,50 @@
 		    	</div>
 	     	</div>
      	</div>
+     	<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+		    	<div class="col-md-12">
+					<div class="ibox">
+						<div class="ibox-content">
+							Task
+							<a href="/createTask?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}" class="pull-right btn-sm btn btn-white">task 생성</a>
+							<table class="table">
+								<tr>
+									<th style="width:100px">#</th>
+									<th style="width: 300px">기간</th>
+									<th>Task Name</th>
+									<th style="width: 250px">Task 매니저</th>
+									<th style="width: 150px">일자</th>
+								</tr>
+								<c:forEach  items="${list}" var="board">
+									<tr class="viewTask" value="${board.tNo}">
+										<td>${board.tNo}</td>
+										<td>${board.tDate}</td>
+										<td>${board.tName}</td>
+										<td>${board.tMName}</td>
+										<td>${board.tWriteD}</td>
+									</tr>
+								</c:forEach>
+							</table>
+							<div class="text-center">
+							<ul class="pagination">
+								<c:if test="${pageMaker.prev}">
+									<li class="page-item"><a class="page-link" href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}&page=${pageMaker.startPage-1}"><i class="fa fa-chevron-left"></i></a></li>
+								</c:if>
+								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+									<li class="page-item" <c:out value="${pageMaker.cri.page} == idx?'class=active':''"/>>
+										<a class="page-link" href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}&page=${idx}">${idx}</a>
+									</li>
+								</c:forEach>
+								<c:if test="${pageMaker.next && pageMaker.endPage >0}">
+									<li class="page-item"><a class="page-link" href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}&page=${pageMaker.endPage+1}">&raquo;</a></li>
+								</c:if>
+							</ul>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 <%@include file="../include/footer.jsp" %>

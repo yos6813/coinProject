@@ -60,14 +60,23 @@
 						</tr>
 						<tr class="activity">
 							<td>기간초과</td>
-							<td id="excess" value="${list7.size()}">${list7.size()}</td>
+							<td id="excess" value="0">0</td>
 						</tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-lg-5">
-            <div class="ibox">
+        <h3>Activity Graph</h3>
+        <div class="col-lg-6">
+        	<div class="social-feed-box">
+                <div class="social-avatar">
+                    <div class="media-body">
+                    </div>
+                </div>
+                <div id="chart">
+                </div>
+            </div>
+            <div class="ibox" style="display: none;">
                 <div class="ibox-content">
                     <h3>
                     	Activity List
@@ -75,100 +84,44 @@
                     <table class="table">
                     	<tr class="activity">
 							<th>액티비티명</th>
-							<th>기간</th>
+							<th>진행중</th>
+							<th>대기</th>
+							<th>완료</th>
+							<th>보류</th>
+							<th>기간초과</th>
 						</tr>
-		                <c:forEach items="${list2}" var="board">
-							<tr class="activityList">
-								<td value="${board.aName}">${board.aName}</td>
-								<td value="${board.aDate}">${board.aDate}</td>
-							</tr>
-		                </c:forEach>
+						<c:forEach items="${list1}" var="board">
+						<tr class="activeC">
+							<td value="${board.aNo}">${board.aName}</td>
+							<td value="${board.aStatus}">${board.aStatus}</td>
+							<td value="${board.aM}">${board.aM}</td>
+							<td value="${board.ongoing}">${board.ongoing}</td>
+							<td value="${board.standby}">${board.standby}</td>
+							<td value="${board.complete}">${board.complete}</td>
+							<td value="${board.defer}">${board.defer}</td>
+							<td>0</td>
+						</tr>
+						</c:forEach>
               		</table>
                 </div>
             </div>
-            <div class="social-feed-box">
-                <div class="social-avatar">
-                    <div class="media-body">
-                        <h3>
-                        	Activity Graph
-                        </h3>
-                    </div>
-                </div>
-                <div id="chart" class="social-body">
-                </div>
-            </div>
         </div>
-        <div class="col-lg-4 m-b-lg">
-            <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon navy-bg">
-                        <i class="fa fa-briefcase"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Meeting</h2>
-                        <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the sale.
-                        </p>
-                        <a href="#" class="btn btn-sm btn-primary"> More info</a>
+        <h3><b>Task List</b></h3>
+        <div class="col-lg-3 m-b-lg">
+           	<div>
+            	<c:forEach items="${list7}" var="board">
+	                <div class="ibox">
+	                	<div class="ibox-content">
+	                		<p class="tStatus label">${board.tStatus}</p>
+	                        <h3>${board.tName}</h3>
+	                        <p>${board.tText}</p>
+	                        <p class="text text-warning">${board.tMName}</p>
                             <span class="vertical-date">
-                                Today <br>
-                                <small>Dec 24</small>
+                            	${board.tDate}
                             </span>
-                    </div>
-                </div>
-
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon blue-bg">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Send documents to Mike</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn btn-sm btn-success"> Download document </a>
-                            <span class="vertical-date">
-                                Today <br>
-                                <small>Dec 24</small>
-                            </span>
-                    </div>
-                </div>
-
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon lazur-bg">
-                        <i class="fa fa-coffee"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Coffee Break</h2>
-                        <p>Go to shop and find some products. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
-                        <a href="#" class="btn btn-sm btn-info">Read more</a>
-                        <span class="vertical-date"> Yesterday <br><small>Dec 23</small></span>
-                    </div>
-                </div>
-
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon yellow-bg">
-                        <i class="fa fa-phone"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Phone with Jeronimo</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
-                        <span class="vertical-date">Yesterday <br><small>Dec 23</small></span>
-                    </div>
-                </div>
-
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon navy-bg">
-                        <i class="fa fa-comments"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Chat with Monica and Sandra</h2>
-                        <p>Web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </p>
-                        <span class="vertical-date">Yesterday <br><small>Dec 23</small></span>
-                    </div>
-                </div>
+	                    </div>
+	                </div>
+            	</c:forEach>
             </div>
         </div>
     </div>

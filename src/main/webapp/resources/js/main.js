@@ -264,7 +264,7 @@ $(document).ready(function(){
 
 /* view Task */
 $(document).ready(function(){
-	$(".activityList").click(function(){
+	$(".activityList1").click(function(){
 		location.href = "/viewActivity?email=" + firebase.auth().currentUser.email + "&bNo=" + bno + "&aNo=" + $(this).attr('value');
 	})
 })
@@ -309,56 +309,74 @@ $(document).ready(function(){
 	        }
 	    });
 	});
-	
+
 	var dataSource = [];
-	for(var i=0; i<$('.activityList').size(); i++){
-		var date1 = $('.activityList').eq(i).children('td').eq(1).attr('value');
-		var date2 = date1.split('-');
-		var date3 = date2[0].split('/');
-		var date4 = date2[1].split('/');
-		
+	for(var i=0; i<$('.activeC').size(); i++){
 		dataSource.push({
-			date: $('.activityList').eq(i).children('td').eq(0).attr('value'),
-			aVal1: new Date(date3[0], date3[1]-1, date3[2]),
-			aVal2: new Date(date4[0], date4[1]-1, date4[2])
+			name1: $('.activeC').eq(i).children('td').eq(0).text() + "<br/>-" 
+				 + $('.activeC').eq(i).children('td').eq(2).text() + "<br/>("
+				 + $('.activeC').eq(i).children('td').eq(1).text() + ")",
+			ongoing: parseInt($('.activeC').eq(i).children('td').eq(3).attr('value')),
+			standby: parseInt($('.activeC').eq(i).children('td').eq(4).attr('value')),
+			complete: parseInt($('.activeC').eq(i).children('td').eq(5).attr('value')),
+			defer: parseInt($('.activeC').eq(i).children('td').eq(6).attr('value')),
+			no: $('.activeC').eq(i).children('td').eq(0).attr('value')
 		})
 	}
 	
 	$(function(){
 	    $("#chart").dxChart({
-	        palette: "violet",
-//	        rotated: true,
 	        dataSource: dataSource,
+	        rotated: true,
+	        equalBarWidth: false,
+	        palette: "Harmony Light",
 	        commonSeriesSettings: {
-	        	argumentField: "date",
-	            type: "rangeBar"      
-	        },
-	        loadingIndicator:{
-	        	show:true
+	            argumentField: "name1",
+	            type: "stackedBar",
+	            tagField: "no"
 	        },
 	        series: [
-	            { 
-	                rangeValue1Field: "aVal1", 
-	                rangeValue2Field: "aVal2"
-	            }
+	            {valueField: "ongoing", name: "진행중" },
+	            {valueField: "standby", name: "대기" },
+	            {valueField: "complete", name: "완료" },
+	            {valueField: "defer", name: "보류" }
 	        ],
+	        legend: {
+	            verticalAlignment: "bottom",
+	            horizontalAlignment: "center",
+	            itemTextPosition: 'top'
+	        },
+	        valueAxis: {
+	            position: "right"
+	        },
 	        "export": {
 	            enabled: true
 	        },
-	        legend: {
-	        	visible: false
-	        },
 	        tooltip: {
 	            enabled: true,
-	            customizeTooltip: function (value) {
-	            	var day = value.valueText;
-	            	var day1 = day.split('-');
-	            	var day2 = day1[0].split('00');
-	            	var day3 = day1[1].split('00');
-	            	
-	                return { text: day2[0] + "-" + day3[0] };
+	            location: "edge",
+	            customizeTooltip: function (arg) {
+                	 return {
+                		 text: arg.seriesName + "/ " + arg.valueText
+                	 };
 	            }
+	        },
+	        onPointClick: function (info) {
+	        	var clickedPoint = info.target;
+	        	location.href="/projectView?email=" + email + "&bNo=" + bno + "&aNo=" + clickedPoint.tag
 	        }
 	    });
 	});
+	
+	if($('.tStatus').text()=='진행중'){
+		$('.tStatus').addClass('label-primary');
+	} else if($('.tStatus').text()=='대기'){
+		$('.tStatus').addClass('label-default');
+	} else if($('.tStatus').text()=='보류'){
+		$('.tStatus').addClass('label-warning');
+	} else if($('.tStatus').text()=='완료'){
+		$('.tStatus').addClass('label-success');
+	} else if($('.tStatus').text()=='기간초과'){
+		$('.tStatus').addClass('label-error');
+	}
 })

@@ -4,19 +4,37 @@ public class Criteria {
 
 	private int page;	
 	private int perPageNum;
+	int bNo;
+	int aNo;
+	int tNo;
 	
+	public int gettNo() {
+		return tNo;
+	}
+
+	public void settNo(int tNo) {
+		this.tNo = tNo;
+	}
+
+	public int getaNo() {
+		return aNo;
+	}
+
+	public void setaNo(int aNo) {
+		this.aNo = aNo;
+	}
+
+	public int getbNo() {
+		return bNo;
+	}
+
+	public void setbNo(int bNo) {
+		this.bNo = bNo;
+	}
+
 	public Criteria(){
 		this.page = 1;
-		this.perPageNum = 10;
-	}
-	
-	public Criteria(int page, int perPageNum){
-		this.page = page;
-		this.perPageNum = perPageNum;
-	}
-	
-	public Criteria(int perPageNum){
-		this.perPageNum = perPageNum;
+		this.perPageNum = 5;
 	}
 	
 	public void setPage(int page){
@@ -32,7 +50,7 @@ public class Criteria {
 	public void setPerPageNum(int perPageNum){
 		
 		if(perPageNum <= 0 || perPageNum > 100){
-			this.perPageNum = 10;
+			this.perPageNum = 5;
 			return;
 		}
 		

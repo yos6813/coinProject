@@ -32,6 +32,7 @@ public class Board {
 	String pmName;
 	String writeName;
 	
+	//activity
 	int aNo;
 	String aName;
 	String aDate;
@@ -41,6 +42,122 @@ public class Board {
 	String aWriteU;
 	String aStatus;
 	
+	//Task
+	int tNo;
+	String tName;
+	String tDate;
+	String tStatus;
+	String tM;
+	String tText;
+	String tWriteD;
+	String tWriteU;
+	String tMName;
+	String tWriteName;
+	String tMPhoto;
+	String tWritePhoto;
+	
+	//view Project
+	int ongoing;
+	int standby;
+	int complete;
+	int defer;
+	
+	public int getOngoing() {
+		return ongoing;
+	}
+	public void setOngoing(int ongoing) {
+		this.ongoing = ongoing;
+	}
+	public int getStandby() {
+		return standby;
+	}
+	public void setStandby(int standby) {
+		this.standby = standby;
+	}
+	public int getComplete() {
+		return complete;
+	}
+	public void setComplete(int complete) {
+		this.complete = complete;
+	}
+	public int getDefer() {
+		return defer;
+	}
+	public void setDefer(int defer) {
+		this.defer = defer;
+	}
+	public String gettMName() {
+		return tMName;
+	}
+	public void settMName(String tMName) {
+		this.tMName = tMName;
+	}
+	public String gettWriteName() {
+		return tWriteName;
+	}
+	public void settWriteName(String tWriteName) {
+		this.tWriteName = tWriteName;
+	}
+	public String gettMPhoto() {
+		return tMPhoto;
+	}
+	public void settMPhoto(String tMPhoto) {
+		this.tMPhoto = tMPhoto;
+	}
+	public String gettWritePhoto() {
+		return tWritePhoto;
+	}
+	public void settWritePhoto(String tWritePhoto) {
+		this.tWritePhoto = tWritePhoto;
+	}
+	public int gettNo() {
+		return tNo;
+	}
+	public void settNo(int tNo) {
+		this.tNo = tNo;
+	}
+	public String gettName() {
+		return tName;
+	}
+	public void settName(String tName) {
+		this.tName = tName;
+	}
+	public String gettDate() {
+		return tDate;
+	}
+	public void settDate(String tDate) {
+		this.tDate = tDate;
+	}
+	public String gettStatus() {
+		return tStatus;
+	}
+	public void settStatus(String tStatus) {
+		this.tStatus = tStatus;
+	}
+	public String gettM() {
+		return tM;
+	}
+	public void settM(String tM) {
+		this.tM = tM;
+	}
+	public String gettText() {
+		return tText;
+	}
+	public void settText(String tText) {
+		this.tText = tText;
+	}
+	public String gettWriteD() {
+		return tWriteD;
+	}
+	public void settWriteD(String tWriteD) {
+		this.tWriteD = tWriteD;
+	}
+	public String gettWriteU() {
+		return tWriteU;
+	}
+	public void settWriteU(String tWriteU) {
+		this.tWriteU = tWriteU;
+	}
 	public String getaStatus() {
 		return aStatus;
 	}

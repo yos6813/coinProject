@@ -35,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="ActivityList" resultType="org.zerock.persistence.Board">
+		select * from v_activityTbl where bNo = #{bNo} order by aNo desc limit #{pageStart}, #{perPageNum};
+	</select>
+	
+	<select id="ActivityList1" resultType="org.zerock.persistence.Board">
 		select * from v_activityTbl where bNo = #{bNo} order by aNo desc;
 	</select>
 	
@@ -50,11 +54,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countList4" resultType="org.zerock.persistence.Board">
 		select * from v_activityTbl where bNo = #{bNo} and aStatus = '보류';
 	</select>
-	<select id="countList5" resultType="org.zerock.persistence.Board">
-		select * from v_activityTbl where bNo = #{bNo} and aStatus = '기간초과';
-	</select>
 	
 	<select id="viewActivity" resultType="org.zerock.persistence.Board">
 		select * from v_getactivityTbl where aNo = #{aNo};
+	</select>
+	
+	<select id="listPage" parameterType="list" resultType="org.zerock.persistence.Board">
+		select * from v_boardTbl where bNo > 0 order by bNo desc limit #{page}, 5;
+	</select>
+	
+	<select id="listCriteria" parameterType="list" resultType="org.zerock.persistence.Board">
+		select * from v_boardTbl where bNo > 0 order by bNo desc limit #{pageStart}, #{perPageNum};
+	</select>
+	
+	<select id="countPaging" resultType="int">
+		select count(bNo) from v_boardTbl where bNo > 0;
+	</select>
+	
+	<select id="countAPaging" resultType="int">
+		select count(aNo) from v_activityTbl where aNo > 0 and bNo = #{bNo};
+	</select>
+	
+	<select id="countTPaging" resultType="int">
+		select count(*) from v_activityTbl where aNo > 0 and aNo = #{aNo};
+	</select>
+	
+	<insert id="insertTask" parameterType="org.zerock.persistence.Board">
+		insert into taskTbl(aNo, tName, tDate, tStatus, tM, tText, tWriteD, tWriteU)
+		values(#{aNo}, #{tName}, #{tDate}, #{tStatus}, #{tM}, #{tText}, #{tWriteD}, #{tWriteU});
+	</insert>
+	
+<!-- 	<select id="listTask" parameterType="list" resultType="org.zerock.persistence.Board"> -->
+<!-- 		select * from v_taskTbl where aNo = #{aNo}; -->
+<!-- 	</select> -->
+	
+	<select id="listTask" parameterType="list" resultType="org.zerock.persistence.Board">
+		select * from v_taskTbl where aNo = #{aNo} and aNo > 0 order by aNo desc limit #{pageStart}, #{perPageNum};
+	</select>
+	
+	<select id="viewTask" resultType="org.zerock.persistence.Board">
+		select * from v_getTaskTbl where bNo = #{bNo};
+	</select>
+	
+	<select id="countTask" resultType="org.zerock.persistence.Board">
+		SELECT aNo, aName, bNo, aStatus, aM,
+		 COUNT(CASE WHEN tStatus = '진행중' THEN 1 END) ongoing,
+		 COUNT(CASE WHEN tStatus = '대기' THEN 1 END) standby,
+		 COUNT(CASE WHEN tStatus = '완료' THEN 1 END) complete,
+		 COUNT(CASE WHEN tStatus = '보류' THEN 1 END) defer
+		FROM v_getTasktbl group by aNo having bNo = #{bNo};
+	</select>
+	
+	<select id="taskView" resultType="org.zerock.persistence.Board">
+		select * from v_getTaskTbl where aNo = #{aNo} order by field(tStatus, '진행중', '보류', '대기', '완료');
 	</select>
 </mapper>

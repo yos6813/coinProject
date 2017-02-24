@@ -58,6 +58,21 @@
 								</tr>
 							</c:forEach>
 						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<c:if test="${pageMaker.prev}">
+									<li class="page-item"><a class="page-link" href="/projectList?email=${user.email}&page=${pageMaker.startPage-1}"><i class="fa fa-chevron-left"></i></a></li>
+								</c:if>
+								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+									<li class="page-item" <c:out value="${pageMaker.cri.page} == idx?'class=active':''"/>>
+										<a class="page-link" href="/projectList?email=${user.email}&page=${idx}">${idx}</a>
+									</li>
+								</c:forEach>
+								<c:if test="${pageMaker.next && pageMaker.endPage >0}">
+									<li class="page-item"><a class="page-link" href="/projectList?email=${user.email}&page=${pageMaker.endPage+1}">&raquo;</a></li>
+								</c:if>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

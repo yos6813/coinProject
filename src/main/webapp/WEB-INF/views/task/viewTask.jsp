@@ -80,7 +80,7 @@
 									<th style="width: 150px">일자</th>
 								</tr>
 								<c:forEach items="${list2}" var="board">
-									<tr class="activityList" value="${board.aNo}">
+									<tr class="activityList1" value="${board.aNo}">
 										<td>${board.aNo}</td>
 										<td>${board.aDate }</td>
 										<td>${board.aName}</td>
@@ -89,6 +89,21 @@
 									</tr>
 								</c:forEach>
 							</table>
+							<div class="text-center">
+							<ul class="pagination">
+								<c:if test="${pageMaker.prev}">
+									<li class="page-item"><a class="page-link" href="/viewTask?email=${user.email}&bNo=${board.bNo}&page=${pageMaker.startPage-1}"><i class="fa fa-chevron-left"></i></a></li>
+								</c:if>
+								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+									<li class="page-item" <c:out value="${pageMaker.cri.page} == idx?'class=active':''"/>>
+										<a class="page-link" href="/viewTask?email=${user.email}&bNo=${board.bNo}&page=${idx}">${idx}</a>
+									</li>
+								</c:forEach>
+								<c:if test="${pageMaker.next && pageMaker.endPage >0}">
+									<li class="page-item"><a class="page-link" href="/viewTask?email=${user.email}&bNo=${board.bNo}&page=${pageMaker.endPage+1}">&raquo;</a></li>
+								</c:if>
+							</ul>
+						</div>
 						</div>
 					</div>
 				</div>

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.zerock.persistence.Board;
 import org.zerock.persistence.BoardDAO;
+import org.zerock.persistence.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -39,8 +40,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> ActivityList(Board board) {
-		return dao.ActivityList(board);
+	public List<Board> ActivityList(Criteria cri) {
+		return dao.ActivityList(cri);
 	}
 
 	@Override
@@ -69,7 +70,47 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> countList5(Board board) {
-		return dao.countList5(board);
+	public List<Board> listCriteria(Criteria cri) {
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) {
+		return dao.countPaging(cri);
+	}
+
+	@Override
+	public int listCountACriteria(Criteria cri) {
+		return dao.countAPaging(cri);
+	}
+
+	@Override
+	public List<Board> ActivityList1(Board board) {
+		return dao.ActivityList1(board);
+	}
+
+	@Override
+	public void insertTask(Board board) {
+		dao.insertTask(board);
+	}
+
+	@Override
+	public List<Board> listTask(Criteria cri) {
+		return dao.listTask(cri);
+	}
+
+	@Override
+	public List<Board> countTask(Board board) {
+		return dao.countTask(board);
+	}
+
+	@Override
+	public int listCountTCriteria(Criteria cri) {
+		return dao.countTPaging(cri);
+	}
+
+	@Override
+	public List<Board> taskView(Board board) {
+		return dao.taskView(board);
 	}
 }

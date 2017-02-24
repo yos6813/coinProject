@@ -12,7 +12,7 @@ public class PageMaker {
 	private boolean prev;
 	private boolean next;
 	
-	private int displayPageNum = 10;
+	private int displayPageNum = 5;
 	
 	private Criteria cri;
 	
@@ -46,6 +46,22 @@ public class PageMaker {
 
 	public int getTotalCount() {
 		return totalCount;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
 	}
 
 	public int getStartPage() {
