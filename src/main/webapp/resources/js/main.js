@@ -221,14 +221,19 @@ $(document).ready(function(){
 
 /* board List */
 $(document).ready(function(){
-	if($('.boardStatus').text() == '대기'){
-		$('.boardStatus').addClass('label label-default');
-	} else if($('.boardStatus').text() == '진행중'){
-		$('.boardStatus').addClass('label label-primary');
-	} else if($('.boardStatus').text() == '완료'){
-		$('.boardStatus').addClass('label label-success');
-	} else if($('.boardStatus').text() == '보류'){
-		$('.boardStatus').addClass('label label-danger');
+	for(var i=0; i<$('.boardStatus').size(); i++){
+		$('.boardStatus').eq(i).addClass("b" + i);
+		if($('.b' + i).text()=='진행중'){
+			$('.b' + i).addClass('label-primary');
+		} else if($('.b' + i).text()=='대기'){
+			$('.b' + i).addClass('label-default');
+		} else if($('.b' + i).text()=='보류'){
+			$('.b' + i).addClass('label-warning');
+		} else if($('.b' + i).text()=='완료'){
+			$('.b' + i).addClass('label-success');
+		} else if($('.b' + i).text()=='기간초과'){
+			$('.b' + i).addClass('label-error');
+		}
 	}
 	
 	$(".boardList").click(function(){
@@ -368,15 +373,19 @@ $(document).ready(function(){
 	    });
 	});
 	
-	if($('.tStatus').text()=='진행중'){
-		$('.tStatus').addClass('label-primary');
-	} else if($('.tStatus').text()=='대기'){
-		$('.tStatus').addClass('label-default');
-	} else if($('.tStatus').text()=='보류'){
-		$('.tStatus').addClass('label-warning');
-	} else if($('.tStatus').text()=='완료'){
-		$('.tStatus').addClass('label-success');
-	} else if($('.tStatus').text()=='기간초과'){
-		$('.tStatus').addClass('label-error');
+	for(var i=0; i<$('.tStatus').size(); i++){
+		$('.tStatus').eq(i).addClass(i + "");
+		if($('.' + i).text()=='진행중'){
+			$('.' + i).addClass('label-primary');
+		} else if($('.' + i).text()=='대기'){
+			$('.' + i).addClass('label-default');
+		} else if($('.' + i).text()=='보류'){
+			$('.' + i).addClass('label-warning');
+		} else if($('.' + i).text()=='완료'){
+			$('.' + i).addClass('label-success');
+		} else if($('.' + i).text()=='기간초과'){
+			$('.' + i).addClass('label-error');
+		}
 	}
+	
 })

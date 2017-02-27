@@ -42,7 +42,7 @@
 						<table class="table">
 							<tr>
 								<th style="width:50px">#</th>
-								<th>상태</th>
+								<th style="width:100px">상태</th>
 								<th style="width: 200px">기간</th>
 								<th>프로젝트명</th>
 								<th>관리자</th>
@@ -52,7 +52,7 @@
 							<c:forEach items="${list}" var="board">
 								<tr class="boardList" value="${board.bNo}">
 									<td style="width:50px">${board.bNo}</td>
-									<td><p class="boardStatus">${board.status}</p></td>
+									<td><p class="boardStatus label">${board.status}</p></td>
 									<td style="width: 200px">${board.projectDate}<br/><small></small></td>
 									<td>${board.pName}</td>
 									<td style="width: 150px"><img class="img-circle" src="${board.writePhoto}"><br/><small>${board.writeUser}</small> </td>
