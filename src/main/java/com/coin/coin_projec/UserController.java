@@ -33,7 +33,7 @@ public class UserController {
     	User redirect = service.read(email);
     	
     	if (redirect != null) {
-    		return "redirect:/home?email=" + email;
+    		return "redirect:/home1?email=" + email;
     	} else{
     		return "redirect: /register";
     	}

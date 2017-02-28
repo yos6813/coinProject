@@ -26,7 +26,7 @@
                     </p>
                   	<a href=""><img alt="image" class="img-circle" src="${board.pmPhoto}"></a>
                     <p class="small font-bold">
-                        <span>${board.pm}</span>
+                        <span>${board.pmName}</span>
                     </p>
                 </div>
             </div>
@@ -60,7 +60,7 @@
 						</tr>
 						<tr class="activity">
 							<td>기간초과</td>
-							<td id="excess" value="0">0</td>
+							<td id="excess" value="${list8.size()}">${list8.size()}</td>
 						</tr>
                     </table>
                 </div>
@@ -84,6 +84,8 @@
                     <table class="table">
                     	<tr class="activity">
 							<th>액티비티명</th>
+							<th>상태</th>
+							<th>매니저</th>
 							<th>진행중</th>
 							<th>대기</th>
 							<th>완료</th>
@@ -99,7 +101,7 @@
 							<td value="${board.standby}">${board.standby}</td>
 							<td value="${board.complete}">${board.complete}</td>
 							<td value="${board.defer}">${board.defer}</td>
-							<td>0</td>
+							<td value="${board.excess}">${board.excess}</td>
 						</tr>
 						</c:forEach>
               		</table>

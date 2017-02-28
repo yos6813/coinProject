@@ -16,7 +16,7 @@
 	</head>
 	
 	<body class="gray-bg">
-		<div class="center text-center">
+		<div class="center1 text-center">
 			<a id="login"><img alt="login" src="/resources/img/btn_google_1x.png"></a>
 		</div>
 			

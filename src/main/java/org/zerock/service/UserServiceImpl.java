@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService{
 	public User read(String email) {
 		return dao.read(email);
 	}
+
+	@Override
+	public List<User> listAll2(String email) {
+		return dao.listAll2(email);
+	}
 }

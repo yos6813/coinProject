@@ -8396,11 +8396,11 @@ body.md-skin {
   }
 }
 
-.center {
+.center1 {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); /* Yep! */
+  transform: translate(-50%, -50%); Yep!
   width: 48%;
   height: 59%;
 }

@@ -12,6 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select email, username, photoURL, slackID, coin from usertbl where not email = #{email}
 	</select>
 	
+	<select id="listAll2" parameterType="map" resultType="org.zerock.persistence.User">
+		select email, username, photoURL, slackID, coin from usertbl;
+	</select>
+	
 	<update id="update">
 		update usertbl set coin=#{coin2} where email = #{email};
 	</update>

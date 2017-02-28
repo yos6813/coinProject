@@ -41,6 +41,7 @@ public class Board {
 	String aWriteD;
 	String aWriteU;
 	String aStatus;
+	String aMName;
 	
 	//Task
 	int tNo;
@@ -61,7 +62,20 @@ public class Board {
 	int standby;
 	int complete;
 	int defer;
+	int excess;
 	
+	public String getaMName() {
+		return aMName;
+	}
+	public void setaMName(String aMName) {
+		this.aMName = aMName;
+	}
+	public int getExcess() {
+		return excess;
+	}
+	public void setExcess(int excess) {
+		this.excess = excess;
+	}
 	public int getOngoing() {
 		return ongoing;
 	}

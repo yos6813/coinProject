@@ -83,7 +83,7 @@
 			              </div>
 			              <!-- /.box-body -->
 			              <div class="box-footer">
-			                <button class="btn btn-default">Cancel</button>
+			                <a class="cancel btn btn-default">Cancel</a>
 			                <button type="submit" class="btn btn-info pull-right">Sign in</button>
 			              </div>
 			              <!-- /.box-footer -->

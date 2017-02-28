@@ -55,8 +55,8 @@
 									<td><p class="boardStatus label">${board.status}</p></td>
 									<td style="width: 200px">${board.projectDate}<br/><small></small></td>
 									<td>${board.pName}</td>
-									<td style="width: 150px"><img class="img-circle" src="${board.writePhoto}"><br/><small>${board.writeUser}</small> </td>
-									<td><img class="img-circle" src="${board.pmPhoto}"><br/><small>${board.pm}</small></td>
+									<td style="width: 150px"><img class="img-circle" src="${board.writePhoto}"><br/><small>${board.writeName}</small> </td>
+									<td><img class="img-circle" src="${board.pmPhoto}"><br/><small>${board.pmName}</small></td>
 									<td style="width: 150px">${board.writeDate}</td>
 								</tr>
 							</c:forEach>

@@ -8,6 +8,8 @@ function getParameterByName(name) {
 var pno = getParameterByName('pNo');
 var bno = getParameterByName('bNo');
 var email = getParameterByName('email');
+var ano = getParameterByName('aNo');
+var tno = getParameterByName('tNo');
 
 var config = {
     apiKey: "AIzaSyDLSpBShLQKwdj0i4jQFYI9AjP7kKpB7nU",
@@ -148,6 +150,16 @@ $(document).ready(function(){
 
 /* taskWrite */
 $(document).ready(function(){
+	$('.cancel').click(function() {
+		var result = confirm('글 작성을 취소하시겠습니까?');
+		if(result) {
+			//yes
+			location.replace('/task?email=' + email);
+		} else { 
+			//no 
+		} 
+	})
+	
 	$('#startDateForm').hide();
 	$('#endDateForm').hide();
 	$('#pDateForm').hide();
@@ -260,17 +272,35 @@ $(document).ready(function(){
 		var result = confirm('글 작성을 취소하시겠습니까?');
 		if(result) {
 			//yes
-			location.replace('/task?email=' + firebase.auth().currentUser.email);
+			location.replace('/task?email=' + email);
 		} else { 
 			//no 
 		} 
 	})
+	
+	var date = $('#pDate1').text();
+	var pdate = date.split('-');
+	 $('#aDate').daterangepicker({
+	     format: 'YYYY/MM/DD',
+	     minDate: pdate[0],
+         maxDate: pdate[1],
+	 });
 });
 
 /* view Task */
 $(document).ready(function(){
+	var formObj = $("form[role='form']");
 	$(".activityList1").click(function(){
 		location.href = "/viewActivity?email=" + firebase.auth().currentUser.email + "&bNo=" + bno + "&aNo=" + $(this).attr('value');
+	})
+	
+	$('#pDel').click(function(){
+		formObj.attr('action', '/deleteP?email=' + email + "&bNo=" + bno);
+		formObj.submit();
+	})
+	
+	$('#pMod').click(function(){
+		location.href= '/modifyP?email=' + email + "&bNo=" + bno;
 	})
 })
 
@@ -325,6 +355,7 @@ $(document).ready(function(){
 			standby: parseInt($('.activeC').eq(i).children('td').eq(4).attr('value')),
 			complete: parseInt($('.activeC').eq(i).children('td').eq(5).attr('value')),
 			defer: parseInt($('.activeC').eq(i).children('td').eq(6).attr('value')),
+			excess: parseInt($('.activeC').eq(i).children('td').eq(7).attr('value')),
 			no: $('.activeC').eq(i).children('td').eq(0).attr('value')
 		})
 	}
@@ -344,7 +375,8 @@ $(document).ready(function(){
 	            {valueField: "ongoing", name: "진행중" },
 	            {valueField: "standby", name: "대기" },
 	            {valueField: "complete", name: "완료" },
-	            {valueField: "defer", name: "보류" }
+	            {valueField: "defer", name: "보류" },
+	            {valueField: "excess", name: "기간초과" }
 	        ],
 	        legend: {
 	            verticalAlignment: "bottom",
@@ -387,5 +419,95 @@ $(document).ready(function(){
 			$('.' + i).addClass('label-error');
 		}
 	}
+})
+
+/* activity view */
+$(document).ready(function(){
+	$('.taskList').click(function(){
+		location.href="/taskView?email=" + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + $(this).attr('value');
+	})
 	
+	for(var i=0; i<$('.aStatus').size(); i++){
+		$('.aStatus').eq(i).addClass("a" + i);
+		if($('.a' + i).text()=='진행중'){
+			$('.a' + i).addClass('label-primary');
+		} else if($('.a' + i).text()=='대기'){
+			$('.a' + i).addClass('label-default');
+		} else if($('.a' + i).text()=='보류'){
+			$('.a' + i).addClass('label-warning');
+		} else if($('.a' + i).text()=='완료'){
+			$('.a' + i).addClass('label-success');
+		} else if($('.a' + i).text()=='기간초과'){
+			$('.a' + i).addClass('label-error');
+		}
+	}
+	
+	var formObj = $("#aForm");
+	
+	$('#aDel').click(function(){
+		formObj.attr('action', '/deleteA?email=' + email + "&bNo=" + bno + "&aNo=" + ano);
+		formObj.submit();
+	})
+	
+	$('#aMod').click(function(){
+		location.href= '/modifyA?email=' + email + "&bNo=" + bno + "&aNo=" + ano;
+	})
+})
+
+/* Create Task */
+$(document).ready(function(){
+	var date = $('#aDate1').text();
+	var pdate = date.split('-');
+	 $('#tDate').daterangepicker({
+	     format: 'YYYY/MM/DD',
+	     minDate: pdate[0],
+         maxDate: pdate[1],
+	 });
+})
+
+/* task view */
+$(document).ready(function(){
+	var formObj = $("#tForm");
+	$('#tDel').click(function(){
+		formObj.attr('action', '/deleteT?email=' + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + tno);
+		formObj.submit();
+	})
+	
+	$('#tMod').click(function(){
+		location.href= '/modifyT?email=' + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + tno;
+	})
+})
+
+/* modify Project */
+$(document).ready(function(){
+	$("#pStatusSel").val($('#status').val()).prop("selected", true);
+	$('#userSel1').val($('#pM1').val()).prop("selected", true);
+})
+
+/* modify Activity */
+$(document).ready(function(){
+	var date = $('#pDate1').text();
+	var pdate = date.split('-');
+	 $('#projectDate1').daterangepicker({
+	     format: 'YYYY/MM/DD',
+	     minDate: pdate[0],
+         maxDate: pdate[1],
+	 });
+	
+	$("#aStatusSel").val($('#aStatus').val()).prop("selected", true);
+	$('#userSel2').val($('#aM1').val()).prop("selected", true);
+})
+
+/* modify Task */
+$(document).ready(function(){
+	var date = $('#aDate1').text();
+	var pdate = date.split('-');
+	 $('#projectDate2').daterangepicker({
+	     format: 'YYYY/MM/DD',
+	     minDate: pdate[0],
+         maxDate: pdate[1],
+	 });
+	
+	$("#tStatusSel").val($('#tStatus').val()).prop("selected", true);
+	$('#userSel3').val($('#tM1').val()).prop("selected", true);
 })

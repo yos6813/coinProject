@@ -24,6 +24,7 @@
     <link href="/resources/css/style.css" rel="stylesheet">
     <link href="/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="/resources/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="/resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 
 </head>
 
@@ -46,6 +47,7 @@
                     </li>
                     <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>Home</span></a></li>
 		            <li><a href="/task?email=${user.email}"><i class="fa fa-list-alt"></i> <span>업무관리</span></a></li>
+		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-list-alt"></i> <span>법인카드사용내역관리</span></a></li>
 		            <li><a href="/admit?email=${user.email}"><i class="fa fa-table"></i> <span>관리페이지</span></a></li>
                 </ul>
 
@@ -60,7 +62,7 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li>
                     <a id="signout">
-                        <i class="fa fa-sign-out"></i> Log out
+                        <i class="fa fa-sign-out"></i> Logout
                     </a>
                 </li>
             </ul>

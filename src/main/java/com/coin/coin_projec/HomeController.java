@@ -59,4 +59,14 @@ public class HomeController {
 		
 		return "login";
 	}
+	
+	@RequestMapping(value = "/home1")
+	public String home1(@RequestParam("email") String email, Locale locale, Model model, User user) {
+		String[][] test = {{"1", "23"}};
+//		model.addAttribute(service.read(email));
+		
+		logger.info(test[0][1]);
+		
+		return "redirect:/home?email=" + email;
+	}
 }

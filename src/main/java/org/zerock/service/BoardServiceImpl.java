@@ -30,11 +30,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board getBoard(int bNo) {
-		return dao.getBoard(bNo);
-	}
-
-	@Override
 	public void insertActivity(Board board) {
 		dao.insertActivity(board);
 	}
@@ -47,26 +42,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board viewActivity(int aNo) {
 		return dao.viewActivity(aNo);
-	}
-
-	@Override
-	public List<Board> countList1(Board board) {
-		return dao.countList1(board);
-	}
-
-	@Override
-	public List<Board> countList2(Board board) {
-		return dao.countList2(board);
-	}
-
-	@Override
-	public List<Board> countList3(Board board) {
-		return dao.countList3(board);
-	}
-
-	@Override
-	public List<Board> countList4(Board board) {
-		return dao.countList4(board);
 	}
 
 	@Override
@@ -112,5 +87,80 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> taskView(Board board) {
 		return dao.taskView(board);
+	}
+
+	@Override
+	public List<Board> countList1(Board board) {
+		return dao.countList1(board);
+	}
+
+	@Override
+	public List<Board> countList2(Board board) {
+		return dao.countList2(board);
+	}
+
+	@Override
+	public List<Board> countList3(Board board) {
+		return dao.countList3(board);
+	}
+
+	@Override
+	public List<Board> countList4(Board board) {
+		return dao.countList4(board);
+	}
+
+	@Override
+	public List<Board> countList5(Board board) {
+		return dao.countList5(board);
+	}
+
+	@Override
+	public Board viewTask(int tNo) {
+		return dao.viewTask(tNo);
+	}
+
+	@Override
+	public void delProject(int bNo) {
+		dao.delProject(bNo);
+	}
+
+	@Override
+	public void delActivity(int bNo) {
+		dao.delActivity(bNo);
+	}
+
+	@Override
+	public void delTask(int bNo) {
+		dao.delTask(bNo);
+	}
+
+	@Override
+	public void delA(int aNo) {
+		dao.delA(aNo);
+	}
+
+	@Override
+	public void delT(int aNo) {
+		dao.delT(aNo);
+	}
+
+	@Override
+	public void deleteTask(int tNo) {
+		dao.deleteTask(tNo);
+	}
+
+	@Override
+	public void updateP(Board board) {
+		dao.updateP(board);
+	}
+
+	@Override
+	public void updateA(Board board) {
+		dao.updateA(board);
+	}
+
+	@Override
+	public void updateT(Board board) {
+		dao.updateT(board);
 	}
 }

@@ -15,4 +15,6 @@ public interface UserService {
 	public void update2(User vo);
 	
 	public User read(String email);
+	
+	public List<User> listAll2(String email);
 }

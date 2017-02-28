@@ -31,11 +31,6 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public Board getBoard(int bNo) {
-		return session.selectOne(namespace + ".getBoard", bNo);
-	}
-
-	@Override
 	public void insertActivity(Board board) {
 		session.insert(namespace + ".insertActivity", board);
 	}
@@ -53,21 +48,6 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<Board> countList1(Board board) {
 		return session.selectList(namespace + ".countList1", board);
-	}
-
-	@Override
-	public List<Board> countList2(Board board) {
-		return session.selectList(namespace + ".countList2", board);
-	}
-
-	@Override
-	public List<Board> countList3(Board board) {
-		return session.selectList(namespace + ".countList3", board);
-	}
-
-	@Override
-	public List<Board> countList4(Board board) {
-		return session.selectList(namespace + ".countList4", board);
 	}
 
 	@Override
@@ -124,5 +104,75 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<Board> taskView(Board board) {
 		return session.selectList(namespace + ".taskView", board);
+	}
+
+	@Override
+	public List<Board> countList2(Board board) {
+		return session.selectList(namespace + ".countList2", board);
+	}
+
+	@Override
+	public List<Board> countList3(Board board) {
+		return session.selectList(namespace + ".countList3", board);
+	}
+
+	@Override
+	public List<Board> countList4(Board board) {
+		return session.selectList(namespace + ".countList4", board);
+	}
+
+	@Override
+	public List<Board> countList5(Board board) {
+		return session.selectList(namespace + ".countList5", board);
+	}
+
+	@Override
+	public Board viewTask(int tNo) {
+		return session.selectOne(namespace + ".viewTask", tNo);
+	}
+
+	@Override
+	public void delProject(int bNo) {
+		session.delete(namespace + ".delProject", bNo);
+	}
+
+	@Override
+	public void delActivity(int bNo) {
+		session.delete(namespace + ".delActivity", bNo);
+	}
+
+	@Override
+	public void delTask(int bNo) {
+		session.delete(namespace + ".delTask", bNo);
+	}
+
+	@Override
+	public void delA(int aNo) {
+		session.delete(namespace + ".delA", aNo);
+	}
+
+	@Override
+	public void delT(int aNo) {
+		session.delete(namespace + ".delT", aNo);
+	}
+
+	@Override
+	public void deleteTask(int tNo) {
+		session.delete(namespace + ".deleteTask", tNo);		
+	}
+
+	@Override
+	public void updateP(Board board) {
+		session.update(namespace + ".updateP", board);
+	}
+
+	@Override
+	public void updateA(Board board) {
+		session.update(namespace + ".updateA", board);
+	}
+
+	@Override
+	public void updateT(Board board) {
+		session.update(namespace + ".updateT", board);
 	}
 }
