@@ -18,12 +18,14 @@
 	    <div class="row">
 	        <div class="col-lg-12">
 		        <div class="ibox float-e-margins">
-		        	<a class="btn btn-default pull-right">글쓰기</a>
+		        	<a data-toggle="modal" data-target="#myModal" class="btn btn-default pull-right">엑셀 데이터 업로드</a>&nbsp;
+		        	<a href="/usageWrite?email=${user.email}" class="btn btn-default pull-right">글쓰기</a>
 			        <div class="ibox-content">
 			        	<div class="table-responsive">
 				            <table class="table table-striped table-bordered table-hover dataTables-example" >
 					            <thead>
 					            <tr>
+					            	<th>No</th>
 					                <th>이용일자</th>
 					                <th>카드구분</th>
 					                <th>사용자</th>
@@ -37,26 +39,26 @@
 					            </tr>
 					            </thead>
 					            <tbody>
-					            <tr class="gradeX">
-					                <td>Trident</td>
-					                <td>Internet
-					                    Explorer 4.0
-					                </td>
-					                <td>Win 95+</td>
-					                <td>4</td>
-					                <td>X</td>
-					                <td>Trident</td>
-					                <td>Internet
-					                    Explorer 4.0
-					                </td>
-					                <td>Win 95+</td>
-					                <td>4</td>
-					                <td>X</td>
-					            </tr>
+						            <c:forEach items="${list}" var="card">
+							            <tr class="gradeX">
+							            	<td>${card.cNo}</td>
+							                <td>${card.usageDateY}/${card.usageDateM}/${card.usageDateD}</td>
+							                <td>${card.classifyCard}</td>
+							                <td>${card.usageUser}</td>
+							                <td>${card.usageCard}</td>
+							                <td>${card.sales}</td>
+							                <td>${card.memberStore}</td>
+							                <td>${card.cost}</td>
+							                <td>${card.abstract1}</td>
+							                <td>${card.abstract2}</td>
+							                <td>${card.note}</td>
+							            </tr>
+						            </c:forEach>
 					            </tbody>
 					            <tfoot>
 					            <tr>
-					               <th>이용일자</th>
+					            	<th>No</th>
+					               	<th>이용일자</th>
 					                <th>카드구분</th>
 					                <th>사용자</th>
 					                <th>사용카드</th>
@@ -75,5 +77,27 @@
 	    	</div>
 		</div>
 	</div>
+</div>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <p class="font-bold">파일 업로드</p>
+            </div>
+            <div class="modal-body">
+            	<form id="excelUpForm" method="post" action="" role="form" enctype="multipart/form-data">
+	                <div class="form-group">
+		                <label>파일 선택</label>
+		                <input id="excel" name="excel" class="file" type="file" multiple data-show-upload="false" data-show-caption="true">
+	                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" id="excelUp" onclick="check()" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 <%@include file="../include/footer.jsp" %>

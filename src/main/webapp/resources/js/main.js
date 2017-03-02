@@ -511,3 +511,26 @@ $(document).ready(function(){
 	$("#tStatusSel").val($('#tStatus').val()).prop("selected", true);
 	$('#userSel3').val($('#tM1').val()).prop("selected", true);
 })
+
+/* usage write */
+$(document).ready(function(){
+	$('#abstract2').hide();
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	var year = today.getFullYear();
+	var day = today.getDate();
+	
+	$('#usageWriteD').val(year + "/" + month + "/" + day);
+	
+	$('#abstract1').focusout(function(){
+		if($('#abstract1').val() != ''){
+			$('#abstract2').show();
+		} else {
+			$('#abstract2').hide();
+		}
+	})
+	
+	$('#usageUser').focusin(function(){
+		$('#totalDate').val($('#year').val() + "/" + $('#month').val() + "/" + $('#day').val());
+	})
+})

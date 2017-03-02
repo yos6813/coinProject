@@ -111,5 +111,42 @@
     });
 
 </script>
+<script type="text/javascript">
+function checkFileType(filePath){
+	var fileFormat = filePath.split(".");
+	if(fileFormat.indexOf("xls") > -1){
+		return true;
+	}else if(fileFormat.indexOf("xlsx") > -1){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function check(){
+	var file = $("#excel").val();
+	if(file == "" || file == null){
+		alert("파일 선택");
+		return false;
+	}else if(!checkFileType(file)){
+		alert("엑셀 파일만 업로드");
+		return false;
+	}
+	var fileFormat = file.split(".");
+	var fileType = fileFormat[1];
+	if(confirm("업로드 하시겠습니까?")){
+		$("#excelUpForm").attr("action","/accountsMngs/compExcelUpload");
+		var options = {
+			success:function(data){
+				alert("업로드 완료");
+				$("#ajax-content").html(data);
+			},
+			type: "POST",
+			data : {"excelType" : fileType}
+		};
+		$("form").ajaxSubmit(options);
+	}
+}
+</script>
 </body>
 </html>

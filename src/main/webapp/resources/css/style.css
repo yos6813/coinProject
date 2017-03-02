@@ -8410,7 +8410,7 @@ body.md-skin {
 	height: 30px;
 }
 
-#pText, #userBox {
+#pText, #userBox, #card {
 	width: 100%;
 	height: 200px;
 	font-size: 14px;

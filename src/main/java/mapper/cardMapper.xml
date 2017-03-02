@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.CardDAO">
+	<insert id="usageCardInsert">
+		insert into usageTbl (usageDate, classifyCard, usageUser, usageCard, sales,
+							  memberStore, cost, abstract1, abstract2, note)
+		values (#{usageDate}, #{classifyCard}, #{usageUser}, #{usageCard}, #{sales},
+				#{memberStore}, #{cost}, #{abstract1}, #{abstract2}, #{note});              
+	</insert>
+	
+	<select id="usageCardSelect" resultType="org.zerock.persistence.Card">
+		select cNo, usageDate, classifyCard, usageUser, usageCard, sales, memberStore,
+			   cost, abstract1, abstract2, note from usageTbl;
+	</select>
+</mapper>
