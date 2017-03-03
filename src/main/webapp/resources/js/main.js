@@ -10,6 +10,8 @@ var bno = getParameterByName('bNo');
 var email = getParameterByName('email');
 var ano = getParameterByName('aNo');
 var tno = getParameterByName('tNo');
+var abno =getParameterByName('abNo');
+var page =getParameterByName('page');
 
 var config = {
     apiKey: "AIzaSyDLSpBShLQKwdj0i4jQFYI9AjP7kKpB7nU",
@@ -171,7 +173,6 @@ $(document).ready(function(){
 	
 	$('#today').val(year + '-' + month + '-' + day);
 	$('#userSel').change(function(){
-		console.log($(this).children());
 		$('#userBox').text($('#userBox').val() + $(this).text() + "(" + $(this).val() + ")");
 	})
 	
@@ -514,7 +515,12 @@ $(document).ready(function(){
 
 /* usage write */
 $(document).ready(function(){
-	$('#abstract2').hide();
+	if($('#abstract2').children().size() <= 0){
+		$('#abstract2box').hide();
+	}
+	
+	$("#abstract1").val(abno).prop("selected", true);
+	$('#usageDate').hide();
 	var today = new Date();
 	var month = today.getMonth() + 1;
 	var year = today.getFullYear();
@@ -522,15 +528,100 @@ $(document).ready(function(){
 	
 	$('#usageWriteD').val(year + "/" + month + "/" + day);
 	
-	$('#abstract1').focusout(function(){
-		if($('#abstract1').val() != ''){
-			$('#abstract2').show();
-		} else {
-			$('#abstract2').hide();
-		}
+	$('#abstract1').change(function(){
+		location.href = '/usageWrite?email=' + email + '&abNo=' + $(this).val();
 	})
 	
 	$('#usageUser').focusin(function(){
-		$('#totalDate').val($('#year').val() + "/" + $('#month').val() + "/" + $('#day').val());
+		$('#totalDate').val($('#year').val() + "." + $('#month').val() + "." + $('#day').val());
 	})
 })
+
+function checkFileType(filePath) {
+    var fileFormat = filePath.split(".");
+    if (fileFormat.indexOf("xlsx") > -1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function check() {
+    var file = $("#excelFile").val();
+    if (file == "" || file == null) {
+        alert("파일을 선택해주세요.");
+        return false;
+    } else if (!checkFileType(file)) {
+        alert("엑셀 파일만 업로드 가능합니다.");
+        return false;
+    }
+
+    if (confirm("업로드 하시겠습니까?")) {
+        var options = {
+            success : function(data) {
+                alert("모든 데이터가 업로드 되었습니다.");
+            },
+            type : "POST"
+        };
+        $("#excelUploadForm").ajaxSubmit(options);
+    }
+}
+
+/* admit abstract */
+$(document).ready(function(){
+	$('#abstractNo').val(abno);
+	$('.admitAbstract1').click(function(){
+		location.href = '/abstractPage?email=' + email + '&abNo=' + $(this).attr('value') + "&page=" + page;
+	})
+})
+
+/* usage List */
+$(document).ready(function(){
+//	var usageData = [];
+//	for(var i=0; i<=$('.gradeX').size(); i++){
+//		var date = $('.listData').text();
+//		var split = date.split('.');
+//		
+//		if(split[0] == $('#chartYear').val()){
+//			usageData.push({
+//				listData: split[1],
+//				listCost: 
+//			})
+//		}
+//	}
+	var populationData1 = [{
+						    arg: 1950,
+						    val: 2525778669
+						}, {
+						    arg: 1960,
+						    val: 3026002942
+						}, {
+						    arg: 1970,
+						    val: 3691172616
+						}, {
+						    arg: 1980,
+						    val: 4449048798
+						}, {
+						    arg: 1990,
+						    val: 5320816667
+						}, {
+						    arg: 2000,
+						    val: 6127700428
+						}, {
+						    arg: 2010,
+						    val: 6916183482
+						}];
+	
+	$(function(){
+	    $("#chart1").dxChart({
+	        dataSource: populationData1, 
+	        series: {
+	            argumentField: "arg",
+	            valueField: "val",
+	            name: "My oranges",
+	            type: "bar",
+	            color: '#ffaa66'
+	        }
+	    });
+	});
+})	

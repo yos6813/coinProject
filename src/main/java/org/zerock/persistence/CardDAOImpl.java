@@ -24,4 +24,9 @@ public class CardDAOImpl implements CardDAO{
 	public List<Card> usageCardSelect(Card card) {
 		return session.selectList(namespace + ".usageCardSelect", card);
 	}
+
+	@Override
+	public int sumUsageCost(Card card) {
+		return session.selectOne(namespace + ".sumUsageCost", card);
+	}
 }

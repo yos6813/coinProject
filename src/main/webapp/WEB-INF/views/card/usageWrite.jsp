@@ -30,7 +30,7 @@
                   <div class="col-sm-2">
                     <input type="text" id="day" class="form-control" placeholder="일">
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-2" id="usageDate">
                     <input type="text" id="totalDate" name="usageDate" class="form-control">
                   </div>
                 </div>
@@ -78,13 +78,21 @@
                 <div class="form-group">
                		<label class="col-sm-2 control-label">적요1</label>
                  	<div class="col-sm-10">
-                 		 <input type="text" id="abstract1" name="abstract1" class="form-control" required>
+                 		 <select class="form-control" id="abstract1" name="abstract1">
+	                 		 <c:forEach items="${list2}" var="admit">
+								<option value="${admit.abNo}">${admit.abName}</option>
+	                 		 </c:forEach>
+						</select>
                   	</div>
                 </div>
-                <div class="form-group" id="abstract2">
+                <div class="form-group" id="abstract2box">
                		<label class="col-sm-2 control-label">적요2</label>
                  	<div class="col-sm-10">
-                 		 <input type="text" name="abstract2" class="form-control">
+                 		 <select class="form-control" id="abstract2" name="abstract2">
+	                 		 <c:forEach items="${list3}" var="admit">
+								<option value="${admit.ab2No}">${admit.ab2Name}</option>
+	                 		 </c:forEach>
+						</select>
                   	</div>
                 </div>
                 <div class="form-group">

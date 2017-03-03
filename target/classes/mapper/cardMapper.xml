@@ -11,7 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="usageCardSelect" resultType="org.zerock.persistence.Card">
-		select cNo, usageDate, classifyCard, usageUser, usageCard, sales, memberStore,
-			   cost, abstract1, abstract2, note from usageTbl;
+		select distinct cNo, usageDate, classifyCard, usageUser, usageCard, sales, memberStore,
+			   cost, abstract1, abstract2, note, vab.abName, vab2.ab2Name from usageTbl u left outer join v_abstracttbl vab on u.abstract1 = vab.abNo
+               left outer join v_abstracttbl vab2 on u.abstract2 = vab2.ab2No;
+	</select>
+	
+	<select id="sumUsageCost" resultType="int">
+		select sum(cost) as count from usageTbl;
 	</select>
 </mapper>

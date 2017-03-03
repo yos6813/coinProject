@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.AdmitDAO">
+	<insert id="insertAbstract"  parameterType="org.zerock.persistence.Admit">
+		insert into abstractTbl(abName) values(#{abName});
+	</insert>
+	
+	<select id="selectAbstract" parameterType="list" resultType="org.zerock.persistence.Admit">
+		select * from abstractTbl;
+	</select>
+	
+	<select id="listCriteria" parameterType="list" resultType="org.zerock.persistence.Admit">
+		select * from abstractTbl where abNo > 0 limit #{pageStart}, #{perPageNum};
+	</select>
+	
+	<insert id="insertAbstract2"  parameterType="org.zerock.persistence.Admit">
+		insert into abstractTbl2(abNo, ab2Name) values(#{abNo}, #{ab2Name});
+	</insert>
+	
+	<select id="selectAbstract2" parameterType="list" resultType="org.zerock.persistence.Admit">
+		select * from v_abstractTbl where abNo = #{abNo};;
+	</select>
+	
+	<select id="countPaging" resultType="int">
+		select count(abNo) from abstractTbl where abNo > 0;
+	</select>
+</mapper>

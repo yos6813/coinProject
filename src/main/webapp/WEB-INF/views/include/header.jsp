@@ -47,8 +47,18 @@
                     </li>
                     <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>Home</span></a></li>
 		            <li><a href="/task?email=${user.email}"><i class="fa fa-list-alt"></i> <span>업무관리</span></a></li>
-		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-list-alt"></i> <span>법인카드사용내역관리</span></a></li>
-		            <li><a href="/admit?email=${user.email}"><i class="fa fa-table"></i> <span>관리페이지</span></a></li>
+		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-credit-card"></i> <span>법인카드사용내역관리</span></a></li>
+		            <li>
+                        <a><i class="fa fa-table"></i> <span>관리페이지</span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="/admit?email=${user.email}">프로젝트</a>
+                            </li>
+                            <li>
+                                <a href="/abstractPage?email=${user.email}&abNo=1&page=1">적요</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
