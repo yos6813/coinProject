@@ -48,6 +48,9 @@ public class cardController {
 	public String cardList(@RequestParam("email") String email, Locale locale, Model model, User user, Card card) {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list", cService.usageCardSelect(card));
+		model.addAttribute("list1", cService.concatDate(card));
+		model.addAttribute("list2", cService.orderByUser(card));
+		model.addAttribute("list3", cService.orderByAbstract(card));
 		
 		Card card1 = new Card();
 		card1.setCount(cService.sumUsageCost(card));

@@ -28,15 +28,85 @@
                                		<div class="form-inline">
 	                               		<div class="form-group col-md-2">
 		                               		<select id="chartYear" class="form-control">
-		                               			<option value="2017">2017</option>
+		                               			<option value="2017">2017년</option>
 		                               		</select>
 	                               		</div>
 			                            <div class="form-group col-md-4">
-			                                <label for="accrueCost">누적금액:</label>
+			                                <label for="accrueCost">총 누적금액:</label>
 			                                <input type="text" class="form-control" id="accrueCost" value="${cost.count}원">
 			                            </div>
 									</div>
                                		<div id="chart1"></div>
+                               		<div style="display:none;">
+                               			<table class="table">
+                               				<thead>
+                               					<tr>
+                               						<th>연도</th>
+                               						<th>날짜</th>
+                               						<th>금액</th>
+                               					</tr>
+                               				</thead>
+                               				<tbody>
+                               					<c:forEach items="${list1}" var="card">
+                               						<tr class="dateCostTbl">
+                               							<td class="concatYear">${card.concatYear}</td>
+                               							<td class="concatDate">${card.concatDate}</td>
+                               							<td class="sumCost">${card.sumCost}</td>
+                               						</tr>
+                               					</c:forEach>
+                               				</tbody>
+                               			</table>
+                               		</div>
+                               		<hr>
+                               		<div class="form-inline">
+	                               		<div class="form-group col-md-2">
+		                               		<select id="chartMonth" class="form-control">
+		                               		</select>
+	                               		</div>
+									</div>
+									<div id="userCostChart"></div>
+									<div style="display:none;">
+                               			<table class="table">
+                               				<thead>
+                               					<tr>
+                               						<td>날짜</td>
+                               						<th>항목</th>
+                               						<th>금액</th>
+                               					</tr>
+                               				</thead>
+                               				<tbody>
+                               					<c:forEach items="${list3}" var="card">
+                               						<tr class="orderByabstract1Tbl">
+                               							<td class="abstract1Date" value="${card.concatDate}">${card.concatDate}</td>
+                               							<td class="orderByAbstract1">${card.abstract1}</td>
+                               							<td class="abstract1SumCost">${card.sumCost}</td>
+                               						</tr>
+                               					</c:forEach>
+                               				</tbody>
+                               			</table>
+                               		</div>
+                               		<hr>
+									<div id="userCostGraph"></div>
+									<div style="display:none;">
+                               			<table class="table">
+                               				<thead>
+                               					<tr>
+                               						<td>날짜</td>
+                               						<th>이름</th>
+                               						<th>금액</th>
+                               					</tr>
+                               				</thead>
+                               				<tbody>
+                               					<c:forEach items="${list2}" var="card">
+                               						<tr class="orderByUserTbl">
+                               							<td class="userDate" value="${card.concatDate}">${card.concatDate}</td>
+                               							<td class="orderByUser">${card.usageUser}</td>
+                               							<td class="userSumCost">${card.sumCost}</td>
+                               						</tr>
+                               					</c:forEach>
+                               				</tbody>
+                               			</table>
+                               		</div>
                                </div>
                            </div>
                            <div id="tab-2" class="tab-pane">
@@ -45,7 +115,7 @@
 					        	<a href="/usageWrite?email=${user.email}&abNo=1" class="btn btn-default pull-right">글쓰기</a>
 					        	<hr>
 					        	<div class="table-responsive">
-						            <table class="table table-striped table-bordered table-hover dataTables-example" >
+						            <table class="table table-striped table-bordered table-hover dataTables-example">
 							            <thead>
 							            <tr>
 							            	<th>No</th>
@@ -65,7 +135,7 @@
 								            <c:forEach items="${list}" var="card">
 									            <tr class="gradeX">
 									            	<td>${card.cNo}</td>
-									                <td class="listDate">${card.usageDate}</td>
+									                <td class="listDate" value="${card.usageDate}">${card.usageDate}</td>
 									                <td>${card.classifyCard}</td>
 									                <td>${card.usageUser}</td>
 									                <td>${card.usageCard}</td>

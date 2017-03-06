@@ -68,4 +68,19 @@ public class CardServiceImpl implements CardService{
 	public int sumUsageCost(Card card) {
 		return dao.sumUsageCost(card);
 	}
+
+	@Override
+	public List<Card> concatDate(Card card) {
+		return dao.concatDate(card);
+	}
+
+	@Override
+	public List<Card> orderByUser(Card card) {
+		return dao.orderByUser(card);
+	}
+
+	@Override
+	public List<Card> orderByAbstract(Card card) {
+		return dao.orderByAbstract(card);
+	}
 }

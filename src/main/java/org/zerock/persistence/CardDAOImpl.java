@@ -29,4 +29,19 @@ public class CardDAOImpl implements CardDAO{
 	public int sumUsageCost(Card card) {
 		return session.selectOne(namespace + ".sumUsageCost", card);
 	}
+
+	@Override
+	public List<Card> concatDate(Card card) {
+		return session.selectList(namespace + ".concatDate", card);
+	}
+
+	@Override
+	public List<Card> orderByUser(Card card) {
+		return session.selectList(namespace + ".orderByUser", card);
+	}
+
+	@Override
+	public List<Card> orderByAbstract(Card card) {
+		return session.selectList(namespace + ".orderByAbstract", card);
+	}
 }

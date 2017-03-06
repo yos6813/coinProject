@@ -20,6 +20,28 @@ public class Card {
 	int ab2No;
 	int count;
 	
+	int concatYear;
+	int concatDate;
+	int sumCost;
+	
+	public int getConcatYear() {
+		return concatYear;
+	}
+	public void setConcatYear(int concatYear) {
+		this.concatYear = concatYear;
+	}
+	public int getConcatDate() {
+		return concatDate;
+	}
+	public void setConcatDate(int concatDate) {
+		this.concatDate = concatDate;
+	}
+	public int getSumCost() {
+		return sumCost;
+	}
+	public void setSumCost(int sumCost) {
+		this.sumCost = sumCost;
+	}
 	public int getCount() {
 		return count;
 	}

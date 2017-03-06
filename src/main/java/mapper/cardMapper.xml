@@ -19,4 +19,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="sumUsageCost" resultType="int">
 		select sum(cost) as count from usageTbl;
 	</select>
+	
+	<select id="concatDate" resultType="org.zerock.persistence.Card">
+		select CONCAT(YEAR(usageDate)) concatYear, CONCAT(MONTH(usageDate)) concatDate, sum(cost) sumCost from usageTbl group by concatDate;
+	</select>
+	
+	<select id="orderByUser" resultType="org.zerock.persistence.Card">
+		select CONCAT(MONTH(usageDate)) as concatDate, usageUser, sum(cost) sumCost from usageTbl group by concatDate, usageUser;
+	</select>
+	
+	<select id="orderByAbstract" resultType="org.zerock.persistence.Card">
+		select CONCAT(MONTH(usageDate)) as concatDate, abstract1, sum(cost) sumCost from usageTbl group by concatDate, abstract1;
+	</select>
 </mapper>

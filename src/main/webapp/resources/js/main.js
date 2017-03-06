@@ -576,52 +576,173 @@ $(document).ready(function(){
 })
 
 /* usage List */
-$(document).ready(function(){
-//	var usageData = [];
-//	for(var i=0; i<=$('.gradeX').size(); i++){
-//		var date = $('.listData').text();
-//		var split = date.split('.');
-//		
-//		if(split[0] == $('#chartYear').val()){
-//			usageData.push({
-//				listData: split[1],
-//				listCost: 
-//			})
-//		}
-//	}
-	var populationData1 = [{
-						    arg: 1950,
-						    val: 2525778669
-						}, {
-						    arg: 1960,
-						    val: 3026002942
-						}, {
-						    arg: 1970,
-						    val: 3691172616
-						}, {
-						    arg: 1980,
-						    val: 4449048798
-						}, {
-						    arg: 1990,
-						    val: 5320816667
-						}, {
-						    arg: 2000,
-						    val: 6127700428
-						}, {
-						    arg: 2010,
-						    val: 6916183482
-						}];
+function usageData(){
+	var dateCost = [];
+	for(var i=0; i<$('.dateCostTbl').size(); i++){
+		if($('.concatYear').eq(i).text() == $('#chartYear').val()){
+			dateCost.push({
+				arg: $('.concatDate').eq(i).text(),
+				val: parseInt($('.sumCost').eq(i).text())
+			})
+		}
+	}
 	
 	$(function(){
 	    $("#chart1").dxChart({
-	        dataSource: populationData1, 
+	        dataSource: dateCost,
+	        palette: "violet",
 	        series: {
+	        	palette: "violet",
+	            argumentField: "arg",
+	            valueField: "val",
+	            name: "누적 금액",
+	            type: "bar",
+	        },
+	        argumentAxis: {
+	        	 label: {
+		            format: {
+		            	type: "month"
+		            }
+	        	 }
+	        },
+	        tooltip: {
+	        	enabled: true,
+	            location: "edge",
+	            customizeTooltip: function (arg) {
+                	 return {
+                		 text: arg.valueText
+                	 };
+	            }
+	        },
+	        legend: {
+	            horizontalAlignment: 'center',
+	            verticalAlignment: 'bottom'
+	        },
+	        valueAxis: {
+	            label: {
+	                format: {
+	                    type: "millions"
+	                },
+	            }
+	        },
+	        title: "<h4>달 별 누적금액</h4>"
+	    });
+	});
+}
+
+function userSum(){
+	var userCost = [];
+	for(var i=0; i<$('.orderByabstract1Tbl').size(); i++){
+		if($('.abstract1Date').eq(i).attr('value') == $('#chartMonth').val()){
+			userCost.push({
+				arg: $('.orderByAbstract1').eq(i).text(),
+				val: parseInt($('.abstract1SumCost').eq(i).text())
+			})
+		}
+	}
+	
+	$(function(){
+	    $("#userCostChart").dxChart({
+	        dataSource: userCost,
+	        series: {
+	        	enabled: false,
 	            argumentField: "arg",
 	            valueField: "val",
 	            name: "My oranges",
 	            type: "bar",
-	            color: '#ffaa66'
-	        }
+	            color: "#e0af9a",
+	            name: "누적 금액"
+	        },
+	        tooltip: {
+	        	enabled: true,
+	            location: "edge",
+	            customizeTooltip: function (arg) {
+                	 return {
+                		 text: arg.valueText
+                	 };
+	            }
+	        },
+	        valueAxis: {
+	            label: {
+	                format: {
+	                    type: "millions"
+	                },
+	            }
+	        },
+	        title: "<h3>항목 별 누적 금액</h3>"
 	    });
 	});
+}
+
+function userSum1(){
+	var userCost = [];
+	for(var i=0; i<$('.orderByUserTbl').size(); i++){
+		if($('.userDate').eq(i).attr('value') == $('#chartMonth').val()){
+			userCost.push({
+				arg: "<img class='img-circle' src='resources/img/photo.png'><br>" + $('.orderByUser').eq(i).text(),
+				val: parseInt($('.userSumCost').eq(i).text())
+			})
+		}
+	}
+	
+	$(function(){
+	    $("#userCostGraph").dxChart({
+	        dataSource: userCost,
+	        rotated: true,
+	        commonSeriesSettings: {
+	            argumentField: "arg",
+	            type: "bar",
+	            color: "#b7d2ff",
+	        },
+	        series: {
+	            valueField: "val",
+	            name: "누적 금액"
+	        },
+	        legend: {
+	            verticalAlignment: "bottom",
+	            horizontalAlignment: "center"
+	        },
+	        "export": {
+	            enabled: true
+	        },
+	        tooltip: {
+	        	enabled: true,
+	            location: "edge",
+	            customizeTooltip: function (arg) {
+                	 return {
+                		 text: arg.valueText
+                	 };
+	            }
+	        },
+	        valueAxis: {
+	            label: {
+	                format: {
+	                    type: "millions"
+	                },
+	            }
+	        },
+	        title: "<h3>인 별 누적 금액</h3>"
+	    });
+	});
+}
+
+$(document).ready(function(){
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	for(var i=1; i<=month; i++){
+		$('#chartMonth').append("<option value='" + i + "'>" + i + "월</option>");
+	}
+	usageData();
+	userSum();
+	userSum1();
+	
+	$('#chartYear').change(function(){
+		usageData();
+	})
+	
+	$('#chartMonth').change(function(){
+		userSum();
+		userSum1();
+	})
+	
 })	
