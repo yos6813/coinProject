@@ -48,7 +48,7 @@ public class ProjectController {
 		
 		model.addAttribute("list1", bService.countTask(board));
 		model.addAttribute("list7", bService.taskView(board));
-		return "/projectView";
+		return "projectView";
 	}
 	
 	@RequestMapping(value = "/projectList")
@@ -61,6 +61,6 @@ public class ProjectController {
 		pageMaker.setTotalCount(bService.listCountCriteria(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
-		return "/projectList";
+		return "projectList";
 	}
 }

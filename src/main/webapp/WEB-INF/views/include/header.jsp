@@ -11,21 +11,22 @@
 
     <title>Home</title>
 
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/resources/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Toastr style -->
-    <link href="/resources/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="resources/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
     <!-- Gritter -->
-    <link href="/resources/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="resources/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-    <link href="/resources/css/animate.css" rel="stylesheet">
-    <link href="/resources/css/style.css" rel="stylesheet">
-    <link href="/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="/resources/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
-    <link href="/resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-
+    <link href="resources/css/animate.css" rel="stylesheet">
+    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="resources/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="resources/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="resources/css/plugins/iCheck/custom.css" rel="stylesheet">
 </head>
 
 <body>

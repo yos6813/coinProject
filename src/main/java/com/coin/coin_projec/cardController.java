@@ -56,7 +56,7 @@ public class cardController {
 		card1.setCount(cService.sumUsageCost(card));
 		
 		model.addAttribute("cost", card1);
-		return "/card/cardList";
+		return "card/cardList";
 	}
 	
 	@RequestMapping(value = "/usageWrite", method=RequestMethod.GET)
@@ -66,14 +66,14 @@ public class cardController {
 		model.addAttribute("list2", aService.selectAbstract(admit));
 		model.addAttribute("list3", aService.selectAbstract2(admit));
 		
-		return "/card/usageWrite";
+		return "card/usageWrite";
 	}
 	
 	@RequestMapping(value = "/cWrite", method=RequestMethod.POST)
 	public String cWrite(@RequestParam("email") String email, Locale locale, Model model, User user, Card card) {
 		cService.usageCardInsert(card);
 		
-		return "redirect:/cardList?email=" + email;
+		return "redirect:cardList?email=" + email;
 	}
 	
 	@ResponseBody
@@ -84,7 +84,7 @@ public class cardController {
             throw new RuntimeException("엑셀파일을 선택해 주세요");
         }
  
-        File destFile = new File("D:\\"+excelFile.getOriginalFilename());
+        File destFile = new File(excelFile.getOriginalFilename());
         try {
             excelFile.transferTo(destFile);
         } catch (IllegalStateException | IOException e) {
@@ -97,7 +97,15 @@ public class cardController {
         destFile.delete();
         
         ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:/cardList?email=" + email);
+        view.setViewName("redirect:cardList?email=" + email);
         return view;
     }
+	
+	@RequestMapping(value = "/modifyCard", method=RequestMethod.GET)
+	public String modifyCard(@RequestParam("email") String email, @RequestParam("cNo") int cNo,
+							 Locale locale, Model model, User user, Card card) {
+		model.addAttribute(service.read(email));
+		
+		return "card/modifyCard";
+	}
 }

@@ -9,25 +9,25 @@
 	
 	    <title>Login</title>
 	
-	    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="/resources/font-awesome/css/font-awesome.css" rel="stylesheet">
-	    <link href="/resources/css/animate.css" rel="stylesheet">
-	    <link href="/resources/css/style.css" rel="stylesheet">
+	    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet">
+	    <link href="resources/css/animate.css" rel="stylesheet">
+	    <link href="resources/css/style.css" rel="stylesheet">
 	</head>
 	
 	<body class="gray-bg">
 		<div class="center1 text-center">
-			<a id="login"><img alt="login" src="/resources/img/btn_google_1x.png"></a>
+			<a id="login"><img alt="login" src="resources/img/btn_google_1x.png"></a>
 		</div>
 			
 		<!-- firebase -->
     	<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
     	
 		<!-- Mainly scripts -->
-		<script src="/resources/js/jquery-2.1.1.js"></script>
-		<script src="/resources/js/bootstrap.min.js"></script>
-		<script src="/resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-		<script src="/resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-		<script src="/resources/js/main.js"></script>
+		<script src="resources/js/jquery-2.1.1.js"></script>
+		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+		<script src="resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="resources/js/main.js"></script>
 	</body>
 </html>

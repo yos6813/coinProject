@@ -51,7 +51,7 @@ public class HomeController {
     	service.update2(user);
     	logger.info(user.toString());
     	
-        return "redirect:/home?email=" + email;
+        return "redirect:home?email=" + email;
     }
 	
 	@RequestMapping(value = "/")
@@ -67,6 +67,6 @@ public class HomeController {
 		
 		logger.info(test[0][1]);
 		
-		return "redirect:/home?email=" + email;
+		return "redirect:home?email=" + email;
 	}
 }

@@ -35,14 +35,14 @@ public class AdmitController {
 	public String view(@RequestParam ("email") String email, Project project, Model model) {
 		model.addAttribute("list", pService.viewList());
 		model.addAttribute(service.read(email));
-		return "/admit/admitView";
+		return "admit/admitView";
 	}
 	
 	@RequestMapping(value = "/registProject")
 	public String registProject(@RequestParam ("email") String email, Project project, Model model, User user) {
 		pService.insertProject(project);
 		
-		return "redirect:/admit?email=" + email;
+		return "redirect:admit?email=" + email;
 	}
 	
 	@RequestMapping(value = "/abstractPage")
@@ -61,14 +61,14 @@ public class AdmitController {
 		model.addAttribute("pageMaker", pageMaker);
 		
 		
-		return "/admit/abstractPage";
+		return "admit/abstractPage";
 	}
 	
 	@RequestMapping(value = "/registAbstract")
 	public String registAbstract(@RequestParam ("email") String email, Project project, Model model, User user, Admit admit) {
 		aService.insertAbstract(admit);
 		
-		return "redirect:/abstractPage?email=" + email;
+		return "redirect:abstractPage?email=" + email;
 	}
 	
 	@RequestMapping(value = "/registAbstract2")
@@ -76,6 +76,6 @@ public class AdmitController {
 								  @RequestParam (value="abNo", required=false) int abNo, @RequestParam (value="page") int page) {
 		aService.insertAbstract2(admit);
 		
-		return "redirect:/abstractPage?email=" + email + "&abNo=" + abNo + "&page=" + page;
+		return "redirect:abstractPage?email=" + email + "&abNo=" + abNo + "&page=" + page;
 	}
 }

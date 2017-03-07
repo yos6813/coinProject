@@ -13,12 +13,14 @@ var tno = getParameterByName('tNo');
 var abno =getParameterByName('abNo');
 var page =getParameterByName('page');
 
-var config = {
-    apiKey: "AIzaSyDLSpBShLQKwdj0i4jQFYI9AjP7kKpB7nU",
-    authDomain: "test-7f6b6.firebaseapp.com",
-    databaseURL: "https://test-7f6b6.firebaseio.com",
-    storageBucket: "test-7f6b6.appspot.com",
-    messagingSenderId: "1019331388800"
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDp2pj6WSvpKOtnnRp9NwdTVZAgUalNNa8",
+    authDomain: "yeta-cscenter.firebaseapp.com",
+    databaseURL: "https://yeta-cscenter.firebaseio.com",
+    storageBucket: "yeta-cscenter.appspot.com",
+    messagingSenderId: "304577172613"
   };
   firebase.initializeApp(config);
 
@@ -745,4 +747,7 @@ $(document).ready(function(){
 		userSum1();
 	})
 	
+	$('.gradeX').click(function(){
+		location.href="modifyCard?email=" + email + "&cNo=" + $(this).attr('value');
+	})
 })	

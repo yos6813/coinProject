@@ -111,6 +111,9 @@
                            </div>
                            <div id="tab-2" class="tab-pane">
                                <div class="panel-body">
+                               <div class="col-sm-5">
+                               	<div class="mine"><label> <input type="radio" class="mine" value="" checked=""> <i></i> 내것만 보기 </label></div>
+                               </div>
                                	<a data-toggle="modal" data-target="#myModal" class="btn btn-default pull-right">엑셀 데이터 업로드</a>&nbsp;
 					        	<a href="/usageWrite?email=${user.email}&abNo=1" class="btn btn-default pull-right">글쓰기</a>
 					        	<hr>
@@ -118,6 +121,7 @@
 						            <table class="table table-striped table-bordered table-hover dataTables-example">
 							            <thead>
 							            <tr>
+							            	<th>#</th>
 							            	<th>No</th>
 							                <th>이용일자</th>
 							                <th>카드구분</th>
@@ -133,7 +137,8 @@
 							            </thead>
 							            <tbody>
 								            <c:forEach items="${list}" var="card">
-									            <tr class="gradeX">
+									            <tr class="gradeX" value="${card.cNo}">
+									            	<td value="${card.cNo}" class="mine"><input type="checkBox" class="mine" value=""></td>
 									            	<td>${card.cNo}</td>
 									                <td class="listDate" value="${card.usageDate}">${card.usageDate}</td>
 									                <td>${card.classifyCard}</td>
@@ -148,21 +153,6 @@
 									            </tr>
 								            </c:forEach>
 							            </tbody>
-							            <tfoot>
-							            <tr>
-							            	<th>No</th>
-							               	<th>이용일자</th>
-							                <th>카드구분</th>
-							                <th>사용자</th>
-							                <th>사용카드</th>
-							                <th>매출구분</th>
-							                <th>이용가맹점(은행)명</th>
-							                <th>이용금액</th>
-							                <th>적요1</th>
-							                <th>적요2</th>
-							                <th>비고</th>
-							            </tr>
-							            </tfoot>
 				            		</table>
 				            	</div>
                                </div>

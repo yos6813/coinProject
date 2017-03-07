@@ -50,7 +50,7 @@ public class taskController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 			
-		return "/task/taskM";
+		return "task/taskM";
 	}
 	
 	@RequestMapping(value = "/taskWrite", method=RequestMethod.GET)
@@ -62,9 +62,9 @@ public class taskController {
 			model.addAttribute(pService.readProject(pNo));
 		}
 		model.addAttribute(service.read(email));
-		model.addAttribute("list2", service.listAll(email));
+		model.addAttribute("list2", service.listAll2(email));
 		
-		return "/task/taskWrite";
+		return "task/taskWrite";
 	}
 	
 	 @RequestMapping(value="/taskWriteP", method=RequestMethod.POST)
@@ -72,7 +72,7 @@ public class taskController {
 		 bService.insertBoard(board);
 		 logger.info(board.toString());
 		 
-		 return "redirect:/task?email=" + email;
+		 return "redirect:task?email=" + email;
     }
 	
 	@RequestMapping(value="/viewTask")
@@ -88,7 +88,7 @@ public class taskController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "/task/viewTask";
+		return "task/viewTask";
 	}
 	
 	@RequestMapping(value="/activityWrite")
@@ -96,14 +96,14 @@ public class taskController {
 		model.addAttribute(bService.viewBoard(bNo));
 		model.addAttribute("list2", service.listAll(email));
 		
-		return "/task/activityWrite";
+		return "task/activityWrite";
 	}
 	
 	@RequestMapping(value="/aWrite", method=RequestMethod.POST)
 	 public String aWrite(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board, Project project, User user, HttpServletRequest request) {
 		bService.insertActivity(board);
 		
-		return "redirect:/viewTask?email=" + email + "&bNo=" + bNo;
+		return "redirect:viewTask?email=" + email + "&bNo=" + bNo;
 	}
 	
 	@RequestMapping(value="/viewActivity")
@@ -118,7 +118,7 @@ public class taskController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "/task/viewActivity";
+		return "task/viewActivity";
 	}
 	
 	@RequestMapping(value="/createTask")
@@ -128,7 +128,7 @@ public class taskController {
 		model.addAttribute("list2", service.listAll(email));
 		model.addAttribute(bService.viewActivity(aNo));
 		
-		return "/task/createTask";
+		return "task/createTask";
 	}
 	
 	@RequestMapping(value="/createT", method=RequestMethod.POST)
@@ -136,7 +136,7 @@ public class taskController {
 			 @RequestParam ("aNo") int aNo, Board board, User user, HttpServletRequest request) {
 		bService.insertTask(board);
 		
-		return "redirect:/viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
+		return "redirect:viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
 	@RequestMapping(value="/taskView")
@@ -152,7 +152,7 @@ public class taskController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "/task/taskView";
+		return "task/taskView";
 	}
 	
 	@RequestMapping(value="/deleteP", method=RequestMethod.POST)
@@ -163,7 +163,7 @@ public class taskController {
 		bService.delActivity(bNo);
 		bService.delTask(bNo);
 		
-		return "redirect:/task?email=" + email;
+		return "redirect:task?email=" + email;
 	}
 	
 	@RequestMapping(value="/deleteA", method=RequestMethod.POST)
@@ -173,7 +173,7 @@ public class taskController {
 		bService.delA(aNo);
 		bService.delT(aNo);
 		
-		return "redirect:/viewTask?email=" + email + "&bNo=" + bNo;
+		return "redirect:viewTask?email=" + email + "&bNo=" + bNo;
 	}
 	
 	@RequestMapping(value="/deleteT", method=RequestMethod.POST)
@@ -182,7 +182,7 @@ public class taskController {
 		
 		bService.deleteTask(tNo);
 		
-		return "redirect:/viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
+		return "redirect:viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
 	/* modify */
@@ -194,7 +194,7 @@ public class taskController {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list1", service.listAll2(email));
 		
-		return "/modify/modifyP";
+		return "modify/modifyP";
 	}
 	
 	@RequestMapping(value="/modifyBoard")
@@ -202,7 +202,7 @@ public class taskController {
 			Board board, User user, RedirectAttributes rttr) {
 		bService.updateP(board);
 		
-		return "redirect:/viewTask?email=" + email + "&bNo=" + bNo;
+		return "redirect:viewTask?email=" + email + "&bNo=" + bNo;
 	}
 	
 	@RequestMapping(value="/modifyA")
@@ -212,7 +212,7 @@ public class taskController {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list1", service.listAll2(email));
 		
-		return "/modify/modifyA";
+		return "modify/modifyA";
 	}
 	
 	@RequestMapping(value="/modifyActivity")
@@ -220,7 +220,7 @@ public class taskController {
 			 @RequestParam("aNo") String aNo, Board board, User user, RedirectAttributes rttr) {
 		bService.updateA(board);
 		
-		return "redirect:/viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
+		return "redirect:viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
 	@RequestMapping(value="/modifyT")
@@ -230,13 +230,13 @@ public class taskController {
 		model.addAttribute(bService.viewTask(tNo));
 		model.addAttribute(service.read(email));
 		model.addAttribute("list1", service.listAll2(email));
-		return "/modify/modifyT";
+		return "modify/modifyT";
 	}
 	
 	@RequestMapping(value="/modifyTask")
 	 public String modifyTask(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
 			 @RequestParam("aNo") int aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr) {
 		bService.updateT(board);
-		return "redirect:/taskView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo + "&tNo=" + tNo;
+		return "redirect:taskView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo + "&tNo=" + tNo;
 	}
 }
