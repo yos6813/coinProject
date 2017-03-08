@@ -34,7 +34,7 @@
 					<input type="text" class="form-control" id="email"name="email" readonly="readonly">
 				</div>
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="닉네임" name="nickname" id="nickname">
+					<input type="text" class="form-control" placeholder="닉네임(한글로입력)" name="nickname" id="nickname">
 				</div>
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" placeholder="slackID" name="slackID" id="slackId">

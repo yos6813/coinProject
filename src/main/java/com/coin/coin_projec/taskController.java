@@ -72,7 +72,7 @@ public class taskController {
 		 bService.insertBoard(board);
 		 logger.info(board.toString());
 		 
-		 return "redirect:task?email=" + email;
+		 return "redirect:/task?email=" + email;
     }
 	
 	@RequestMapping(value="/viewTask")
@@ -94,7 +94,7 @@ public class taskController {
 	@RequestMapping(value="/activityWrite")
 	 public String writeActivity(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board, Project project, User user, HttpServletRequest request) {
 		model.addAttribute(bService.viewBoard(bNo));
-		model.addAttribute("list2", service.listAll(email));
+		model.addAttribute("list2", service.listAll2(email));
 		
 		return "task/activityWrite";
 	}

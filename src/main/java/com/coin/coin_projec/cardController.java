@@ -45,17 +45,24 @@ public class cardController {
 	private static final Logger logger = LoggerFactory.getLogger(cardController.class);
 	
 	@RequestMapping(value = "/cardList", method=RequestMethod.GET)
-	public String cardList(@RequestParam("email") String email, Locale locale, Model model, User user, Card card) {
+	public String cardList(@RequestParam("email") String email, @RequestParam(value="check", required=false) String check,
+						   Locale locale, Model model, User user, Card card) {
 		model.addAttribute(service.read(email));
-		model.addAttribute("list", cService.usageCardSelect(card));
+		
+		if(check != null){
+			model.addAttribute("list", cService.selectUserCard(email));
+		} else {
+			model.addAttribute("list", cService.usageCardSelect(card));
+		}
 		model.addAttribute("list1", cService.concatDate(card));
 		model.addAttribute("list2", cService.orderByUser(card));
 		model.addAttribute("list3", cService.orderByAbstract(card));
 		
 		Card card1 = new Card();
 		card1.setCount(cService.sumUsageCost(card));
-		
+
 		model.addAttribute("cost", card1);
+		
 		return "card/cardList";
 	}
 	
@@ -65,6 +72,7 @@ public class cardController {
 		model.addAttribute("list", service.listAll(email));
 		model.addAttribute("list2", aService.selectAbstract(admit));
 		model.addAttribute("list3", aService.selectAbstract2(admit));
+		model.addAttribute("list4", service.listAll2(email));
 		
 		return "card/usageWrite";
 	}
@@ -103,9 +111,30 @@ public class cardController {
 	
 	@RequestMapping(value = "/modifyCard", method=RequestMethod.GET)
 	public String modifyCard(@RequestParam("email") String email, @RequestParam("cNo") int cNo,
-							 Locale locale, Model model, User user, Card card) {
+							 Locale locale, Model model, User user, Card card, Admit admit) {
 		model.addAttribute(service.read(email));
+		model.addAttribute(cService.userCardSelect(cNo));
+		model.addAttribute("list2", aService.selectAbstract(admit));
+		model.addAttribute("list3", aService.selectAbstract2(admit));
 		
 		return "card/modifyCard";
+	}
+	
+	@RequestMapping(value = "/cModify", method=RequestMethod.POST)
+	public String cModify(@RequestParam("email") String email, @RequestParam("cNo") int cNo,
+							 Locale locale, Model model, User user, Card card) {
+		model.addAttribute(service.read(email));
+		cService.updateCardList(card);
+		
+		return "redirect:cardList?email=" + email;
+	}
+	
+	@RequestMapping(value = "/cDelete", method=RequestMethod.POST)
+	public String cDelete(@RequestParam("email") String email, @RequestParam("cNo") int cNo,
+							 Locale locale, Model model, User user, Card card) {
+		model.addAttribute(service.read(email));
+		cService.deleteCardList(cNo);
+		
+		return "redirect:cardList?email=" + email;
 	}
 }

@@ -44,4 +44,29 @@ public class CardDAOImpl implements CardDAO{
 	public List<Card> orderByAbstract(Card card) {
 		return session.selectList(namespace + ".orderByAbstract", card);
 	}
+
+	@Override
+	public void pasteData(Card card) {
+		session.insert(namespace + ".pasteData", card);
+	}
+
+	@Override
+	public Card userCardSelect(int cNo) {
+		return session.selectOne(namespace + ".userCardSelect", cNo);
+	}
+
+	@Override
+	public void updateCardList(Card card) {
+		session.update(namespace + ".updateCardList", card);
+	}
+
+	@Override
+	public void deleteCardList(int cNo) {
+		session.delete(namespace + ".deleteCardList", cNo);
+	}
+
+	@Override
+	public List<Card> selectUserCard(String email) {
+		return session.selectList(namespace + ".selectUserCard", email);
+	}
 }

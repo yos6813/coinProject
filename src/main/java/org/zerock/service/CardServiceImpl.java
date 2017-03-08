@@ -83,4 +83,29 @@ public class CardServiceImpl implements CardService{
 	public List<Card> orderByAbstract(Card card) {
 		return dao.orderByAbstract(card);
 	}
+
+	@Override
+	public void pasteData(Card card) {
+		dao.pasteData(card);
+	}
+
+	@Override
+	public Card userCardSelect(int cNo) {
+		return dao.userCardSelect(cNo);
+	}
+
+	@Override
+	public void updateCardList(Card card) {
+		dao.updateCardList(card);
+	}
+
+	@Override
+	public void deleteCardList(int cNo) {
+		dao.deleteCardList(cNo);
+	}
+
+	@Override
+	public List<Card> selectUserCard(String email) {
+		return dao.selectUserCard(email);
+	}
 }

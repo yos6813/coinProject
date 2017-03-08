@@ -12,6 +12,8 @@ var ano = getParameterByName('aNo');
 var tno = getParameterByName('tNo');
 var abno =getParameterByName('abNo');
 var page =getParameterByName('page');
+var cno =getParameterByName('cNo');
+var check =getParameterByName('check');
 
 
   // Initialize Firebase
@@ -422,6 +424,18 @@ $(document).ready(function(){
 			$('.' + i).addClass('label-error');
 		}
 	}
+	
+	if($('#boardStatus').text()=='진행중'){
+		$('#boardStatus').addClass('label-primary');
+	} else if($('#boardStatus').text()=='대기'){
+		$('#boardStatus').addClass('label-default');
+	} else if($('#boardStatus').text()=='보류'){
+		$('#boardStatus').addClass('label-warning');
+	} else if($('#boardStatus').text()=='완료'){
+		$('#boardStatus').addClass('label-success');
+	} else if($('#boardStatus').text()=='기간초과'){
+		$('#boardStatus').addClass('label-error');
+	}
 })
 
 /* activity view */
@@ -748,6 +762,73 @@ $(document).ready(function(){
 	})
 	
 	$('.gradeX').click(function(){
-		location.href="modifyCard?email=" + email + "&cNo=" + $(this).attr('value');
+		location.href="modifyCard?email=" + email + "&cNo=" + $(this).attr('value') + "&abNo=" + $(this).children('.abList').attr('value');
 	})
+	
+	$('input[type="checkBox"]').click(function(){
+//		if(this.checked){
+			console.log($(this).attr('value'));
+//		} else {
+//			
+//		}
+	})
+	
+	$('#mine').click(function(){
+		if($(this).is(":checked")){
+			location.search = "?email=" + email + "&check=true";
+		} else {
+			location.search = "?email=" + email;
+		}
+	})
+	
+	if(check == 'true'){
+		$('#mine').attr('checked', true);
+	}
 })	
+
+/* modify usage */
+$(document).ready(function(){
+	if(cno != '' && cno != undefined){
+		var date1 = $('#totalDateM').val();
+		var split1 = date1.split('.');
+		$('#yearM').val(split1[0]);
+		$('#monthM').val(split1[1]);
+		$('#dayM').val(split1[2]);
+	}
+	
+	if($('#abstract2M').children().size() <= 0){
+		$('#Mabstract2box').hide();
+	}
+	
+	$("#abstract1M").val(abno).prop("selected", true);
+	
+	$('#abstract1M').change(function(){
+		location.href = '/modifyCard?email=' + email + "&cNo=" + cno + '&abNo=' + $(this).val();
+	})
+	
+	$('#Mcancel').click(function() {
+		var result = confirm('글 작성을 취소하시겠습니까?');
+		if(result) {
+			//yes
+			location.replace('cardList?email=' + email);
+		} else { 
+			//no 
+		} 
+	})
+	
+	function deleteData(){
+		var result = confirm('글을 삭제하시겠습니까?');
+		if(result) {
+			//yes
+			$('#modifyForm').attr('action',"/cDelete?email=" + email + "&cNo=" + cno);
+			$('#modifyForm').submit();
+		} else { 
+			//no 
+		} 
+	}
+	
+	function modifyData(){
+		$('#modifyForm').attr('action', "/cModify?email=" + email + "&cNo=" + cno);
+		$('#modifyForm').submit();
+	}
+})

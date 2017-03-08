@@ -16,85 +16,6 @@
      </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
-	<div class="row m-b-lg m-t-lg">
-		<div class="col-md-6">
-		    <div class="profile-image">
-		        <img src="${board.pmPhoto}" class="img-circle circle-border m-b-md" alt="profile">
-			</div>
-			<div class="profile-info">
-		    	<div class="">
-		        	<div>
-			            <h2 class="no-margins">
-			                ${board.pName}
-			         	</h2>
-			         	<p class="label" id="boardStatus">${board.status}</p><br>
-			         	<small>
-			             	${board.text}
-		                </small>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-        <div class="col-md-3">
-            <table class="table small m-b-xs">
-                <tbody>
-                <tr>
-                    <td>
-                        <strong>142</strong> Projects
-                    </td>
-                    <td>
-                        <strong>22</strong> Followers
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>61</strong> Comments
-                    </td>
-                    <td>
-                        <strong>54</strong> Articles
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>154</strong> Tags
-                    </td>
-                    <td>
-                        <strong>32</strong> Friends
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-3">
-			<div class="ibox">
-				<div class="ibox-content">
-		     	<h3>Activity Status</h3>
-		     	<table class="table">
-					<tr class="activity">
-						<td>진행중</td>
-						<td id="ongoing" value="${list3.size()}">${list3.size()}</td>
-					</tr>
-					<tr class="activity">
-						<td>완료</td>
-						<td id="c​omplete" value="${list5.size()}">${list5.size()}</td>
-					</tr>
-					<tr class="activity">
-						<td>대기</td>
-						<td id="standby" value="${list4.size()}">${list4.size()}</td>
-					</tr>
-					<tr class="activity">
-						<td>보류</td>
-						<td id="defer" value="${list6.size()}">${list6.size()}</td>
-					</tr>
-					<tr class="activity">
-						<td>기간초과</td>
-						<td id="excess" value="${list8.size()}">${list8.size()}</td>
-					</tr>
-             	</table>
-              </div>
-          </div>
-		</div>
-	</div>
     <div class="row">
         <div class="col-lg-3">
             <div class="ibox">
@@ -115,6 +36,33 @@
                     <div class="user-friends">
                         <div id="pie"></div>
                     </div>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Activity Status</h3>
+                    <table class="table">
+						<tr class="activity">
+							<td>진행중</td>
+							<td id="ongoing" value="${list3.size()}">${list3.size()}</td>
+						</tr>
+						<tr class="activity">
+							<td>완료</td>
+							<td id="c​omplete" value="${list5.size()}">${list5.size()}</td>
+						</tr>
+						<tr class="activity">
+							<td>대기</td>
+							<td id="standby" value="${list4.size()}">${list4.size()}</td>
+						</tr>
+						<tr class="activity">
+							<td>보류</td>
+							<td id="defer" value="${list6.size()}">${list6.size()}</td>
+						</tr>
+						<tr class="activity">
+							<td>기간초과</td>
+							<td id="excess" value="${list8.size()}">${list8.size()}</td>
+						</tr>
+                    </table>
                 </div>
             </div>
         </div>

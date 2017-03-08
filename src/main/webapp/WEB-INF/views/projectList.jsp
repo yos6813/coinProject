@@ -3,19 +3,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="include/header.jsp" %>
-<!-- Content Wrapper. Contains page content -->
-  <!-- Content Header (Page header) -->
-	<div class="row wrapper border-bottom white-bg page-heading">
-	     <div class="col-lg-10">
-	         <h1>
-	   			<b>Project List</b>
-		 	 </h1>
-	         <ol class="breadcrumb">
-			    <li><a href="/home"><i class="fa fa-home"></i> Home</a></li>
-			    <li class="active">Project List</li>
-		     </ol>
-	     </div>
-	 </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+     <div class="col-lg-10">
+         <h1>
+   			<b>Project List</b>
+	 	 </h1>
+         <ol class="breadcrumb">
+		    <li><a href="/home"><i class="fa fa-home"></i> Home</a></li>
+		    <li class="active">Project List</li>
+	     </ol>
+     </div>
+ </div>
 <div class="wrapper-content">
 	 <div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">

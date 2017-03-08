@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="sumUsageCost" resultType="int">
-		select sum(cost) as count from usageTbl;
+		select ifnull(sum(cost), 0) as count from usageTbl;
 	</select>
 	
 	<select id="concatDate" resultType="org.zerock.persistence.Card">
@@ -31,4 +31,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="orderByAbstract" resultType="org.zerock.persistence.Card">
 		select CONCAT(MONTH(usageDate)) as concatDate, abstract1, sum(cost) sumCost from usageTbl group by concatDate, abstract1;
 	</select>
+	
+	<insert id="pasteData">
+		insert into usageTbl (usageDate, classifyCard, usageUser, usageCard, sales, memberStore, cost, abstract1, abstract2, note)
+			select usageDate, classifyCard, usageUser, usageCard, sales, memberStore, cost, abstract1, abstract2, note from usageTbl
+			where cNo in(
+			<foreach collection="data_list" item="item" index="index" separator="," open="(" close=")">
+				#{cNo}
+			</foreach>
+			);
+	</insert>
+	
+	<select id="userCardSelect" resultType="org.zerock.persistence.Card">
+		select distinct cNo, usageDate, classifyCard, usageUser, usageCard, sales, memberStore,
+			   cost, abstract1, abstract2, note, vab.abName, vab2.ab2Name from usageTbl u left outer join v_abstracttbl vab on u.abstract1 = vab.abNo
+               left outer join v_abstracttbl vab2 on u.abstract2 = vab2.ab2No where cNo = #{cNo};
+    </select>
+    
+    <update id="updateCardList">
+    	update usageTbl set usageDate=#{usageDate}, classifyCard=#{classifyCard}, usageUser=#{usageUser}, usageCard=#{usageCard},
+    						sales=#{sales}, memberStore=#{memberStore},	cost=#{cost}, abstract1=#{abstract1},
+    						abstract2=#{abstract2}, note=#{note} where cNo = #{cNo};
+    </update>
+    
+    <delete id="deleteCardList">
+    	delete from usageTbl where cNo = #{cNo};                    
+    </delete>
+    
+    <select id="selectUserCard" resultType="org.zerock.persistence.Card">
+    	select distinct cNo, usageDate, classifyCard, usageUser, usageCard, sales, memberStore,
+		cost, abstract1, abstract2, note, vab.abName, vab2.ab2Name from usageTbl u left outer join v_abstracttbl vab on u.abstract1 = vab.abNo
+		left outer join v_abstracttbl vab2 on u.abstract2 = vab2.ab2No inner join usertbl us on u.usageUser = us.nickname where email=#{email};
+    </select>
 </mapper>
