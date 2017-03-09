@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board viewActivity(int aNo) {
+	public Board viewActivity(String aNo) {
 		return dao.viewActivity(aNo);
 	}
 
@@ -110,11 +110,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> countList5(Board board) {
-		return dao.countList5(board);
-	}
-
-	@Override
 	public Board viewTask(int tNo) {
 		return dao.viewTask(tNo);
 	}
@@ -162,5 +157,20 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void updateT(Board board) {
 		dao.updateT(board);
+	}
+
+	@Override
+	public List<Board> countPercent(int bNo) {
+		return dao.countPercent(bNo);
+	}
+
+	@Override
+	public List<Board> countOrderbyUser(String aNo) {
+		return dao.countOrderbyUser(aNo);
+	}
+
+	@Override
+	public List<Board> joinUser(Board board) {
+		return dao.joinUser(board);
 	}
 }

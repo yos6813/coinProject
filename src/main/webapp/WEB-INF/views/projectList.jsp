@@ -33,6 +33,7 @@
 								<div class="col-md-2">
 									<a id="searchBtn" class="btn btn-white"><i class="fa fa-search"></i></a>
 								</div>
+								<a href="/taskWrite?email=${user.email}" type="button"  class="btn btn-white btn-sm pull-right">프로젝트 생성</a>
 							</div>
 						<table class="table">
 							<tr>

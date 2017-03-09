@@ -138,7 +138,7 @@
 							            <tbody>
 											<c:forEach items="${list}" var="card">
 									            <tr class="gradeX" value="${card.cNo}">
-									            	<td><input value="${card.cNo}" type="checkBox" class="mine checkB"></td>
+									            	<td><input value="${card.cNo}" type="checkBox"></td>
 									            	<td>${card.cNo}</td>
 									                <td class="listDate" value="${card.usageDate}">${card.usageDate}</td>
 									                <td>${card.classifyCard}</td>

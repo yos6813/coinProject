@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- project view -->
 	<select id="viewBoard" resultType="org.zerock.persistence.Board">
-		select * from v_getBoard where bNo = #{bNo};
+		select *, (select count(distinct tMName) as joinUser from v_tasktbl) as joinUser from v_getBoard where bNo = #{bNo};
 	</select>
 	
 	<insert id="insertActivity" parameterType="org.zerock.persistence.Board">
@@ -52,9 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="countList4" resultType="org.zerock.persistence.Board">
 		select * from v_activityTbl where bNo = #{bNo} and aStatus = '보류';
-	</select>
-	<select id="countList5" resultType="org.zerock.persistence.Board">
-		select * from v_activityTbl where bNo = #{bNo} and aStatus = '기간초과';
 	</select>
 	
 	<select id="viewActivity" resultType="org.zerock.persistence.Board">
@@ -101,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="taskView" resultType="org.zerock.persistence.Board">
-		select * from v_getTaskTbl where aNo = #{aNo} order by field(tStatus, '기간초과', '진행중', '보류', '대기', '완료');
+		select * from v_getTaskTbl where aNo = #{aNo} order by field(tStatus, '진행중', '보류', '대기', '완료');
 	</select>
 	
 	<delete id="delProject">
@@ -145,4 +142,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			tName=#{tName}, tDate=#{tDate}, tStatus=#{tStatus}, tM=#{tM}, tText=#{tText}
 		where tNo = #{tNo};
 	</update>
+	
+	<select id="countPercent" resultType="org.zerock.persistence.Project">
+		select round(ongoing/total * 100) ongoing1, round(standby/total * 100) standby1, round(complete/total * 100) complete1, round(defer/total * 100) defer1 from v_statusTbl where bNo = #{bNo};
+	</select>
+	
+	<select id="countOrderbyUser" resultType="org.zerock.persistence.Board">
+		select  aNo, tNo, tMPhoto, tMName, count(*) count,
+			count(*) as total,
+			COUNT(CASE WHEN tStatus = '진행중' THEN 1 END) ongoing,
+			COUNT(CASE WHEN tStatus = '대기' THEN 1 END) standby,
+			COUNT(CASE WHEN tStatus = '완료' THEN 1 END) complete,
+			COUNT(CASE WHEN tStatus = '보류' THEN 1 END) defer
+		from v_taskTbl where aNo=#{aNo} group by tMName order by count;
+	</select>
+	
+	<select id="joinUser" resultType="org.zerock.persistence.Board">
+		select count(distinct tMName) as joinUser from v_tasktbl;
+	</select>
 </mapper>

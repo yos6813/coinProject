@@ -65,10 +65,11 @@ public class AdmitController {
 	}
 	
 	@RequestMapping(value = "/registAbstract")
-	public String registAbstract(@RequestParam ("email") String email, Project project, Model model, User user, Admit admit) {
+	public String registAbstract(@RequestParam ("email") String email, Project project, Model model, User user, Admit admit,
+								 @RequestParam (value="abNo", required=false) int abNo, @RequestParam (value="page") int page) {
 		aService.insertAbstract(admit);
 		
-		return "redirect:abstractPage?email=" + email;
+		return "redirect:abstractPage?email=" + email + "&abNo=" + abNo + "&page=" + page;
 	}
 	
 	@RequestMapping(value = "/registAbstract2")

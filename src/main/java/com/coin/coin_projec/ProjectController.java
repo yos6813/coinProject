@@ -44,10 +44,20 @@ public class ProjectController {
 		model.addAttribute("list4", bService.countList2(board));
 		model.addAttribute("list5", bService.countList3(board));
 		model.addAttribute("list6", bService.countList4(board));
-		model.addAttribute("list8", bService.countList5(board));
 		
 		model.addAttribute("list1", bService.countTask(board));
-		model.addAttribute("list7", bService.taskView(board));
+		model.addAttribute("list9", bService.countPercent(bNo));
+		
+		model.addAttribute("list7", bService.listTask(cri));
+		
+		model.addAttribute("list10", bService.countOrderbyUser(aNo));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bService.listCountTCriteria(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
 		return "projectView";
 	}
 	

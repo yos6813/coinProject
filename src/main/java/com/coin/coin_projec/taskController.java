@@ -72,7 +72,7 @@ public class taskController {
 		 bService.insertBoard(board);
 		 logger.info(board.toString());
 		 
-		 return "redirect:/task?email=" + email;
+		 return "redirect:projectList?email="+ email;
     }
 	
 	@RequestMapping(value="/viewTask")
@@ -103,11 +103,11 @@ public class taskController {
 	 public String aWrite(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board, Project project, User user, HttpServletRequest request) {
 		bService.insertActivity(board);
 		
-		return "redirect:viewTask?email=" + email + "&bNo=" + bNo;
+		return "redirect:projectView?email=" + email + "&bNo=" + bNo;
 	}
 	
 	@RequestMapping(value="/viewActivity")
-	 public String viewActivity(Model model, @RequestParam ("bNo") int bNo, @RequestParam ("aNo") int aNo,
+	 public String viewActivity(Model model, @RequestParam ("bNo") int bNo, @RequestParam ("aNo") String aNo,
 			 Board board, Project project, User user, HttpServletRequest request, Criteria cri) {
 		model.addAttribute(bService.viewActivity(aNo));
 		model.addAttribute("list", bService.listTask(cri));
@@ -123,10 +123,13 @@ public class taskController {
 	
 	@RequestMapping(value="/createTask")
 	 public String createTask(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board
-			 , @RequestParam ("aNo") int aNo, Project project, User user, HttpServletRequest request) {
+			 , @RequestParam (value="aNo", required=false) String aNo, Project project, User user, HttpServletRequest request) {
 		model.addAttribute(service.read(email));
-		model.addAttribute("list2", service.listAll(email));
-		model.addAttribute(bService.viewActivity(aNo));
+		model.addAttribute("list", bService.ActivityList1(board));
+		model.addAttribute("list2", service.listAll2(email));
+		if(aNo != null){
+			model.addAttribute(bService.viewActivity(aNo));
+		}
 		
 		return "task/createTask";
 	}
@@ -136,7 +139,7 @@ public class taskController {
 			 @RequestParam ("aNo") int aNo, Board board, User user, HttpServletRequest request) {
 		bService.insertTask(board);
 		
-		return "redirect:viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
+		return "redirect:projectView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
 	@RequestMapping(value="/taskView")
@@ -163,7 +166,7 @@ public class taskController {
 		bService.delActivity(bNo);
 		bService.delTask(bNo);
 		
-		return "redirect:task?email=" + email;
+		return "redirect:/projectList?email=" + email;
 	}
 	
 	@RequestMapping(value="/deleteA", method=RequestMethod.POST)
@@ -202,12 +205,12 @@ public class taskController {
 			Board board, User user, RedirectAttributes rttr) {
 		bService.updateP(board);
 		
-		return "redirect:viewTask?email=" + email + "&bNo=" + bNo;
+		return "redirect:/projectView?email=" + email + "&bNo=" + bNo;
 	}
 	
 	@RequestMapping(value="/modifyA")
 	 public String modifyA(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
-			 @RequestParam("aNo") int aNo, Board board, User user, RedirectAttributes rttr) {
+			 @RequestParam("aNo") String aNo, Board board, User user, RedirectAttributes rttr) {
 		model.addAttribute(bService.viewActivity(aNo));
 		model.addAttribute(service.read(email));
 		model.addAttribute("list1", service.listAll2(email));

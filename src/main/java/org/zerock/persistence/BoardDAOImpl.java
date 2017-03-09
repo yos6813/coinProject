@@ -41,7 +41,7 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public Board viewActivity(int aNo) {
+	public Board viewActivity(String aNo) {
 		return session.selectOne(namespace + ".viewActivity", aNo);
 	}
 
@@ -122,11 +122,6 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> countList5(Board board) {
-		return session.selectList(namespace + ".countList5", board);
-	}
-
-	@Override
 	public Board viewTask(int tNo) {
 		return session.selectOne(namespace + ".viewTask", tNo);
 	}
@@ -174,5 +169,20 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public void updateT(Board board) {
 		session.update(namespace + ".updateT", board);
+	}
+
+	@Override
+	public List<Board> countPercent(int bNo) {
+		return session.selectList(namespace + ".countPercent", bNo);
+	}
+
+	@Override
+	public List<Board> countOrderbyUser(String aNo) {
+		return session.selectList(namespace + ".countOrderbyUser", aNo);
+	}
+
+	@Override
+	public List<Board> joinUser(Board board) {
+		return session.selectList(namespace + ".joinUser", board);
 	}
 }

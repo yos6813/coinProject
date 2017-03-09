@@ -33,7 +33,7 @@ public class Board {
 	String writeName;
 	
 	//activity
-	int aNo;
+	String aNo;
 	String aName;
 	String aDate;
 	String aM;
@@ -62,19 +62,57 @@ public class Board {
 	int standby;
 	int complete;
 	int defer;
-	int excess;
 	
+	//view Project
+	int ongoing1;
+	int standby1;
+	int complete1;
+	int defer1;
+	
+	int count;
+	int joinUser;
+	
+	public int getJoinUser() {
+		return joinUser;
+	}
+	public void setJoinUser(int joinUser) {
+		this.joinUser = joinUser;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getOngoing1() {
+		return ongoing1;
+	}
+	public void setOngoing1(int ongoing1) {
+		this.ongoing1 = ongoing1;
+	}
+	public int getStandby1() {
+		return standby1;
+	}
+	public void setStandby1(int standby1) {
+		this.standby1 = standby1;
+	}
+	public int getComplete1() {
+		return complete1;
+	}
+	public void setComplete1(int complete1) {
+		this.complete1 = complete1;
+	}
+	public int getDefer1() {
+		return defer1;
+	}
+	public void setDefer1(int defer1) {
+		this.defer1 = defer1;
+	}
 	public String getaMName() {
 		return aMName;
 	}
 	public void setaMName(String aMName) {
 		this.aMName = aMName;
-	}
-	public int getExcess() {
-		return excess;
-	}
-	public void setExcess(int excess) {
-		this.excess = excess;
 	}
 	public int getOngoing() {
 		return ongoing;
@@ -190,10 +228,10 @@ public class Board {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	public int getaNo() {
+	public String getaNo() {
 		return aNo;
 	}
-	public void setaNo(int aNo) {
+	public void setaNo(String aNo) {
 		this.aNo = aNo;
 	}
 	public String getaName() {

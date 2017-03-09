@@ -55,7 +55,7 @@
 				<div class="ibox">
 					<div class="ibox-title"><b>등록</b></div>
 					<div class="ibox-content">
-						<form role="form" method="post" action="/registAbstract?email=${user.email}&page=$1">
+						<form role="form" method="post" action="/registAbstract?email=${user.email}&abNo=1&page=1">
 							<div class="form-group col-md-8">
 								<input class="form-control" name="abName" type="text" id="sample3" placeholder="텍스트 입력">
 							</div>

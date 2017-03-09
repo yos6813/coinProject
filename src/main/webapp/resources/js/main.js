@@ -248,8 +248,6 @@ $(document).ready(function(){
 			$('.b' + i).addClass('label-warning');
 		} else if($('.b' + i).text()=='완료'){
 			$('.b' + i).addClass('label-success');
-		} else if($('.b' + i).text()=='기간초과'){
-			$('.b' + i).addClass('label-error');
 		}
 	}
 	
@@ -299,12 +297,18 @@ $(document).ready(function(){
 		location.href = "/viewActivity?email=" + firebase.auth().currentUser.email + "&bNo=" + bno + "&aNo=" + $(this).attr('value');
 	})
 	
-	$('#pDel').click(function(){
-		formObj.attr('action', '/deleteP?email=' + email + "&bNo=" + bno);
-		formObj.submit();
+	$('#pDel1').click(function(){
+		var result = confirm('삭제하시겠습니까?');
+		if(result) {
+			//yes
+			formObj.attr('action', '/deleteP?email=' + email + "&bNo=" + bno);
+			formObj.submit();
+		} else { 
+			//no 
+		} 
 	})
 	
-	$('#pMod').click(function(){
+	$('#pMod1').click(function(){
 		location.href= '/modifyP?email=' + email + "&bNo=" + bno;
 	})
 })
@@ -314,53 +318,19 @@ $(document).ready(function(){
 	$(".projectList").click(function(){
 		location.href = "/projectView?email=" + firebase.auth().currentUser.email + "&bNo=" + $(this).attr('value');
 	})
-	var pieChartDataSource = [
-	    { category: '진행중', value: $('#ongoing').attr('value') },
-	    { category: '대기', value: $('#standby').attr('value') },
-	    { category: '완료', value: $('#c​omplete').attr('value') },
-	    { category: '보류', value: $('#defer').attr('value') },
-	    { category: '기간초과', value: $('#excess').attr('value') }
-	];
-
-	$(function () {
-	    $("#pie").dxPieChart({
-	    	type: "doughnut",
-	    	palette: "Harmony Light",
-	        dataSource: pieChartDataSource,
-	        series: {
-	        	palette: "Harmony Light",
-	        	type: "doughnut",
-	            argumentField: 'category',
-	            valueField: 'value'
-	        },
-	        loadingIndicator:{
-	        	show:true
-	        },
-	        legend: {
-	            horizontalAlignment: 'center',
-	            verticalAlignment: 'bottom'
-	        },
-	        pathModified: true,
-	        tooltip: {
-	            enabled: true,
-	            customizeTooltip: function (value) {
-	                return { text: value.valueText };
-	            }
-	        }
-	    });
-	});
 
 	var dataSource = [];
 	for(var i=0; i<$('.activeC').size(); i++){
 		dataSource.push({
-			name1: $('.activeC').eq(i).children('td').eq(0).text() + "<br/>-" 
-				 + $('.activeC').eq(i).children('td').eq(2).text() + "<br/>("
-				 + $('.activeC').eq(i).children('td').eq(1).text() + ")",
-			ongoing: parseInt($('.activeC').eq(i).children('td').eq(3).attr('value')),
-			standby: parseInt($('.activeC').eq(i).children('td').eq(4).attr('value')),
-			complete: parseInt($('.activeC').eq(i).children('td').eq(5).attr('value')),
-			defer: parseInt($('.activeC').eq(i).children('td').eq(6).attr('value')),
-			excess: parseInt($('.activeC').eq(i).children('td').eq(7).attr('value')),
+			name1: "<p>" + 
+				 $('.activeC').eq(i).children('td').eq(2).text() + "</p><br>"
+				 + $('.activeC').eq(i).children('td').eq(0).text() + "<br/>" 
+				 + $('.activeC').eq(i).children('td').eq(1).text() + "<br/>"
+				 + $('.activeC').eq(i).children('td').eq(3).text(),
+			ongoing: parseInt($('.activeC').eq(i).children('td').eq(4).attr('value')),
+			standby: parseInt($('.activeC').eq(i).children('td').eq(5).attr('value')),
+			complete: parseInt($('.activeC').eq(i).children('td').eq(6).attr('value')),
+			defer: parseInt($('.activeC').eq(i).children('td').eq(7).attr('value')),
 			no: $('.activeC').eq(i).children('td').eq(0).attr('value')
 		})
 	}
@@ -381,7 +351,6 @@ $(document).ready(function(){
 	            {valueField: "standby", name: "대기" },
 	            {valueField: "complete", name: "완료" },
 	            {valueField: "defer", name: "보류" },
-	            {valueField: "excess", name: "기간초과" }
 	        ],
 	        legend: {
 	            verticalAlignment: "bottom",
@@ -410,6 +379,7 @@ $(document).ready(function(){
 	    });
 	});
 	
+	
 	for(var i=0; i<$('.tStatus').size(); i++){
 		$('.tStatus').eq(i).addClass(i + "");
 		if($('.' + i).text()=='진행중'){
@@ -420,8 +390,6 @@ $(document).ready(function(){
 			$('.' + i).addClass('label-warning');
 		} else if($('.' + i).text()=='완료'){
 			$('.' + i).addClass('label-success');
-		} else if($('.' + i).text()=='기간초과'){
-			$('.' + i).addClass('label-error');
 		}
 	}
 	
@@ -433,9 +401,38 @@ $(document).ready(function(){
 		$('#boardStatus').addClass('label-warning');
 	} else if($('#boardStatus').text()=='완료'){
 		$('#boardStatus').addClass('label-success');
-	} else if($('#boardStatus').text()=='기간초과'){
-		$('#boardStatus').addClass('label-error');
 	}
+	
+	$('#totalStatus').attr('value', parseInt($('#ongoing').text()) + parseInt($('#c​omplete').text()) + parseInt($('#standby').text()) + parseInt($('#defer').text()));
+	$('#totalStatus').text(parseInt($('#ongoing').text()) + parseInt($('#c​omplete').text()) + parseInt($('#standby').text()) + parseInt($('#defer').text()));
+	if(parseInt($('#ongoing').text()) + parseInt($('#c​omplete').text()) + parseInt($('#standby').text()) + parseInt($('#defer').text()) <= 0){
+		$('#ongoing').text($('#ongoing').text() + "(0%)"); 
+		$('#c​omplete').text($('#c​omplete').text() + "(0%)");
+		$('#standby').text($('#standby').text() + "(0%)");
+		$('#defer').text($('#defer').text() + "(0%)");
+	} else{
+		$('#ongoing').text($('#ongoing').text() + "(" + (parseInt($('#ongoing').text())/parseInt($('#totalStatus').text()) * 100) + "%)"); 
+		$('#c​omplete').text($('#c​omplete').text() + "(" + (parseInt($('#c​omplete').text())/parseInt($('#totalStatus').text()) * 100) + "%)");
+		$('#standby').text($('#standby').text() + "(" + (parseInt($('#standby').text())/parseInt($('#totalStatus').text()) * 100) + "%)");
+		$('#defer').text($('#defer').text() + "(" + (parseInt($('#defer').text())/parseInt($('#totalStatus').text()) * 100) + "%)");
+	}
+	
+	var projectDay = $('#projectPday').text().split('-');
+	if($('#projectPday').text() != '' && $('#projectPday').text() != undefined){
+		var pday1 = projectDay[1].split('/');
+		var project = new Date(pday1[0], pday1[1]-1, pday1[2]);
+		var today = new Date();
+		var btMs = today.getTime() - project.getTime() ;
+		var btDay = Math.floor(btMs / (1000*60*60*24)) ;
+		
+		if(btDay >= 0){
+			$('#projectDday').text("+" + btDay);
+		} else {
+			$('#projectDday').text(btDay);
+		}
+	}
+	
+	
 })
 
 /* activity view */
@@ -454,8 +451,6 @@ $(document).ready(function(){
 			$('.a' + i).addClass('label-warning');
 		} else if($('.a' + i).text()=='완료'){
 			$('.a' + i).addClass('label-success');
-		} else if($('.a' + i).text()=='기간초과'){
-			$('.a' + i).addClass('label-error');
 		}
 	}
 	
@@ -480,6 +475,15 @@ $(document).ready(function(){
 	     minDate: pdate[0],
          maxDate: pdate[1],
 	 });
+	 
+	 $('#activitySelect').change(function(){
+		 location.search = "?email=" + email + "&bNo=" + bno + "&aNo=" + $(this).val();
+	 })
+	 if(ano != undefined && ano != ''){
+		 $("#activitySelect").val(ano).prop("selected", true);
+		 $('#activitySelect').hide();
+		 $('#activityViewBox').show();
+	 }
 })
 
 /* task view */
@@ -536,7 +540,6 @@ $(document).ready(function(){
 	}
 	
 	$("#abstract1").val(abno).prop("selected", true);
-	$('#usageDate').hide();
 	var today = new Date();
 	var month = today.getMonth() + 1;
 	var year = today.getFullYear();
@@ -548,9 +551,16 @@ $(document).ready(function(){
 		location.href = '/usageWrite?email=' + email + '&abNo=' + $(this).val();
 	})
 	
-	$('#usageUser').focusin(function(){
-		$('#totalDate').val($('#year').val() + "." + $('#month').val() + "." + $('#day').val());
-	})
+	$('#totalDate').datepicker({
+	    autoclose: true,
+	    format: 'yyyy.mm.dd'
+	});
+	
+	$('#totalDateM').datepicker({
+	    autoclose: true,
+	    format: 'yyyy.mm.dd'
+	});
+	
 })
 
 function checkFileType(filePath) {
@@ -695,7 +705,7 @@ function userSum1(){
 	for(var i=0; i<$('.orderByUserTbl').size(); i++){
 		if($('.userDate').eq(i).attr('value') == $('#chartMonth').val()){
 			userCost.push({
-				arg: "<img class='img-circle' src='resources/img/photo.png'><br>" + $('.orderByUser').eq(i).text(),
+				arg: $('.orderByUser').eq(i).text(),
 				val: parseInt($('.userSumCost').eq(i).text())
 			})
 		}
@@ -767,7 +777,6 @@ $(document).ready(function(){
 	
 	$('input[type="checkBox"]').click(function(){
 //		if(this.checked){
-			console.log($(this).attr('value'));
 //		} else {
 //			
 //		}
@@ -788,13 +797,6 @@ $(document).ready(function(){
 
 /* modify usage */
 $(document).ready(function(){
-	if(cno != '' && cno != undefined){
-		var date1 = $('#totalDateM').val();
-		var split1 = date1.split('.');
-		$('#yearM').val(split1[0]);
-		$('#monthM').val(split1[1]);
-		$('#dayM').val(split1[2]);
-	}
 	
 	if($('#abstract2M').children().size() <= 0){
 		$('#Mabstract2box').hide();

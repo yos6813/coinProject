@@ -23,17 +23,8 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="today" class="col-sm-2 control-label">이용일자</label>
-                  <div class="col-sm-2">
-                    <input type="text" id="yearM" class="form-control" placeholder="년도">
-                  </div>
-                  <div class="col-sm-2">
-                    <input type="text" id="monthM" class="form-control" placeholder="월">
-                  </div>
-                  <div class="col-sm-2">
-                    <input type="text" id="dayM" class="form-control" placeholder="일">
-                  </div>
-                  <div class="col-sm-2" id="usageDate">
-                    <input type="text" id="totalDateM" value="${card.usageDate}" name="usageDate" class="form-control">
+                  <div class="col-sm-6">
+                    <input type="text" id="totalDateM" value="${card.usageDate }" name="usageDate" class="form-control">
                   </div>
                 </div>
                 <div class="form-group">

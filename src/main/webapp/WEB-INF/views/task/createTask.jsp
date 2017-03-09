@@ -17,7 +17,15 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="ibox">
-					<div class="ibox-content">
+					<div class="col-lg-4">
+						<select id="activitySelect" class="form-control">
+							<option>전체</option>
+							<c:forEach items="${list}" var="board">
+								<option value="${board.aNo}">${board.aName}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="ibox-content" style="display: none;" id="activityViewBox">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="m-b-md">

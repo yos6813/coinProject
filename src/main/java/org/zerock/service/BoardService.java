@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.zerock.persistence.Board;
 import org.zerock.persistence.Criteria;
+import org.zerock.persistence.Project;
 
 public interface BoardService {
 	public void insertBoard(Board board);
@@ -11,13 +12,12 @@ public interface BoardService {
 	public Board viewBoard(int bNo);
 	public void insertActivity(Board board);
 	public List<Board> ActivityList(Criteria cri);
-	public Board viewActivity(int aNo);
+	public Board viewActivity(String aNo);
 	
 	public List<Board> countList1(Board board);
 	public List<Board> countList2(Board board);
 	public List<Board> countList3(Board board);
 	public List<Board> countList4(Board board);
-	public List<Board> countList5(Board board);
 	
 	public List<Board> listCriteria(Criteria cri);
 	public int listCountCriteria(Criteria cri);
@@ -42,4 +42,8 @@ public interface BoardService {
 	public void updateP(Board board);
 	public void updateA(Board board);
 	public void updateT(Board board);
+	public List<Board> countPercent(int bNo);
+	
+	public List<Board> countOrderbyUser(String aNo);
+	public List<Board> joinUser(Board board);
 }
