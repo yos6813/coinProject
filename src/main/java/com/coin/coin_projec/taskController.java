@@ -75,22 +75,6 @@ public class taskController {
 		 return "redirect:projectList?email="+ email;
     }
 	
-	@RequestMapping(value="/viewTask")
-	 public String viewTask(Model model, @RequestParam ("bNo") int bNo, Board board, Project project, User user,
-			 Criteria cri, HttpServletRequest request) {
-		model.addAttribute(bService.viewBoard(bNo));
-		model.addAttribute("list", bService.listBoard(board));
-		model.addAttribute("list2", bService.ActivityList(cri));
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCountACriteria(cri));
-		
-		model.addAttribute("pageMaker", pageMaker);
-		
-		return "task/viewTask";
-	}
-	
 	@RequestMapping(value="/activityWrite")
 	 public String writeActivity(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board, Project project, User user, HttpServletRequest request) {
 		model.addAttribute(bService.viewBoard(bNo));
@@ -106,20 +90,6 @@ public class taskController {
 		return "redirect:projectView?email=" + email + "&bNo=" + bNo;
 	}
 	
-	@RequestMapping(value="/viewActivity")
-	 public String viewActivity(Model model, @RequestParam ("bNo") int bNo, @RequestParam ("aNo") String aNo,
-			 Board board, Project project, User user, HttpServletRequest request, Criteria cri) {
-		model.addAttribute(bService.viewActivity(aNo));
-		model.addAttribute("list", bService.listTask(cri));
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCountTCriteria(cri));
-		
-		model.addAttribute("pageMaker", pageMaker);
-		
-		return "task/viewActivity";
-	}
 	
 	@RequestMapping(value="/createTask")
 	 public String createTask(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board
@@ -142,21 +112,6 @@ public class taskController {
 		return "redirect:projectView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
-	@RequestMapping(value="/taskView")
-	 public String taskView(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board
-			 , @RequestParam ("aNo") int aNo, @RequestParam ("tNo") int tNo, Project project, User user,
-			   HttpServletRequest request, Criteria cri) {
-		model.addAttribute(bService.viewTask(tNo));
-		model.addAttribute("list", bService.listTask(cri));
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCountTCriteria(cri));
-		
-		model.addAttribute("pageMaker", pageMaker);
-		
-		return "task/taskView";
-	}
 	
 	@RequestMapping(value="/deleteP", method=RequestMethod.POST)
 	 public String deleteP(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
@@ -176,7 +131,7 @@ public class taskController {
 		bService.delA(aNo);
 		bService.delT(aNo);
 		
-		return "redirect:viewTask?email=" + email + "&bNo=" + bNo;
+		return "redirect:/projectView?email=" + email + "&bNo=" + bNo;
 	}
 	
 	@RequestMapping(value="/deleteT", method=RequestMethod.POST)
@@ -185,7 +140,7 @@ public class taskController {
 		
 		bService.deleteTask(tNo);
 		
-		return "redirect:viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
+		return "redirect:/projectView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
 	/* modify */
@@ -223,7 +178,7 @@ public class taskController {
 			 @RequestParam("aNo") String aNo, Board board, User user, RedirectAttributes rttr) {
 		bService.updateA(board);
 		
-		return "redirect:viewActivity?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
+		return "redirect:/projectView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo;
 	}
 	
 	@RequestMapping(value="/modifyT")
@@ -241,5 +196,16 @@ public class taskController {
 			 @RequestParam("aNo") int aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr) {
 		bService.updateT(board);
 		return "redirect:taskView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo + "&tNo=" + tNo;
+	}
+	
+	@RequestMapping(value="/taskView")
+	 public String taskView(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
+			 @RequestParam("aNo") String aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr) {
+		model.addAttribute(service.read(email));
+		model.addAttribute(bService.viewTask(tNo));
+		
+		model.addAttribute("list", bService.selectWorkLog(tNo));
+		model.addAttribute("list2", bService.selectUserWorkLog(tNo));
+		return "task/taskView";
 	}
 }

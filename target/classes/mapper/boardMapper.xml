@@ -89,8 +89,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="viewTask" resultType="org.zerock.persistence.Board">
-		select b.*, g.*, t.* from v_getBoard b left outer join v_getactivityTbl g on b.bNo = g.bNo left outer join v_taskTbl t on g.aNo = t.aNo
-		where tNo = #{tNo};
+		select b.*, g.*, t.*, sum(w.wTimeH) as wTimeH, sum(w.wTimeM) as wTimeM from v_getBoard b left outer join v_getactivityTbl g on b.bNo = g.bNo left outer join v_taskTbl t on g.aNo = t.aNo
+								       left outer join worklogtbl w on w.tNo = t.tNo
+		where t.tNo = #{tNo};
 	</select>
 	
 	<select id="countTask" resultType="org.zerock.persistence.Board">
@@ -159,5 +160,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="joinUser" resultType="org.zerock.persistence.Board">
 		select count(distinct tMName) as joinUser from v_tasktbl;
+	</select>
+	
+	<insert id="insertWorkLog" parameterType="org.zerock.persistence.Board">
+		insert into worklogTbl (wDate, tNo, wText, wTimeH, wTimeM, wClient, wFileName, wWriteDate, wUser) values (#{wDate}, #{tNo}, #{wText}, #{wTimeH}, #{wTimeM}, #{wClient}, #{wFileName}, #{wWriteDate}, #{wUser});
+	</insert>
+	
+	<select id="selectWorkLog" resultType="org.zerock.persistence.Board">
+		select * from worklogTbl w left outer join userTbl u on w.wUser = u.email where tNo =#{tNo} order by wDate desc;
+	</select>
+	
+	<select id="selectUserWorkLog" resultType="org.zerock.persistence.Board">
+		select distinct username from worklogTbl w left outer join userTbl u on w.wUser = u.email left outer join taskTbl t on t.tNo = w.tNo where w.tNo =#{tNo} and tm != email order by wDate desc;
 	</select>
 </mapper>

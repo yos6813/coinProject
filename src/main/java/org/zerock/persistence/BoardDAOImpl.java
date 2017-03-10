@@ -185,4 +185,19 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<Board> joinUser(Board board) {
 		return session.selectList(namespace + ".joinUser", board);
 	}
+
+	@Override
+	public void insertWorkLog(Board board) {
+		session.insert(namespace + ".insertWorkLog", board);
+	}
+
+	@Override
+	public List<Board> selectWorkLog(int tNo) {
+		return session.selectList(namespace + ".selectWorkLog", tNo);
+	}
+
+	@Override
+	public List<Board> selectUserWorkLog(int tNo) {
+		return session.selectList(namespace + ".selectUserWorkLog", tNo);
+	}
 }

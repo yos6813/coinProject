@@ -10,7 +10,7 @@
    			<b>View Project</b>
 	 	 </h1>
          <ol class="breadcrumb">
-		    <li><a href="/projectView?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
+		    <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 		    <li class="active">View Project</li>
 	     </ol>
      </div>
@@ -144,7 +144,7 @@
 									<th>일자</th>
 								</tr>
 								<c:forEach items="${list7}" var="board">
-									<tr value="${board.tNo}">
+									<tr class="taskC" value="${board.tNo}">
 										<td>${board.tNo}</td>
 										<td>${board.tDate}</td>
 										<td>${board.tName}</td>

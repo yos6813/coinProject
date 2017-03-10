@@ -1,5 +1,7 @@
 package org.zerock.persistence;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board {
 	int bNo;
 	String writeUser;
@@ -72,6 +74,70 @@ public class Board {
 	int count;
 	int joinUser;
 	
+	int wNo, wClient;
+	String wDate, wText, wTimeH, wTimeM, wWriteDate, wUser, wFileName;
+	MultipartFile wfile;
+	
+	public int getwNo() {
+		return wNo;
+	}
+	public void setwNo(int wNo) {
+		this.wNo = wNo;
+	}
+	public int getwClient() {
+		return wClient;
+	}
+	public void setwClient(int wClient) {
+		this.wClient = wClient;
+	}
+	public String getwDate() {
+		return wDate;
+	}
+	public void setwDate(String wDate) {
+		this.wDate = wDate;
+	}
+	public String getwText() {
+		return wText;
+	}
+	public void setwText(String wText) {
+		this.wText = wText;
+	}
+	public String getwTimeH() {
+		return wTimeH;
+	}
+	public void setwTimeH(String wTimeH) {
+		this.wTimeH = wTimeH;
+	}
+	public String getwTimeM() {
+		return wTimeM;
+	}
+	public void setwTimeM(String wTimeM) {
+		this.wTimeM = wTimeM;
+	}
+	public String getwWriteDate() {
+		return wWriteDate;
+	}
+	public void setwWriteDate(String wWriteDate) {
+		this.wWriteDate = wWriteDate;
+	}
+	public String getwUser() {
+		return wUser;
+	}
+	public void setwUser(String wUser) {
+		this.wUser = wUser;
+	}
+	public String getwFileName() {
+		return wFileName;
+	}
+	public void setwFileName(String wFileName) {
+		this.wFileName = wFileName;
+	}
+	public MultipartFile getWfile() {
+		return wfile;
+	}
+	public void setWfile(MultipartFile wfile) {
+		this.wfile = wfile;
+	}
 	public int getJoinUser() {
 		return joinUser;
 	}

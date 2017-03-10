@@ -175,7 +175,7 @@ $(document).ready(function(){
 	var year = today.getFullYear();
 	var day = today.getDate();
 	
-	$('#today').val(year + '-' + month + '-' + day);
+	$('#today').val(year + '.' + month + '.' + day);
 	$('#userSel').change(function(){
 		$('#userBox').text($('#userBox').val() + $(this).text() + "(" + $(this).val() + ")");
 	})
@@ -289,29 +289,6 @@ $(document).ready(function(){
          maxDate: pdate[1],
 	 });
 });
-
-/* view Task */
-$(document).ready(function(){
-	var formObj = $("form[role='form']");
-	$(".activityList1").click(function(){
-		location.href = "/viewActivity?email=" + firebase.auth().currentUser.email + "&bNo=" + bno + "&aNo=" + $(this).attr('value');
-	})
-	
-	$('#pDel1').click(function(){
-		var result = confirm('삭제하시겠습니까?');
-		if(result) {
-			//yes
-			formObj.attr('action', '/deleteP?email=' + email + "&bNo=" + bno);
-			formObj.submit();
-		} else { 
-			//no 
-		} 
-	})
-	
-	$('#pMod1').click(function(){
-		location.href= '/modifyP?email=' + email + "&bNo=" + bno;
-	})
-})
 
 /* Project List */
 $(document).ready(function(){
@@ -432,39 +409,11 @@ $(document).ready(function(){
 		}
 	}
 	
-	
+	$('.taskC').click(function(){
+		location.href = "taskView?email=" + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + $(this).attr('value');
+	})
 })
 
-/* activity view */
-$(document).ready(function(){
-	$('.taskList').click(function(){
-		location.href="/taskView?email=" + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + $(this).attr('value');
-	})
-	
-	for(var i=0; i<$('.aStatus').size(); i++){
-		$('.aStatus').eq(i).addClass("a" + i);
-		if($('.a' + i).text()=='진행중'){
-			$('.a' + i).addClass('label-primary');
-		} else if($('.a' + i).text()=='대기'){
-			$('.a' + i).addClass('label-default');
-		} else if($('.a' + i).text()=='보류'){
-			$('.a' + i).addClass('label-warning');
-		} else if($('.a' + i).text()=='완료'){
-			$('.a' + i).addClass('label-success');
-		}
-	}
-	
-	var formObj = $("#aForm");
-	
-	$('#aDel').click(function(){
-		formObj.attr('action', '/deleteA?email=' + email + "&bNo=" + bno + "&aNo=" + ano);
-		formObj.submit();
-	})
-	
-	$('#aMod').click(function(){
-		location.href= '/modifyA?email=' + email + "&bNo=" + bno + "&aNo=" + ano;
-	})
-})
 
 /* Create Task */
 $(document).ready(function(){
@@ -484,19 +433,6 @@ $(document).ready(function(){
 		 $('#activitySelect').hide();
 		 $('#activityViewBox').show();
 	 }
-})
-
-/* task view */
-$(document).ready(function(){
-	var formObj = $("#tForm");
-	$('#tDel').click(function(){
-		formObj.attr('action', '/deleteT?email=' + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + tno);
-		formObj.submit();
-	})
-	
-	$('#tMod').click(function(){
-		location.href= '/modifyT?email=' + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + tno;
-	})
 })
 
 /* modify Project */
@@ -778,7 +714,6 @@ $(document).ready(function(){
 	$('input[type="checkBox"]').click(function(){
 //		if(this.checked){
 //		} else {
-//			
 //		}
 	})
 	
@@ -833,4 +768,59 @@ $(document).ready(function(){
 		$('#modifyForm').attr('action', "/cModify?email=" + email + "&cNo=" + cno);
 		$('#modifyForm').submit();
 	}
+})
+
+/* task View */
+$(document).ready(function(){
+	if($('#taskAStauts').text()=='진행중'){
+		$('#taskAStauts').addClass('label-primary');
+	} else if($('#taskAStauts').text()=='대기'){
+		$('#taskAStauts').addClass('label-default');
+	} else if($('#taskAStauts').text()=='보류'){
+		$('#taskAStauts').addClass('label-warning');
+	} else if($('#taskAStauts').text()=='완료'){
+		$('#taskAStauts').addClass('label-success');
+	}
+	
+	var taskDay = $('#projectTday').text().split('-');
+	if($('#projectTday').text() != '' && $('#projectTday').text() != undefined){
+		var pday1 = taskDay[1].split('/');
+		var project = new Date(pday1[0], pday1[1]-1, pday1[2]);
+		var today = new Date();
+		var btMs = today.getTime() - project.getTime() ;
+		var btDay = Math.floor(btMs / (1000*60*60*24)) ;
+		
+		if(btDay >= 0){
+			$('#activityDday').text("D+" + btDay);
+			$('#activityDday').addClass('text-danger');
+		} else {
+			$('#activityDday').text("D" + btDay);
+			$('#activityDday').addClass('text-success');
+		}
+		
+		var tday2 = taskDay[0].split('/');
+		var start = new Date(tday2[0], tday2[1]-1, tday2[2]);
+		var btMs2 = today.getTime() - start.getTime();
+		var btDay2 = Math.floor(btMs2 / (1000*60*60*24));
+		
+		var btMs3 = project.getTime() - start.getTime();
+		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
+		
+		if(btDay2 > dayGap){
+			$('#projectTday').append("<strong class='no-margin2'>(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+		} else {
+			$('#projectTday').append("<strong class='no-margin2'>(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+		}
+	}
+	
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	var year = today.getFullYear();
+	var day = today.getDate();
+	
+	$('#writeDay').val(year + '.' + month + '.' + day);
+	
+	$('#wDate').datepicker({
+	     format: 'yyyy.mm.dd'
+	 });
 })

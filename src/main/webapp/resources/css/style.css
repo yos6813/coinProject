@@ -8449,3 +8449,19 @@ body.md-skin {
 /* 	height: 600px; */
 	padding: 25px;
 }
+
+.no-margin{
+	margin-top: 0 !important;
+	margin-left: 20px;
+	float: left;
+}
+
+.no-margin2{
+	margin-left: 5px;
+}
+
+#wText{
+	width: 100%;
+	height:300px;
+	resize:none;
+}

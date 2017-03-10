@@ -3,188 +3,154 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="../include/header.jsp" %>
-<!-- Content Wrapper. Contains page content -->
-  <!-- Content Header (Page header) -->
-	<div class="row wrapper border-bottom white-bg page-heading">
-		<div class="col-lg-10">
-		    <h1>
-		      <b>Task View</b>
-		    </h1>
-		    <ol class="breadcrumb">
-		      <li><a href="/home"><i class="fa fa-home"></i>Home</a></li>
-		      <li><a href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}">project view</a></li>
-		      <li class="active">task view</li>
-		    </ol>
-	    </div>
-	</div>
-<div class="wrapper-content">
-	<div class="wrapper wrapper-content animated fadeInRight">
-	    <div class="row">
-	    	<div class="col-md-12">
-				<div class="ibox float-e-margins">
-				<h2><b>Project</b></h2>
-				<div class="ibox-content">
-                          <div class="row">
-                              <div class="col-lg-12">
-                              	<div class="m-b-md">
-			                    	<a href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}" class="btn btn-white btn-sm pull-right">목록가기</a>
-			               		</div>
-                                  <dl class="dl-horizontal">
-                                      <dt>상태: </dt> <dd><span class="boardStatus label">${board.status}</span></dd>
-                                  </dl>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-lg-5">
-                                  <dl class="dl-horizontal">
-                                  	<dt>작성자:</dt> <dd>${board.writeName}</dd>
-                                      <dt>프로젝트명:</dt> <dd> ${board.pName}</dd>
-                                  </dl>
-                              </div>
-                              <div class="col-lg-7" id="cluster_info">
-                                  <dl class="dl-horizontal" >
-                                      <dt>프로젝트 기간:</dt> <dd> ${board.projectDate} </dd>
-                                      <dt>프로젝트 매니저:</dt> <dd> ${board.pmName}</dd>
-                                  </dl>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-lg-12">
-                                  <dl class="dl-horizontal">
-                                      <dt>내용:</dt>
-                                      <dd>
-                                          <div>
-                                          	<p>${board.text}</p>
-                                          </div>
-                                      </dd>
-                                  </dl>
-                              </div>
-                          </div>
-                      </div>
-				</div>
-				<h2><b>Activity</b></h2>
-				<div class="ibox float-e-margins">
-						<div class="ibox-content">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <dl class="dl-horizontal">
-                                        <dt>상태: </dt> <dd><span class="aStatus label">${board.aStatus}</span></dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <dl class="dl-horizontal">
-                                    	<dt>작성자:</dt> <dd>${board.aWriteU}</dd>
-                                        <dt>액티비티명:</dt> <dd> ${board.aName}</dd>
-                                    </dl>
-                                </div>
-                                <div class="col-lg-7" id="cluster_info">
-                                    <dl class="dl-horizontal" >
-                                        <dt>기간:</dt> <dd> ${board.aDate} </dd>
-                                        <dt>액티비티 매니저:</dt> <dd> ${board.aM}</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <dl class="dl-horizontal">
-                                        <dt>내용:</dt>
-                                        <dd>
-                                            <div>
-                                            	<p>${board.aText}</p>
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-					</div>
-					<h2><b>Task</b></h2>
-					<div class="ibox float-e-margins">
-						<div class="ibox-content">
-                            <div class="row">
-                            	<form id="tForm" role="form" method="post">
-						    		<input type="hidden" name="tNo" value="${board.tNo}">
-						    	</form>
-                                <div class="col-lg-12">
-                                	<div class="m-b-md">
-			                    		<a id="tDel" class="btn btn-white btn-sm pull-right">삭제</a><a id="tMod" class="btn btn-white btn-sm pull-right">수정</a>
-			               			</div>
-                                    <dl class="dl-horizontal">
-                                        <dt>상태: </dt> <dd><span class="tStatus label">${board.tStatus}</span></dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <dl class="dl-horizontal">
-                                    	<dt>작성자:</dt> <dd>${board.tWriteName}</dd>
-                                        <dt>테스크명:</dt> <dd> ${board.tName}</dd>
-                                    </dl>
-                                </div>
-                                <div class="col-lg-7" id="cluster_info">
-                                    <dl class="dl-horizontal" >
-                                        <dt>기간:</dt> <dd> ${board.tDate} </dd>
-                                        <dt>테스크 매니저:</dt> <dd> ${board.tMName}</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <dl class="dl-horizontal">
-                                        <dt>내용:</dt>
-                                        <dd>
-                                            <div>
-                                            	<p>${board.tText}</p>
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-					</div>
-					<div class="ibox">
-						<div class="ibox-content">
-							Task List
-							<a href="/createTask?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}" class="pull-right btn-sm btn btn-white">task 생성</a>
-							<table class="table">
-								<tr>
-									<th style="width:100px">#</th>
-									<th style="width: 300px">기간</th>
-									<th>Task Name</th>
-									<th style="width: 250px">Task 매니저</th>
-									<th style="width: 150px">일자</th>
-								</tr>
-								<c:forEach  items="${list}" var="board">
-									<tr class="taskList" value="${board.tNo}">
-										<td>${board.tNo}</td>
-										<td>${board.tDate}</td>
-										<td>${board.tName}</td>
-										<td>${board.tMName}</td>
-										<td>${board.tWriteD}</td>
-									</tr>
-								</c:forEach>
-							</table>
-							<div class="text-center">
-							<ul class="pagination">
-								<c:if test="${pageMaker.prev}">
-									<li class="page-item"><a class="page-link" href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}&page=${pageMaker.startPage-1}"><i class="fa fa-chevron-left"></i></a></li>
-								</c:if>
-								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-									<li class="page-item" <c:out value="${pageMaker.cri.page} == idx?'class=active':''"/>>
-										<a class="page-link" href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}&page=${idx}">${idx}</a>
-									</li>
-								</c:forEach>
-								<c:if test="${pageMaker.next && pageMaker.endPage >0}">
-									<li class="page-item"><a class="page-link" href="/viewActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}&page=${pageMaker.endPage+1}">&raquo;</a></li>
-								</c:if>
-							</ul>
-						</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+         <h1>
+   			<b>업무 리스트</b>
+	 	 </h1>
+         <ol class="breadcrumb">
+		    <li><a href="/projectView?email=${user.email}&bNo=<%= request.getParameter("bNo") %>"><i class="fa fa-home"></i> Home</a></li>
+		    <li class="active">업무 리스트</li>
+	     </ol>
+     </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="ibox">
+    	<div class="ibox-content">
+			<div class="m-b-md">
+                <a class="btn btn-white btn-sm pull-right" data-toggle="modal" data-target="#myModal5">추가</a>
+				<h2 style="float: left;" id="taskAStauts" class="label">${board.tStatus}</h2>
+	            <h2 class="no-margin">
+	                ${board.tName}
+                </h2> 
+                <h2 class="no-margin" id="activityDday"></h2>
+                <table class="table m-b-xs">
+	                <tbody>
+		                <tr>
+		                    <td>
+								Project: <strong>${board.pName}</strong>
+		                    </td>
+		                    <td>
+								매니저:  <strong>${board.tMName}</strong> 
+		                    </td>
+		                   	<td>
+								기간: <strong id="projectTday">${board.tDate }</strong>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>
+								activity: <strong>${board.aName}</strong>
+		                    </td>
+		                    <td>
+								헬퍼:  <strong>
+										<c:forEach items="${list2}" var="board">
+									  		${board.username} 
+									  	</c:forEach>
+								  	  </strong>
+		                    </td>
+		                   	<td>
+								투입시간: <strong class="text-info">${board.wTimeH}h ${board.wTimeM}m</strong>
+		                    </td>
+		                </tr>
+	                </tbody>
+	            </table>	
+            </div>
+    	</div>
+   	</div>
+	<c:forEach items="${list}" var="board">
+		<div class="profile-image col-md-3">
+		    ${board.wDate}
 		</div>
-	</div>
+		<div class="row m-b-lg m-t-lg">
+   			<div class="col-md-1">	
+	        	<img class="img-circle" src="${board.photoURL}"><br>
+	            <small class="no-margins">
+	                ${board.username}
+	            </small>
+            </div>
+	        <div class="col-md-6">
+	            <h3>${board.wText }</h3>
+	            <small>
+	            	첨부파일: <a href="resources/img/${board.wFileName}">${board.wFileName}</a>
+	            </small>
+	        </div>
+	        <div class="col-md-2">
+	            <h4 class="text-info">${board.wTimeH}h ${board.wTimeM}m</h4>
+	            <small>
+	            	test
+	            </small>
+	        </div>
+	    </div>
+	</c:forEach>
+</div>
+<!-- modal -->
+<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">업무일지</h4>
+            </div>
+            <div class="modal-body">
+            	<form class="form-horizontal wizard-big" method="post" enctype="multipart/form-data" action="/file?email=${user.email}&bNo=<%= request.getParameter("bNo") %>&aNo=<%= request.getParameter("aNo") %>&tNo=<%= request.getParameter("tNo") %>">
+					<div class="box-body">
+						<div class="form-group" style="display: none;">
+		                  <label for="writeUser" class="col-sm-2 control-label">날짜</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" name="wWriteDate" id="writeDay" readonly="readonly">
+		                  </div>
+		                </div>
+		                <div class="form-group" style="display: none;">
+		                  <label for="writeUser" class="col-sm-2 control-label">작성자</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" name="wUser" value="${user.email}" readonly="readonly">
+		                  </div>
+		                </div>
+		                <div class="form-group">
+	                		<label class="col-sm-2 control-label">날짜</label>
+		                 	<div class="col-sm-10">
+		                 		<input type="text" id="wDate" name="wDate" class="form-control" required="required">
+		                  	</div>
+		                </div>
+		                <div class="form-group">
+							<label class="col-sm-2 control-label">업무내용</label>
+							<div class="col-sm-10">
+								<textarea name="wText" id="wText" class="form-control" required></textarea>
+							</div>
+		                </div>
+		                <div class="form-group">
+		                	<label for="projectDate" class="col-sm-2 control-label">투입시간</label>
+		                	<div class="col-sm-5">
+		                		<input type="text" name="wTimeH" class="form-control " placeholder="시" required="required">
+							</div>
+							<div class="col-sm-5">
+		                		<input type="text" name="wTimeM" class="form-control" placeholder="분"  required="required">
+							</div>
+						</div>
+		                <div class="form-group">
+	                		<label class="col-sm-2 control-label">연관고객</label>
+		                 	<div class="col-sm-10">
+		                 		<select class="form-control" name="wClient" style="width: 100%;">
+		                 			<option value="0">선택</option>
+		                 			<option value="1">test</option>
+				                </select>
+		                  	</div>
+		                </div>
+		                <div class="form-group">
+	                		<label class="col-sm-2 control-label">첨부파일</label>
+		                 	<div class="col-sm-10">
+		                 		 <input type="file" name="wfile">
+		                  	</div>
+		                </div>
+		              </div>
+		              <div class="text-right">
+		                <button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+		                <button type="submit" class="btn btn-primary">저장</button>
+		              </div>
+            	</form>
+            </div>
+        </div>
+    </div>
+</div>
 <%@include file="../include/footer.jsp" %>

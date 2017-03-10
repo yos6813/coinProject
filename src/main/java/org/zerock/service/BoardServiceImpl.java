@@ -173,4 +173,19 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> joinUser(Board board) {
 		return dao.joinUser(board);
 	}
+
+	@Override
+	public void insertWorkLog(Board board) {
+		dao.insertWorkLog(board);
+	}
+
+	@Override
+	public List<Board> selectWorkLog(int tNo) {
+		return dao.selectWorkLog(tNo);
+	}
+
+	@Override
+	public List<Board> selectUserWorkLog(int tNo) {
+		return dao.selectUserWorkLog(tNo);
+	}
 }

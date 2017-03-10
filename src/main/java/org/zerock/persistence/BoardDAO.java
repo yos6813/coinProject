@@ -47,4 +47,9 @@ public interface BoardDAO {
 	
 	public List<Board> countOrderbyUser(String aNo);
 	public List<Board> joinUser(Board board);
+	
+	public void insertWorkLog(Board board);
+	public List<Board> selectWorkLog(int tNo);
+	
+	public List<Board> selectUserWorkLog(int tNo);
 }
