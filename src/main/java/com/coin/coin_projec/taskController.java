@@ -1,6 +1,7 @@
 package com.coin.coin_projec;
 
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.persistence.Board;
 import org.zerock.persistence.Criteria;
@@ -200,12 +202,17 @@ public class taskController {
 	
 	@RequestMapping(value="/taskView")
 	 public String taskView(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
-			 @RequestParam("aNo") String aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr) {
+			 @RequestParam("aNo") String aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr,
+			 Criteria cri, @RequestParam (value="wNo", required=false) String wNo) {
 		model.addAttribute(service.read(email));
 		model.addAttribute(bService.viewTask(tNo));
-		
-		model.addAttribute("list", bService.selectWorkLog(tNo));
 		model.addAttribute("list2", bService.selectUserWorkLog(tNo));
+		model.addAttribute("list", bService.selectWorkLog(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bService.listCountWCriteria(cri));
+		
 		return "task/taskView";
 	}
 }

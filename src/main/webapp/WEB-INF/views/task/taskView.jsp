@@ -17,79 +17,114 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="ibox">
-    	<div class="ibox-content">
-			<div class="m-b-md">
-                <a class="btn btn-white btn-sm pull-right" data-toggle="modal" data-target="#myModal5">추가</a>
-				<h2 style="float: left;" id="taskAStauts" class="label">${board.tStatus}</h2>
-	            <h2 class="no-margin">
-	                ${board.tName}
-                </h2> 
-                <h2 class="no-margin" id="activityDday"></h2>
-                <table class="table m-b-xs">
-	                <tbody>
-		                <tr>
-		                    <td>
-								Project: <strong>${board.pName}</strong>
-		                    </td>
-		                    <td>
-								매니저:  <strong>${board.tMName}</strong> 
-		                    </td>
-		                   	<td>
-								기간: <strong id="projectTday">${board.tDate }</strong>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-								activity: <strong>${board.aName}</strong>
-		                    </td>
-		                    <td>
-								헬퍼:  <strong>
-										<c:forEach items="${list2}" var="board">
-									  		${board.username} 
-									  	</c:forEach>
-								  	  </strong>
-		                    </td>
-		                   	<td>
-								투입시간: <strong class="text-info">${board.wTimeH}h ${board.wTimeM}m</strong>
-		                    </td>
-		                </tr>
-	                </tbody>
-	            </table>	
-            </div>
+    	<div class="ibox-content" style="padding-bottom: 10px !important">
+            <a class="btn btn-white btn-sm pull-right" data-toggle="modal" data-target="#myModal5">추가</a>
+			<h2 style="float: left;" id="taskAStauts" class="label">${board.tStatus}</h2>
+            <h2 class="no-margin">
+              ${board.tName}
+             </h2> 
+             <h2 class="no-margin"><strong id="activityDday"></strong></h2>
+             <table class="table m-b-xs no-margin2" style="margin-top: 35px">
+                <tbody>
+	                <tr>
+	                    <td class="text-right no-padding no-margins">
+							<p style="color:#969696;">Project:</p>
+	                    </td>
+	                    <td class="no-padding1 no-margins">
+							<strong>${board.pName}</strong>
+	                    </td>
+	                    <td class="text-right no-padding no-margins">
+							<p style="color:#969696;">매니저: </p>
+	                    </td>
+	                    <td class="no-padding1 no-margins">
+							<strong>${board.tMName}</strong> 
+	                    </td>
+	                   	<td class="text-right no-padding no-margins">
+							<p style="color:#969696;">기간: </p>
+	                    </td>
+	                    <td class="no-padding1 no-margins">
+							<strong id="projectTday">${board.tDate }</strong>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td class="text-right no-padding no-margins">
+							<p style="color:#969696;">Activity:</p>
+	                    </td>
+	                    <td class="no-padding1 no-margins">
+							<strong>${board.aName}</strong>
+	                    </td>
+	                    <td class="text-right no-padding no-margins">
+							<p style="color:#969696;">헬퍼:  </p>
+	                    </td>
+	                    <td class="no-padding1 no-margins">
+							<strong>
+									<c:forEach items="${list2}" var="board">
+								  		${board.username} 
+								  	</c:forEach>
+					  	  	</strong>
+	                    </td>
+	                   	<td class="text-right no-padding no-margins">
+							<p style="color:#969696;">투입시간:</p>
+	                    </td>
+	                    <td class="no-padding1 no-margins">
+	                    	<strong id="wHtimetext" class="text-info">${board.wTimeH}h</strong>
+	                    	<strong id="wMtimetext" class="text-info"> ${board.wTimeM}m</strong>
+	                    </td>
+	                </tr>
+                </tbody>
+            </table>	
     	</div>
    	</div>
+   	<form id="pageNum">
+   		<input type="hidden" id="wnoInput">
+   	</form>
 	<c:forEach items="${list}" var="board">
-		<div class="profile-image col-md-3">
-		    ${board.wDate}
-		</div>
-		<div class="row m-b-lg m-t-lg">
-   			<div class="col-md-1">	
-	        	<img class="img-circle" src="${board.photoURL}"><br>
-	            <small class="no-margins">
-	                ${board.username}
-	            </small>
-            </div>
-	        <div class="col-md-6">
-	            <h3>${board.wText }</h3>
-	            <small>
-	            	첨부파일: <a href="resources/img/${board.wFileName}">${board.wFileName}</a>
-	            </small>
-	        </div>
-	        <div class="col-md-2">
-	            <h4 class="text-info">${board.wTimeH}h ${board.wTimeM}m</h4>
-	            <small>
-	            	test
-	            </small>
-	        </div>
+		<div class="listToChange">
+			<div class="row scrolling" data-wno="${board.wNo}">
+				<div class="col-lg-2">
+					<div class="ibox1 wDate text-right">
+			    		<h5>${board.wDate}</h5>
+			    		<h5>${board.day}</h5>
+			    	</div>
+			    </div>
+			    <div class="col-lg-10">
+					<div class="ibox1 col-md-12">
+						<div class="ibox-content fixSize" style="padding-bottom: 10px !important">
+							<div class="row" style="margin-top: 10px !important">
+					   			<div class="col-md-2 text-center">	
+						        	<img class="img-circle1" src="${board.photoURL}"><br>
+						            <small class="no-margins" style="color:#969696;">
+						                ${board.username}
+						            </small>
+					            </div>
+						        <div class="col-md-5">
+						            <h3>${board.wText}</h3>
+						            <small>
+						            	첨부파일: <a href="resources/img/${board.wFileName}" class="wFile">${board.wFileName}</a>
+						            </small>
+						        </div>
+						        <div class="col-md-2 pull-right text-right">
+						            <strong class="text-info wHTime">${board.wTimeH}h</strong>
+						            <strong class="text-info wMTime">${board.wTimeM}m</strong><br>
+						            <small>
+						            	test
+						            </small>
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
 	    </div>
 	</c:forEach>
 </div>
 <!-- modal -->
 <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-size">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<!--                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                <i class="fa fa-edit modal-icon"></i>
                 <h4 class="modal-title">업무일지</h4>
             </div>
             <div class="modal-body">
@@ -122,25 +157,24 @@
 		                <div class="form-group">
 		                	<label for="projectDate" class="col-sm-2 control-label">투입시간</label>
 		                	<div class="col-sm-5">
-		                		<input type="text" name="wTimeH" class="form-control " placeholder="시" required="required">
+		                		<input type="text" name="wTimeH" class="form-control " placeholder="시">
 							</div>
 							<div class="col-sm-5">
-		                		<input type="text" name="wTimeM" class="form-control" placeholder="분"  required="required">
+		                		<input type="text" name="wTimeM" class="form-control" placeholder="분">
 							</div>
 						</div>
 		                <div class="form-group">
 	                		<label class="col-sm-2 control-label">연관고객</label>
 		                 	<div class="col-sm-10">
-		                 		<select class="form-control" name="wClient" style="width: 100%;">
-		                 			<option value="0">선택</option>
-		                 			<option value="1">test</option>
-				                </select>
+		                 		<select data-placeholder="고객사 명을 입력하여 선택하세요" name="wClient" class="chosen-select form-control"  tabindex="2">
+                					<option value="0">선택</option>
+                				</select>
 		                  	</div>
 		                </div>
 		                <div class="form-group">
 	                		<label class="col-sm-2 control-label">첨부파일</label>
 		                 	<div class="col-sm-10">
-		                 		 <input type="file" name="wfile">
+		                 		 <input class="filebox" type="file" name="wfile">
 		                  	</div>
 		                </div>
 		              </div>

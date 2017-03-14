@@ -180,12 +180,22 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> selectWorkLog(int tNo) {
-		return dao.selectWorkLog(tNo);
+	public List<Board> selectWorkLog(Criteria cri) {
+		return dao.selectWorkLog(cri);
 	}
 
 	@Override
 	public List<Board> selectUserWorkLog(int tNo) {
 		return dao.selectUserWorkLog(tNo);
+	}
+
+	@Override
+	public int listCountWCriteria(Criteria cri) {
+		return dao.countWPaging(cri);
+	}
+
+	@Override
+	public List<Board> infiniteScrollDown(String wNo) {
+		return dao.infiniteScrollDown(wNo);
 	}
 }

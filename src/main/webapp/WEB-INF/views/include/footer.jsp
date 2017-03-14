@@ -61,6 +61,8 @@
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/15.1.11/js/dx.all.js"></script>
 <script src="resources/js/plugins/dataTables/datatables.min.js"></script>
 <script src="resources/js/main.js"></script>
+<!-- Chosen -->
+<script src="resources/js/plugins/chosen/chosen.jquery.js"></script>
 <script>
 $(document).ready(function () {
     $('.mine').iCheck({
@@ -71,11 +73,11 @@ $(document).ready(function () {
 
 $('#registerDate').datepicker({
     autoclose: true,
-    format: 'yyyy-mm-dd'
+    format: 'yyyy.mm.dd'
 });
 
 $('#projectDate').daterangepicker({
- format: 'YYYY/MM/DD',
+ format: 'YYYY.MM.DD',
  timePicker: true,
 	 timePickerIncrement: 30
 });

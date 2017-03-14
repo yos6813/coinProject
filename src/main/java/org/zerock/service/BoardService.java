@@ -23,6 +23,7 @@ public interface BoardService {
 	public int listCountCriteria(Criteria cri);
 	public int listCountACriteria(Criteria cri);
 	public int listCountTCriteria(Criteria cri);
+	public int listCountWCriteria(Criteria cri);
 	public List<Board> ActivityList1(Board board);
 	
 	public void insertTask(Board board);
@@ -48,7 +49,9 @@ public interface BoardService {
 	public List<Board> joinUser(Board board);
 	
 	public void insertWorkLog(Board board);
-	public List<Board> selectWorkLog(int tNo);
+	public List<Board> selectWorkLog(Criteria cri);
 	
 	public List<Board> selectUserWorkLog(int tNo);
+	
+	public List<Board> infiniteScrollDown(String wNo);
 }

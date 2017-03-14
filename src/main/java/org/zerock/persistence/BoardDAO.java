@@ -21,6 +21,7 @@ public interface BoardDAO {
 	public int countPaging(Criteria cri);
 	public int countAPaging(Criteria cri);
 	public int countTPaging(Criteria cri);
+	public int countWPaging(Criteria cri);
 	
 	public List<Board> ActivityList1(Board board);
 	
@@ -49,7 +50,9 @@ public interface BoardDAO {
 	public List<Board> joinUser(Board board);
 	
 	public void insertWorkLog(Board board);
-	public List<Board> selectWorkLog(int tNo);
+	public List<Board> selectWorkLog(Criteria cri);
 	
 	public List<Board> selectUserWorkLog(int tNo);
+	
+	public List<Board> infiniteScrollDown(String wNo);
 }

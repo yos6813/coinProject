@@ -75,9 +75,21 @@ public class Board {
 	int joinUser;
 	
 	int wNo, wClient;
-	String wDate, wText, wTimeH, wTimeM, wWriteDate, wUser, wFileName;
+	String wDate, wText, wTimeH, wTimeM, wWriteDate, wUser, wFileName, day, time;
 	MultipartFile wfile;
 	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
 	public int getwNo() {
 		return wNo;
 	}

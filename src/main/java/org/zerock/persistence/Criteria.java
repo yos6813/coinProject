@@ -7,7 +7,16 @@ public class Criteria {
 	int bNo;
 	int aNo;
 	int tNo;
+	int wNo;
 	
+	public int getwNo() {
+		return wNo;
+	}
+
+	public void setwNo(int wNo) {
+		this.wNo = wNo;
+	}
+
 	public int gettNo() {
 		return tNo;
 	}

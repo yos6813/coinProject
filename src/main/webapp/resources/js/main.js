@@ -14,6 +14,7 @@ var abno =getParameterByName('abNo');
 var page =getParameterByName('page');
 var cno =getParameterByName('cNo');
 var check =getParameterByName('check');
+var wNo = getParameterByName('wNo');
 
 
   // Initialize Firebase
@@ -807,20 +808,73 @@ $(document).ready(function(){
 		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
 		
 		if(btDay2 > dayGap){
-			$('#projectTday').append("<strong class='no-margin2'>(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+			$('#projectTday').append("<strong>(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
 		} else {
-			$('#projectTday').append("<strong class='no-margin2'>(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+			$('#projectTday').append("<strong>(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+		}
+		var today = new Date();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+		var day = today.getDate();
+		
+		$('#writeDay').val(year + '.' + month + '.' + day);
+		
+		if(month < 10){
+			$('#wDate').val(year + '.0' + month + '.' + day);
+		} else if(day < 10) {
+			$('#wDate').val(year + '.' + month + '.0' + day);
+		} else if(month < 10 && day < 10){
+			$('#wDate').val(year + '.0' + month + '.0' + day);
+		} else {
+			$('#wDate').val(year + '.' + month + '.' + day);
+		}
+		
+		$('#wDate').datepicker({
+			format: 'yyyy.mm.dd',
+			endDate: new Date(pday1[0], pday1[1]-1, pday1[2]),
+			startDate: new Date(tday2[0], tday2[1]-1, tday2[2])
+		});
+		
+	}
+	
+	for(var i=1; i<=$('.wDate').size(); i++){
+		if($('.wDate').eq(i).text() == $('.wDate').eq(i-1).text()){
+			$('.wDate').eq(i).hide();
+		} else {
+			$('.wDate').eq(i).parents('.row').addClass('ibox2');
 		}
 	}
 	
-	var today = new Date();
-	var month = today.getMonth() + 1;
-	var year = today.getFullYear();
-	var day = today.getDate();
+	$('.chosen-select').chosen({width: "100%"});
+	$('#viewTaskTable').children('td').addClass('no-padding');
 	
-	$('#writeDay').val(year + '.' + month + '.' + day);
-	
-	$('#wDate').datepicker({
-	     format: 'yyyy.mm.dd'
-	 });
+	for(var i=0; i<= $('.listToChange').size(); i++){
+		if($('.wHTime').eq(i).text() == 'h'){
+			$('.wHTime').eq(i).text(' ');
+		}
+		if($('.wMTime').eq(i).text() == 'm'){
+			$('.wMTime').eq(i).text(' ');
+		}
+	}
+	if(tno != null || tno != undefined){
+		$('.listToChange').hide();
+		
+		for(var i=0; i<5; i++){
+			$('.listToChange').eq(i).show();
+		}
+		
+		var show = 5;
+		$(window).scroll(function() {
+			if ($(document).height() - $(window).height() == $(window).scrollTop()) {
+				for(var i=show; i<=show + 5; i++){
+					$('.listToChange').eq(i).show();
+				}
+				show++;
+				show++;
+				show++;
+				show++;
+				show++;
+			}
+		})
+	}
 })

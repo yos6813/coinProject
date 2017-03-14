@@ -192,12 +192,22 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> selectWorkLog(int tNo) {
-		return session.selectList(namespace + ".selectWorkLog", tNo);
+	public List<Board> selectWorkLog(Criteria cri) {
+		return session.selectList(namespace + ".selectWorkLog", cri);
 	}
 
 	@Override
 	public List<Board> selectUserWorkLog(int tNo) {
 		return session.selectList(namespace + ".selectUserWorkLog", tNo);
+	}
+
+	@Override
+	public int countWPaging(Criteria cri) {
+		return session.selectOne(namespace + ".countWPaging", cri);
+	}
+
+	@Override
+	public List<Board> infiniteScrollDown(String wNo) {
+		return session.selectList(namespace+ ".infiniteScrollDown", wNo);
 	}
 }

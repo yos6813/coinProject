@@ -27,6 +27,7 @@
     <link href="resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
     <link href="resources/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="resources/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="resources/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 </head>
 
 <body>
