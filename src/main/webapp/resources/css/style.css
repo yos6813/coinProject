@@ -8456,6 +8456,11 @@ body.md-skin {
 	float: left;
 }
 
+.topmargin{
+	margin-top: 0 !important;
+/* 	float: left; */
+}
+
 .no-margin2{
 	margin-top: 0 !important;
 	margin-left: 20px;
@@ -8463,6 +8468,24 @@ body.md-skin {
 }
 
 .no-margin2 td{
+	border: none !important;
+}
+
+.no-margin3{
+	margin-top: 0 !important;
+	margin-left: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.no-margin3 td{
+	border: none !important;
+}
+
+.projectTbl{
+	margin-bottom: 0 !important;
+}
+
+.projectTbl td{
 	border: none !important;
 }
 
@@ -8507,6 +8530,11 @@ body.md-skin {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 	padding-left: 2px;
+}
+
+.onlybottompadding{
+	padding-top: 0 !important;
+	padding-bottom: 1px;
 }
 
 .wDate{

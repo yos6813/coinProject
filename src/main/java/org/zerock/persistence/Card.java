@@ -1,5 +1,6 @@
 package org.zerock.persistence;
 
+
 public class Card {
 	int cNo;
 	String usageDate;

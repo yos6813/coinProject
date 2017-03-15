@@ -46,8 +46,8 @@ public class CardDAOImpl implements CardDAO{
 	}
 
 	@Override
-	public void pasteData(Card card) {
-		session.insert(namespace + ".pasteData", card);
+	public void pasteData(List<Integer> cNo) {
+		session.insert(namespace + ".pasteData", cNo);
 	}
 
 	@Override

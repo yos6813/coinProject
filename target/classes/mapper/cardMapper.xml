@@ -32,12 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select CONCAT(MONTH(usageDate)) as concatDate, abstract1, sum(cost) sumCost from usageTbl group by concatDate, abstract1;
 	</select>
 	
-	<insert id="pasteData">
+	<insert id="pasteData" parameterType="org.zerock.persistence.Card">
 		insert into usageTbl (usageDate, classifyCard, usageUser, usageCard, sales, memberStore, cost, abstract1, abstract2, note)
 			select usageDate, classifyCard, usageUser, usageCard, sales, memberStore, cost, abstract1, abstract2, note from usageTbl
 			where cNo in(
-			<foreach collection="data_list" item="item" index="index" separator="," open="(" close=")">
-				#{cNo}
+			<foreach collection="list" item="item" index="index" separator="," >
+				#{item}
 			</foreach>
 			);
 	</insert>

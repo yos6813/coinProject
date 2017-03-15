@@ -137,4 +137,19 @@ public class cardController {
 		
 		return "redirect:cardList?email=" + email;
 	}
+	
+	@RequestMapping(value = "/usagePaste")
+	public String usagePaste(@RequestParam("email") String email, @RequestParam("cNo") List<Integer> cNo,
+			Locale locale, Model model, User user, Card card) {
+		
+		
+		for(Integer i=0; i<=cNo.size(); i++){
+			model.addAttribute(service.read(email));
+			cService.pasteData(cNo);
+			logger.info(cNo.toString());
+			i++;
+		}
+		
+		return "redirect:cardList?email=" + email;
+	}
 }

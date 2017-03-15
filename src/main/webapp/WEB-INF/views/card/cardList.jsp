@@ -110,12 +110,15 @@
                                </div>
                            </div>
                            <div id="tab-2" class="tab-pane">
-                               <div class="panel-body">
-                               <div class="col-sm-5">
-                               	<input type="checkBox" id="mine" value=""> <i></i> 내것만 보기
-                               </div>
-                               	<a data-toggle="modal" data-target="#myModal" class="btn btn-default pull-right">엑셀 데이터 업로드</a>&nbsp;
+                           	<div class="panel-title">
+                               	<a data-toggle="modal" data-target="#myModal" class="btn btn-default pull-right">엑셀 데이터 업로드</a>
 					        	<a href="/usageWrite?email=${user.email}&abNo=1" class="btn btn-default pull-right">글쓰기</a>
+					        	<a class="btn btn-default pull-right" id="pasteUsage">내역복사</a>
+                           	</div>
+                               <div class="panel-body">
+                                <div class="col-sm-5">
+                               		<input type="checkBox" id="mine" value=""> <i></i> 내것만 보기
+                                </div>
 					        	<hr>
 					        	<div class="table-responsive">
 						            <table class="table table-striped table-bordered table-hover dataTables-example">
@@ -138,7 +141,7 @@
 							            <tbody>
 											<c:forEach items="${list}" var="card">
 									            <tr class="gradeX" value="${card.cNo}">
-									            	<td><input value="${card.cNo}" type="checkBox"></td>
+									            	<td><input value="${card.cNo}" class="check" type="checkBox"></td>
 									            	<td>${card.cNo}</td>
 									                <td class="listDate" value="${card.usageDate}">${card.usageDate}</td>
 									                <td>${card.classifyCard}</td>

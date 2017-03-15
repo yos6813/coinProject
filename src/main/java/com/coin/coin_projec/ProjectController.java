@@ -50,7 +50,12 @@ public class ProjectController {
 	public String projectView(@RequestParam ("email") String email, @RequestParam (value="bNo") int bNo, Model model, Board board,
 			User user, Project project, Criteria cri, @RequestParam (value="aNo", required=false) String aNo) {
 		model.addAttribute(service.read(email));
-		model.addAttribute(bService.viewBoard(bNo));
+		
+		if(aNo != null){
+			model.addAttribute(bService.viewActivity(aNo));
+		} else {
+			model.addAttribute(bService.viewBoard(bNo));
+		}
 		model.addAttribute("list", bService.listBoard(board));
 		model.addAttribute("list2", bService.ActivityList1(board));
 		

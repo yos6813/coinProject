@@ -299,12 +299,27 @@ $(document).ready(function(){
 
 	var dataSource = [];
 	for(var i=0; i<$('.activeC').size(); i++){
+		var activeDay = $('.activeC').eq(i).children('td').eq(1).text().split('-');
+		
+		var aday1 = activeDay[1].split('/');
+		var active = new Date(aday1[0], aday1[1]-1, aday1[2]);
+		var today = new Date();
+		var aMs = today.getTime() - active.getTime() ;
+		var aDay = Math.floor(aMs / (1000*60*60*24)) ;
+		var aDay1;
+		if(aDay >= 0){
+			aDay1 = "D+" + aDay;
+		} else {
+			aDay1 = "D" + aDay;
+		}
+		
 		dataSource.push({
 			name1: "<p>" + 
 				 $('.activeC').eq(i).children('td').eq(2).text() + "</p><br>"
 				 + $('.activeC').eq(i).children('td').eq(0).text() + "<br/>" 
-				 + $('.activeC').eq(i).children('td').eq(1).text() + "<br/>"
-				 + $('.activeC').eq(i).children('td').eq(3).text(),
+				 + aDay1,
+//				 + $('.activeC').eq(i).children('td').eq(1).text() + "<br/>"
+//				 + $('.activeC').eq(i).children('td').eq(3).text(),
 			ongoing: parseInt($('.activeC').eq(i).children('td').eq(4).attr('value')),
 			standby: parseInt($('.activeC').eq(i).children('td').eq(5).attr('value')),
 			complete: parseInt($('.activeC').eq(i).children('td').eq(6).attr('value')),
@@ -404,15 +419,76 @@ $(document).ready(function(){
 		var btDay = Math.floor(btMs / (1000*60*60*24)) ;
 		
 		if(btDay >= 0){
-			$('#projectDday').text("+" + btDay);
+			$('#projectDday').text("D+" + btDay);
+			$('#projectDday').addClass('text-danger');
 		} else {
-			$('#projectDday').text(btDay);
+			$('#projectDday').text("D" + btDay);
+			$('#projectDday').addClass('text-danger');
+		}
+		
+		var pday2 = projectDay[0].split('/');
+		var start = new Date(pday2[0], pday2[1]-1, pday2[2]);
+		var btMs2 = today.getTime() - start.getTime();
+		var btDay2 = Math.floor(btMs2 / (1000*60*60*24));
+		
+		var btMs3 = project.getTime() - start.getTime();
+		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
+		
+		if(btDay2 > dayGap){
+			$('#projectPday').append("<strong>(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+		} else {
+			$('#projectPday').append("<strong>(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
+		}
+		
+		for(var i=0; i<$('.projectTStatus').size(); i++){
+			if($('.projectTStatus').eq(i).text()=='진행중'){
+				$('.projectTStatus').eq(i).addClass('label-primary');
+			} else if($('.projectTStatus').eq(i).text()=='대기'){
+				$('.projectTStatus').eq(i).addClass('label-default');
+			} else if($('.projectTStatus').eq(i).text()=='보류'){
+				$('.projectTStatus').eq(i).addClass('label-warning');
+			} else if($('.projectTStatus').eq(i).text()=='완료'){
+				$('.projectTStatus').eq(i).addClass('label-success');
+			}
 		}
 	}
+	
+	$('#projecPDday').text();
 	
 	$('.taskC').click(function(){
 		location.href = "taskView?email=" + email + "&bNo=" + bno + "&aNo=" + ano + "&tNo=" + $(this).attr('value');
 	})
+	
+	for(var i=0; i<$('.tDateText').size(); i++){
+		var tDay = $('.tDateText').eq(i).text().split('-');
+		var pday1 = tDay[1].split('/');
+		var task = new Date(pday1[0], pday1[1]-1, pday1[2]);
+		var today = new Date();
+		var bt = today.getTime() - task.getTime() ;
+		var bt1 = Math.floor(bt / (1000*60*60*24)) ;
+		
+		if(bt1 >= 0){
+			$('.tDdayText').eq(i).text("D+" + bt1);
+			$('.tDdayText').eq(i).addClass('text-danger');
+		} else {
+			$('.tDdayText').eq(i).text("D" + bt1);
+			$('.tDdayText').eq(i).addClass('text-danger');
+		}
+		
+		var pday2 = tDay[0].split('/');
+		var start1 = new Date(pday2[0], pday2[1]-1, pday2[2]);
+		var btMs2 = today.getTime() - start1.getTime();
+		var btDay2 = Math.floor(btMs2 / (1000*60*60*24));
+		
+		var btMs3 = task.getTime() - start.getTime();
+		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
+		
+		if(btDay2 > dayGap){
+			$('.dayGap').eq(i).append("(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")");
+		} else {
+			$('.dayGap').eq(i).append("(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")");
+		}
+	}
 })
 
 
@@ -708,14 +784,11 @@ $(document).ready(function(){
 		userSum1();
 	})
 	
-	$('.gradeX').click(function(){
-		location.href="modifyCard?email=" + email + "&cNo=" + $(this).attr('value') + "&abNo=" + $(this).children('.abList').attr('value');
-	})
 	
-	$('input[type="checkBox"]').click(function(){
-//		if(this.checked){
-//		} else {
-//		}
+	$('.gradeX td').click(function(){
+		if($(this).index() != 0){
+			location.href="modifyCard?email=" + email + "&cNo=" + $(this).parents('.gradeX').attr('value') + "&abNo=" + $(this).parents('.gradeX').children('.abList').attr('value');
+		}
 	})
 	
 	$('#mine').click(function(){
@@ -729,6 +802,25 @@ $(document).ready(function(){
 	if(check == 'true'){
 		$('#mine').attr('checked', true);
 	}
+	$('#pasteUsage').click(function(){
+		var param ="";
+		for(var i=0; i<=$('.check').size(); i++){
+			if($('.check').eq(i).is(":checked")){
+				param = param + "&cNo=" + $('.check').eq(i).val();
+			}
+		}
+		$.ajax({
+	        url : "usagePaste?email=" + email,
+	        type : 'post',
+	        data : param,
+	        dataType : 'text',
+	        success : function(data) {
+	          alert("복사되었습니다");
+	          location.reload();
+	        },
+	        error : function() { alert("복사 실패");}
+		});
+	})
 })	
 
 /* modify usage */
@@ -812,6 +904,7 @@ $(document).ready(function(){
 		} else {
 			$('#projectTday').append("<strong>(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
 		}
+		
 		var today = new Date();
 		var month = today.getMonth() + 1;
 		var year = today.getFullYear();

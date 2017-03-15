@@ -85,8 +85,8 @@ public class CardServiceImpl implements CardService{
 	}
 
 	@Override
-	public void pasteData(Card card) {
-		dao.pasteData(card);
+	public void pasteData(List<Integer> cNo) {
+		dao.pasteData(cNo);
 	}
 
 	@Override

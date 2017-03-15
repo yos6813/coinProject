@@ -25,7 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- project view -->
 	<select id="viewBoard" resultType="org.zerock.persistence.Board">
-		select *, (select count(distinct tMName) as joinUser from v_tasktbl) as joinUser from v_getBoard where bNo = #{bNo};
+		select group_concat((a.aMName)) as aMName, b.*, (select count(distinct tMName) as joinUser from v_tasktbl) as joinUser
+		from v_getBoard b left outer join v_activitytbl a on b.bNo = a.bNo where b.bNo = #{bNo};
 	</select>
 	
 	<insert id="insertActivity" parameterType="org.zerock.persistence.Board">
