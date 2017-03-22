@@ -15,6 +15,9 @@ var page =getParameterByName('page');
 var cno =getParameterByName('cNo');
 var check =getParameterByName('check');
 var wNo = getParameterByName('wNo');
+var ctno = getParameterByName('ctNo');
+var type = getParameterByName('type');
+var keyword = getParameterByName('keyword');
 
 
   // Initialize Firebase
@@ -131,7 +134,6 @@ $(document).ready(function(){
 			$('#email').val(user.email);
 			$('#userEmail').val(user.email);
 		}
-		
 	})
 
 	$('input[type="checkbox"]').click(function(){
@@ -318,8 +320,6 @@ $(document).ready(function(){
 				 $('.activeC').eq(i).children('td').eq(2).text() + "</p><br>"
 				 + $('.activeC').eq(i).children('td').eq(0).text() + "<br/>" 
 				 + aDay1,
-//				 + $('.activeC').eq(i).children('td').eq(1).text() + "<br/>"
-//				 + $('.activeC').eq(i).children('td').eq(3).text(),
 			ongoing: parseInt($('.activeC').eq(i).children('td').eq(4).attr('value')),
 			standby: parseInt($('.activeC').eq(i).children('td').eq(5).attr('value')),
 			complete: parseInt($('.activeC').eq(i).children('td').eq(6).attr('value')),
@@ -434,6 +434,10 @@ $(document).ready(function(){
 		var btMs3 = project.getTime() - start.getTime();
 		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
 		
+		if(btDay2 < 0){
+			btDay2 = 0;
+		}
+		
 		if(btDay2 > dayGap){
 			$('#projectPday').append("<strong>(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
 		} else {
@@ -482,6 +486,10 @@ $(document).ready(function(){
 		
 		var btMs3 = task.getTime() - start.getTime();
 		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
+		
+		if(btDay2 < 0){
+			btDay2 = 0;
+		}
 		
 		if(btDay2 > dayGap){
 			$('.dayGap').eq(i).append("(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")");
@@ -899,6 +907,10 @@ $(document).ready(function(){
 		var btMs3 = project.getTime() - start.getTime();
 		var dayGap = Math.floor(btMs3 / (1000*60*60*24));
 		
+		if(btDay2 < 0){
+			btDay2 = 0;
+		}
+		
 		if(btDay2 > dayGap){
 			$('#projectTday').append("<strong>(<strong class='text-danger'>" + btDay2 + "</strong>/" + dayGap + ")</strong>");
 		} else {
@@ -971,3 +983,150 @@ $(document).ready(function(){
 		})
 	}
 })
+
+/* client */
+/* 다음 주소 찾기 */
+function sample6_execDaumPostcode1() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('clientaddr').value = fullAddr;
+
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('clientaddr2').focus();
+        }
+    }).open();
+}
+$(document).ready(function(){
+	$('.selectClient').click(function(){
+		if(type != null || type != undefined){
+			location.search = "?email=" + email + "&type=" + type + "&keyword=" + keyword + "&ctNo=" + $(this).attr('value');
+		} else {
+			location.search = "?email=" + email + "&ctNo=" + $(this).attr('value');
+		}
+	})
+	
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	var year = today.getFullYear();
+	var day = today.getDate();
+	
+	$('#fDateInput').val(year + '.' + month + '.' + day);
+	for(var i=1; i<=$('#fileList').children('li').size(); i++){
+		$('#fileList').children('li').eq(i).removeClass('fist-item');
+	}
+	
+	$('#searchClient').click(function(){
+		var type = $('#clientType').val();
+		var keyword = $('#clientKeyword').val();
+		location.search = "?email=" + email + "&type=" + type + "&keyword=" + keyword;
+	})
+})
+
+function form_submit(ctno){
+	if(ctno != null || ctno != undefined){
+		$('#clientForm').attr('action',"/registerClient?email=" + email + "&ctNo=" + ctno);
+		$("#clientForm").submit();
+	} else {
+		$('#clientForm').attr('action',"/registerClient?email=" + email);
+		$('#clientForm').submit();
+	}
+}
+
+function deleteClient(ctno){
+	var result = confirm('고객을 삭제하시겠습니까?');
+	if(result) {
+		//yes
+		$('#deleteForm').attr('action',"/deleteClient?email=" + email + "&ctNo=" + ctno);
+		$('#deleteForm').submit();
+	} else { 
+		//no 
+	} 
+}
+
+function contractModal1(fNo){
+	$.ajax({
+	    url: 'modal?email=' + email + "&ctNo=" + ctno,
+	    method: "get",
+	    type: "json",
+	    data: "&fNo=" + fNo,
+	    success: function(data) {
+	        $('#modalBody').html(data);
+	        $("#contractModal").modal("show");
+	    }
+	});
+}
+
+/* notify */
+	
+$('#notifyText').summernote({
+  height: 300,                 // set editor height
+  minHeight: null,             // set minimum height of editor
+  maxHeight: null,             // set maximum height of editor
+  focus: true,
+  toolbar: [
+    // [groupName, [list of button]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough', 'superscript', 'subscript']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']]
+  ]
+});
+
+$('#notifyText').on('summernote.blur', function(){
+	console.log('test');
+	$('#nText').val($('#notifyText').summernote('code'));
+})
+
+var today = new Date();
+var month = today.getMonth() + 1;
+var year = today.getFullYear();
+var day = today.getDate();
+
+$('#nDate').val(year + '.' + month + '.' + day);
+
+/* notify view */
+$(document).ready(function(){
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	var year = today.getFullYear();
+	var day = today.getDate();
+
+	$('#coDate').val(year + '.' + month + '.' + day);
+	
+   $('img').error(function(){
+     $(this).attr('src', '../img/photo.png');
+   });
+})
+

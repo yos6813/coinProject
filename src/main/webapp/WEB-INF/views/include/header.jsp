@@ -28,6 +28,7 @@
     <link href="resources/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="resources/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="resources/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="resources/css/plugins/summernote/summernote.css" rel="stylesheet">
 </head>
 
 <body>
@@ -47,6 +48,7 @@
                             F
                         </div>
                     </li>
+                    <li><a href="/notifyList?email=${user.email}"><i class="fa fa-bell-o"></i><span>공지사항</span></a></li>
                     <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>업무관리</span></a></li>
 		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-credit-card"></i> <span>법인카드사용내역관리</span></a></li>
 		            <li>
@@ -57,6 +59,9 @@
                             </li>
                             <li>
                                 <a href="/abstractPage?email=${user.email}&abNo=1&page=1">적요</a>
+                            </li>
+                            <li>
+                                <a href="/clientList?email=${user.email}">고객관리</a>
                             </li>
                         </ul>
                     </li>

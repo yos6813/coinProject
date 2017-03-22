@@ -40,7 +40,7 @@ public class HomeController {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list", service.listAll(email));
 		
-		return "home";
+		return "notifycation/notifyList";
 	}
 	
 	@RequestMapping(value="/exchange", method=RequestMethod.POST)

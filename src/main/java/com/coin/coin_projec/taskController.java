@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.persistence.Board;
+import org.zerock.persistence.Client;
 import org.zerock.persistence.Criteria;
 import org.zerock.persistence.PageMaker;
 import org.zerock.persistence.Project;
 import org.zerock.persistence.User;
 import org.zerock.service.BoardService;
+import org.zerock.service.ClientService;
 import org.zerock.service.ProjectService;
 import org.zerock.service.UserService;
 
@@ -37,23 +39,10 @@ public class taskController {
 	@Inject
 	private BoardService bService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(taskController.class);
+	@Inject
+	private ClientService ctService;
 	
-	@RequestMapping(value = "/task")
-	public String home(@RequestParam (value="type", required=false) String type, @RequestParam (value="keyword", required=false) String keyword,
-				@RequestParam ("email") String email, Locale locale, Model model, Board board, Project project, User user,
-				Criteria cri) {
-		model.addAttribute(service.read(email));
-		model.addAttribute("list", bService.listCriteria(cri));
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCountCriteria(cri));
-		
-		model.addAttribute("pageMaker", pageMaker);
-			
-		return "task/taskM";
-	}
+	private static final Logger logger = LoggerFactory.getLogger(taskController.class);
 	
 	@RequestMapping(value = "/taskWrite", method=RequestMethod.GET)
 	public String taskWrite(@RequestParam (value="pNo",required=false) String pNo, @RequestParam ("email") String email, Locale locale, Model model, Board board, Project project, User user) {
@@ -203,11 +192,12 @@ public class taskController {
 	@RequestMapping(value="/taskView")
 	 public String taskView(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
 			 @RequestParam("aNo") String aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr,
-			 Criteria cri, @RequestParam (value="wNo", required=false) String wNo) {
+			 Criteria cri, @RequestParam (value="wNo", required=false) String wNo, Client client) {
 		model.addAttribute(service.read(email));
 		model.addAttribute(bService.viewTask(tNo));
 		model.addAttribute("list2", bService.selectUserWorkLog(tNo));
 		model.addAttribute("list", bService.selectWorkLog(cri));
+		model.addAttribute("list3", ctService.clientList(client));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

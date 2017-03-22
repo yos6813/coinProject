@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.ClientDAO">
+	<insert id="clientRegister" parameterType="org.zerock.persistence.Client"> 
+		insert into clientTbl (ctName, ctAddr, ctLicense, ctAddr2) values (#{ctName}, #{ctAddr}, #{ctLicense}, #{ctAddr2});
+	</insert>
+	
+	<select id="clientList"  resultType="org.zerock.persistence.Client">
+		select * from clientTbl
+		<choose>
+			<when test="type=='ctName'">
+				where ctName like CONCAT('%', #{keyword} , '%')
+			</when>
+			<when test="type=='ctLicense'">
+				where ctLicense like CONCAT('%', #{keyword} , '%')
+			</when>
+		</choose>
+	</select>
+	
+	<update id="updateClient">
+		UPDATE clientTbl SET ctName = #{ctName}, ctAddr = #{ctAddr}, ctAddr2 = #{ctAddr2},
+							 ctLicense = #{ctLicense} WHERE ctNo = #{ctNo};         
+	</update>
+	
+	<delete id="deleteClient">
+		delete from clientTbl where ctNo = #{ctNo};
+	</delete>
+	
+	<delete id="deleteWorkLog">
+		delete from worklogTbl where wClient = #{ctNo};
+	</delete>
+	
+	<delete id="deleteContract">
+		delete from contractTbl where ctNo = ${ctNo};
+	</delete>
+	
+	<select id="selectClient" resultType="org.zerock.persistence.Client">
+		select * from clientTbl where ctNo = #{ctNo};
+	</select>
+	
+	<insert id="insertFile" parameterType="org.zerock.persistence.Client">
+		insert into contractTbl (ctNo, fName, fDate, fTitle, fText) values (#{ctNo}, #{fName}, #{fDate}, #{fTitle}, #{fText});
+	</insert>
+	
+	<select id="fileList" resultType="org.zerock.persistence.Client">
+		select * from contractTbl where ctNo = #{ctNo};
+	</select>
+	
+	<select id="fileView" resultType="org.zerock.persistence.Client">
+		select * from contractTbl where fNo = #{fNo};
+	</select>
+	
+	<select id="taskList" resultType="org.zerock.persistence.Client">
+		select w.*, username, photoURL, ctName,
+						case dayofweek(w.wDate)
+							 when '1' then '일요일'
+							 when '2' then '월요일'
+							 when '3' then '화요일'
+							 when '4' then '수요일'
+							 when '5' then '목요일'
+							 when '6' then '금요일'
+							 when '7' then '토요일'
+							 end as day
+	 from worklogTbl w left outer join userTbl u on w.wUser = u.email
+					   left outer join clientTbl ct on ct.ctNo = w.wClient
+	 where wClient = #{ctNo} order by wNo desc;
+	</select>
+</mapper>

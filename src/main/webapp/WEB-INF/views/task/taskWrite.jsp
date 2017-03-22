@@ -8,8 +8,7 @@
 			<b>글쓰기</b>
 	    </h1>
 	    <ol class="breadcrumb">
-	      <li><a href="/home"><i class="fa fa-home"></i> Home</a></li>
-	      <li><a href="/task">업무관리</a></li>
+	      <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 	      <li class="active">글쓰기</li>
 	    </ol>
 	  </div>

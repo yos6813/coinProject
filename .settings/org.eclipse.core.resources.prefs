@@ -7,4 +7,5 @@ encoding//src/main/java/org/zerock/persistence/UserDAOImpl.java=UTF-8
 encoding//src/main/java/org/zerock/service/UserService.java=UTF-8
 encoding//src/main/java/org/zerock/service/UserServiceImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/footer.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/include/modal.jsp=UTF-8
 encoding/<project>=UTF-8

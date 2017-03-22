@@ -8,7 +8,7 @@
 			<b>법인카드 사용내역 쓰기</b>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
+			<li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 			<li><a href="/cardList?email=${user.email}">법인카드 사용내역 관리</a></li>
 			<li class="active">법인카드 사용내역 쓰기</li>
 		</ol>

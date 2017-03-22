@@ -65,7 +65,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="listCriteria" parameterType="list" resultType="org.zerock.persistence.Board">
-		select * from v_getBoard where bNo > 0 order by bNo desc limit #{pageStart}, #{perPageNum};
+		select * from v_getBoard where bNo > 0
+			<choose>
+			<when test="type=='pName'">
+				and pName like CONCAT('%', #{keyword} , '%')
+			</when>
+			<when test="type=='pm'">
+				and pmName like CONCAT('%', #{keyword} , '%')
+			</when>
+		</choose>
+		order by bNo desc limit #{pageStart}, #{perPageNum};
 	</select>
 	
 	<select id="countPaging" resultType="int">
@@ -90,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="viewTask" resultType="org.zerock.persistence.Board">
-		select b.*, g.*, t.*, round(w.wTimeM / 60) + sum(wTimeH) as wTimeH,  mod(sum(wTimeM), 60) as wTimeM
+		select b.*, g.*, t.*, truncate(w.wTimeM / 60, 0) + sum(wTimeH) as wTimeH,  mod(sum(wTimeM), 60) as wTimeM
 		from v_getBoard b left outer join v_getactivityTbl g on b.bNo = g.bNo left outer join v_taskTbl t on g.aNo = t.aNo
 								       left outer join worklogtbl w on w.tNo = t.tNo
 		where t.tNo = #{tNo};
@@ -169,7 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectWorkLog" resultType="org.zerock.persistence.Board">
-		select *,
+		select *, ctName,
 			case dayofweek(w.wDate)
 				 when '1' then '일요일'
 			     when '2' then '월요일'
@@ -179,7 +188,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			     when '6' then '금요일'
 			     when '7' then '토요일'
      			 end as day
-     from worklogTbl w left outer join userTbl u on w.wUser = u.email where tNo =#{tNo} order by wDate desc
+     from worklogTbl w left outer join userTbl u on w.wUser = u.email
+     				   left outer join clientTbl ct on ct.ctNo = w.wClient
+     where tNo =#{tNo} order by wDate desc
 <!--       limit 0, 5; -->
 	</select>
 	

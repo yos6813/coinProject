@@ -9,7 +9,7 @@
    			<b>Project List</b>
 	 	 </h1>
          <ol class="breadcrumb">
-		    <li><a href="/home"><i class="fa fa-home"></i> Home</a></li>
+		    <li><a href="notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 		    <li class="active">Project List</li>
 	     </ol>
      </div>
@@ -42,7 +42,7 @@
 								<th style="width: 200px">기간</th>
 								<th>프로젝트명</th>
 								<th>관리자</th>
-								<th style="width: 150px">프로젝트 매니저</th>
+								<th>프로젝트 매니저</th>
 								<th style="width: 150px">일자</th>
 							</tr>
 							<c:forEach items="${list}" var="board">
@@ -50,8 +50,8 @@
 									<td style="width:50px">${board.bNo}</td>
 									<td><p class="label boardStatus">${board.status}</p></td>
 									<td style="width: 200px">${board.projectDate}<br/><small></small></td>
-									<td>${board.pName}</td>
-									<td style="width: 150px"><img class="img-circle" src="${board.writePhoto}"><br/><small>${board.writeName}</small> </td>
+									<td style="width: 150px">${board.pName}</td>
+									<td><img class="img-circle" src="${board.writePhoto}"><br/><small>${board.writeName}</small> </td>
 									<td><img class="img-circle" src="${board.pmPhoto}"><br/><small>${board.pmName}</small></td>
 									<td style="width: 150px">${board.writeDate}</td>
 								</tr>

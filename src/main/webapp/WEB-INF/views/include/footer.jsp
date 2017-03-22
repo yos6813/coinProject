@@ -12,8 +12,10 @@
 <!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
     
+
 <!-- Mainly scripts -->
 <script src="resources/js/jquery-2.1.1.js"></script>
+<script src="resources/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -32,9 +34,6 @@
 <!-- Custom and plugin javascript -->
 <script src="resources/js/inspinia.js"></script>
 <script src="resources/js/plugins/pace/pace.min.js"></script>
-
-<!-- jQuery UI -->
-<script src="resources/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- GITTER -->
 <script src="resources/js/plugins/gritter/jquery.gritter.min.js"></script>
@@ -60,9 +59,13 @@
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/15.1.11/js/dx.chartjs.js"></script>
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/15.1.11/js/dx.all.js"></script>
 <script src="resources/js/plugins/dataTables/datatables.min.js"></script>
-<script src="resources/js/main.js"></script>
 <!-- Chosen -->
 <script src="resources/js/plugins/chosen/chosen.jquery.js"></script>
+<!-- daum 주소찾기 -->
+<script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
+<!-- Summer Note -->
+<script src="resources/js/plugins/summernote/summernote.min.js"></script>
+<script src="resources/js/main.js"></script>
 <script>
 $(document).ready(function () {
     $('.mine').iCheck({

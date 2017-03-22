@@ -9,7 +9,7 @@
 		<b>관리자 페이지</b>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i>Home</a></li>
         <li class="active">admit</li>
       </ol>
 </div>
@@ -89,16 +89,16 @@
 				</div>
 				<div class="ibox">
 					<div class="ibox-title"><b>등록</b></div>
-					<div class="ibox-content">
+					<div class="ibox-content col-md-12">
 						<form role="form" method="post" class="form-inline" action="/registAbstract2?email=${user.email}&page=1">
-                            <div class="form-group">
+                            <div class="form-group col-lg-12">
                                 <label for="abstractNo">적요:</label>
                                 <input type="text" class="form-control" id="abstractNo" name="abNo">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-12">
                                 <input type="text" class="form-control" id="ab2Name" name="ab2Name" placeholder="텍스트 입력">
+								<button type="submit" class="btn btn-default">등록</button>
                             </div>
-							<button type="submit" class="btn btn-default">등록</button>
 						</form>
 					</div>
 				</div>

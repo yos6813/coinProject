@@ -10,7 +10,7 @@
    			<b>업무 리스트</b>
 	 	 </h1>
          <ol class="breadcrumb">
-		    <li><a href="/projectView?email=${user.email}&bNo=<%= request.getParameter("bNo") %>"><i class="fa fa-home"></i> Home</a></li>
+		    <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 		    <li class="active">업무 리스트</li>
 	     </ol>
      </div>
@@ -107,7 +107,7 @@
 						            <strong class="text-info wHTime">${board.wTimeH}h</strong>
 						            <strong class="text-info wMTime">${board.wTimeM}m</strong><br>
 						            <small>
-						            	test
+						            	${board.ctName}
 						            </small>
 						        </div>
 						    </div>
@@ -157,10 +157,10 @@
 		                <div class="form-group">
 		                	<label for="projectDate" class="col-sm-2 control-label">투입시간</label>
 		                	<div class="col-sm-5">
-		                		<input type="text" name="wTimeH" class="form-control " placeholder="시">
+		                		<input type="text" name="wTimeH" class="form-control " placeholder="시" required="required">
 							</div>
 							<div class="col-sm-5">
-		                		<input type="text" name="wTimeM" class="form-control" placeholder="분">
+		                		<input type="text" name="wTimeM" class="form-control" placeholder="분" required="required">
 							</div>
 						</div>
 		                <div class="form-group">
@@ -168,6 +168,9 @@
 		                 	<div class="col-sm-10">
 		                 		<select data-placeholder="고객사 명을 입력하여 선택하세요" name="wClient" class="chosen-select form-control"  tabindex="2">
                 					<option value="0">선택</option>
+                					<c:forEach items="${list3}" var="client">
+	                					<option value="${client.ctNo}">${client.ctName}</option>
+                					</c:forEach>
                 				</select>
 		                  	</div>
 		                </div>

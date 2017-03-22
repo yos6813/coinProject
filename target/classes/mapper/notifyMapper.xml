@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.NotifyDAO">
+	<insert id="insertNotify" parameterType="org.zerock.persistence.Notify">
+		insert into notifyTbl (nTitle, nText, nDate, writeUser)
+			   values(#{nTitle}, #{nText}, #{nDate}, #{writeUser});
+			   
+		<selectKey keyProperty="no" resultType="int">
+			select last_insert_id()
+		</selectKey>			   
+	</insert>	
+	
+	<insert id="insertNotifyFile">
+		insert into nFileTbl (nNo, nFileName)
+			   values(#{nNo}, #{nFileName});
+	</insert>
+	
+	<select id="notifyList" parameterType="list" resultType="org.zerock.persistence.Notify">
+		select *, count(c.nNo) as countComment from notifyTbl n left outer join userTbl u on n.writeUser = u.email left outer join commenttbl c on c.nNo = n.nNo group by n.nNo;
+	</select>
+	
+	<select id="notifyView" resultType="org.zerock.persistence.Notify">
+		select * from notifyTbl n left outer join userTbl u on n.writeUser = u.email where nNo = #{nNo};
+	</select>
+	
+	<insert id="insertComments">
+		insert into commentTbl(nNo, coText, coUser, coDate) values (#{nNo}, #{coText}, #{coUser}, #{coDate});
+	</insert>
+	
+	<select id="commentList" parameterType="list" resultType="org.zerock.persistence.Notify">
+		select * from commentTbl c left outer join userTbl u on c.coUser = u.email where nNo = #{nNo};
+	</select>
+	
+	<select id="fileList" parameterType="list" resultType="org.zerock.persistence.Notify">
+		select * from notifyTbl n left outer join userTbl u on n.writeUser = u.email left outer join nfiletbl f on f.nNo = n.nNo where n.nNo = #{nNo} group by f.nfNo;
+	</select>
+</mapper>
