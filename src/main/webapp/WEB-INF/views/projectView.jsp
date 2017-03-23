@@ -66,9 +66,9 @@
         <div class="col-md-3" style="padding-right: 0;">
         	<div class="ibox">
 		    	<div class="ibox-content" style="padding-bottom: 14px;">
-			    	<table class="table projectTbl">
+			    	<table class="table voteItemsTbl">
 			    		<tr class="activity">
-						<td class="text-right no-padding1 no-margins"><h3>전체:</h3></td>
+						<td class="text-right no-padding1 no-margins"><h3></h3></td>
 						<td class="text-right no-padding1 no-margins">
 							<h3 id="totalStatus"></h3>
 						</td>

@@ -78,7 +78,7 @@ public class NotifyController {
 				logger.info("fail업로드 실패");
 			}
 			
-		return "redirect:notifyList?email=" + email;
+		return "redirect:/notifyList?email=" + email;
 	}
 	
 	@RequestMapping(value = "/notifyView")
@@ -100,5 +100,54 @@ public class NotifyController {
 			nService.insertComments(notify);
 			
 		return "redirect:notifyView?email=" + email + "&nNo=" + nNo;
+	}
+	
+	@RequestMapping(value = "/notifyMod")
+	public String notifyMod(@RequestParam("email") String email, @RequestParam("nNo") int nNo,
+							 Locale locale, Model model, User user, Notify notify) {
+			model.addAttribute(service.read(email));
+			model.addAttribute(nService.notifyMod(nNo));
+			
+		return "notification/notifyMod";
+	}
+	
+	@RequestMapping(value = "/notifyModify", method=RequestMethod.POST)
+	public String notifyModify(@RequestParam("email") String email, @RequestParam("nNo") int nNo,
+							   Locale locale, Model model, User user, Notify notify, HttpSession session) {
+			model.addAttribute(service.read(email));
+			nService.notifyModify(notify);
+			
+			String uploadPath = session.getServletContext().getRealPath("/resources/img");
+			System.out.println("upload path=" + uploadPath);
+			
+			List<MultipartFile> file = notify.getnFile();
+			
+			try {
+				for(Integer i=0; i<file.size(); i++){
+					FileCopyUtils.copy(file.get(i).getInputStream(), new FileOutputStream(uploadPath + "/" + file.get(i).getOriginalFilename()));
+					notify.setnFileName(file.get(i).getOriginalFilename());
+					nService.insertNotifyFile(notify);
+				}
+				logger.info("success업로드 성공");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				logger.info("fail업로드 실패");
+			} catch (IOException e) {
+				e.printStackTrace();
+				logger.info("fail업로드 실패");
+			}
+			
+		return "redirect:notifyView?email=" + email + "&nNo=" + nNo;
+	}
+	
+	@RequestMapping(value = "/deleteNotify", method=RequestMethod.POST)
+	public String deleteNotify(@RequestParam("email") String email, @RequestParam("nNo") int nNo,
+							   Locale locale, Model model, User user, Notify notify, HttpSession session) {
+			model.addAttribute(service.read(email));
+			nService.deleteNotify(nNo);
+			nService.deleteComments(nNo);
+			nService.deletenFile(nNo);
+			
+		return "redirect:notifyList?email=" + email;
 	}
 }

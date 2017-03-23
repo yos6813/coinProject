@@ -18,6 +18,7 @@ var wNo = getParameterByName('wNo');
 var ctno = getParameterByName('ctNo');
 var type = getParameterByName('type');
 var keyword = getParameterByName('keyword');
+var vNo = getParameterByName('vNo');
 
 
   // Initialize Firebase
@@ -1105,7 +1106,6 @@ $('#notifyText').summernote({
 });
 
 $('#notifyText').on('summernote.blur', function(){
-	console.log('test');
 	$('#nText').val($('#notifyText').summernote('code'));
 })
 
@@ -1130,3 +1130,73 @@ $(document).ready(function(){
    });
 })
 
+function deleteNotify(nNo){
+	var result = confirm('글을 삭제하시겠습니까?');
+	if(result) {
+		//yes
+		$('#notifyForm').attr('action',"/deleteNotify?email=" + email + "&nNo=" + nNo);
+		$('#notifyForm').submit();
+	} else { 
+		//no 
+	} 
+}
+
+/* vote */
+$('#voteText').summernote({
+	  height: 300,                 // set editor height
+	  minHeight: null,             // set minimum height of editor
+	  maxHeight: null,             // set maximum height of editor
+	  focus: true,
+	  toolbar: [
+	    // [groupName, [list of button]]
+	    ['style', ['bold', 'italic', 'underline', 'clear']],
+	    ['font', ['strikethrough', 'superscript', 'subscript']],
+	    ['fontsize', ['fontsize']],
+	    ['color', ['color']],
+	    ['para', ['ul', 'ol', 'paragraph']],
+	    ['height', ['height']]
+	  ]
+});
+
+$('#voteText').on('summernote.blur', function(){
+	$('#vText').val($('#voteText').summernote('code'));
+})
+
+$(document).ready(function(){
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	var year = today.getFullYear();
+	var day = today.getDate();
+
+	$('#vDate').val(year + '.' + month + '.' + day);
+	
+	$('#nText').focus(function(){
+		$('#nText').before('<input class="form-control iText" name="iText2" type="text"><input type="file" name="file">');
+		$('.iText').last().focus();
+	})
+	
+	$('.img-size').error(function(){
+	     $(this).attr('src', 'resources/img/237033-file_document__text_word-512.png');
+	});	
+	
+	$('#voteSubmit').click(function(){
+		var param ="";
+		for(var i=0; i<=$('.voteResult').size(); i++){
+			if($('.voteResult').eq(i).is(":checked")){
+				param = param + "&iNo=" + $('.voteResult').eq(i).attr('value');
+			}
+		}
+		$.ajax({
+	        url : "updateIcount?email=" + email + "&vNo=" + vNo,
+	        type : 'post',
+	        data : param,
+	        dataType : 'text',
+	        success : function(data) {
+	          console.log(data);
+	          console.log("success");
+	          location.href="vote?email=" + email + "&vNo=" + vNo;
+	        }, 
+	        error : function() { }
+		});
+	})
+})

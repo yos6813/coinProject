@@ -49,4 +49,29 @@ public class NotifyServiceImpl implements NotifyService {
 		return dao.fileList(nNo);
 	}
 
+	@Override
+	public Notify notifyMod(int nNo) {
+		return dao.notifyMod(nNo);
+	}
+
+	@Override
+	public void notifyModify(Notify notify) {
+		dao.notifyModify(notify);
+	}
+
+	@Override
+	public void deleteNotify(int nNo) {
+		dao.deleteNotify(nNo);
+	}
+
+	@Override
+	public void deleteComments(int nNo) {
+		dao.deleteComments(nNo);
+	}
+
+	@Override
+	public void deletenFile(int nNo) {
+		dao.deletenFile(nNo);
+	}
+
 }

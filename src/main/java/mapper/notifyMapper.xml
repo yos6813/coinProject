@@ -34,6 +34,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="fileList" parameterType="list" resultType="org.zerock.persistence.Notify">
-		select * from notifyTbl n left outer join userTbl u on n.writeUser = u.email left outer join nfiletbl f on f.nNo = n.nNo where n.nNo = #{nNo} group by f.nfNo;
+		select *, count(f.nfNo) fileNumber from notifyTbl n left outer join userTbl u on n.writeUser = u.email left outer join nfiletbl f on f.nNo = n.nNo where n.nNo = #{nNo} group by f.nfNo;
 	</select>
+	
+	<select id="notifyMod" resultType="org.zerock.persistence.Notify">
+		select * from notifyTbl where nNo = #{nNo};
+	</select>
+	
+	<update id="notifyModify">
+		UPDATE notifyTbl SET nTitle = #{nTitle}, nText = #{nText} WHERE nNo = #{nNo}; 
+	</update>
+	
+	<delete id="deleteNotify">
+		delete from notifyTbl where nNo = #{nNo};  
+	</delete>
+	
+	<delete id="deleteComments">
+		delete from commentTbl where nNo = #{nNo};
+	</delete>
+	
+	<delete id="deletenFile">
+		delete from nfiletbl where nNo = #{nNo};
+	</delete>
 </mapper>

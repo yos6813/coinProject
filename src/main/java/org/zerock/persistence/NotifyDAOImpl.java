@@ -49,4 +49,29 @@ public class NotifyDAOImpl implements NotifyDAO {
 	public List<Notify> fileList(int nNo) {
 		return session.selectList(namespace + ".fileList", nNo);
 	}
+
+	@Override
+	public Notify notifyMod(int nNo) {
+		return session.selectOne(namespace + ".notifyMod", nNo);
+	}
+
+	@Override
+	public void notifyModify(Notify notify) {
+		session.update(namespace + ".notifyModify", notify);
+	}
+
+	@Override
+	public void deleteNotify(int nNo) {
+		session.delete(namespace + ".deleteNotify", nNo);
+	}
+
+	@Override
+	public void deleteComments(int nNo) {
+		session.delete(namespace + ".deleteComments", nNo);
+	}
+
+	@Override
+	public void deletenFile(int nNo) {
+		session.delete(namespace + ".deletenFile", nNo);
+	}
 }

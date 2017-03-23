@@ -10,4 +10,9 @@ public interface NotifyDAO {
 	public void insertComments(Notify notify);
 	public List<Notify> commentList(int nNo);
 	public List<Notify> fileList(int nNo);
+	public Notify notifyMod(int nNo);
+	public void notifyModify(Notify notify);
+	public void deleteNotify(int nNo);
+	public void deleteComments(int nNo);
+	public void deletenFile(int nNo);
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.VoteDAO">
+	<insert id="insertVote"  parameterType="org.zerock.persistence.Vote">
+		insert into voteTbl (vTitle, vText, vDate, vUser) values (#{vTitle}, #{vText}, #{vDate}, #{vUser});
+		
+		<selectKey keyProperty="no" resultType="int">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<insert id="insertVoteItems" parameterType="org.zerock.persistence.Vote">
+		insert into voteItemTbl (vNo, icount, iText, fileName) values (#{vNo}, #{icount}, #{iText}, #{fileName});
+	</insert>
+	
+	<select id="listVote" resultType="org.zerock.persistence.Vote">
+		select * from voteTbl v left outer join userTbl u on v.vUser = u.email;
+	</select>
+	
+	<select id="viewVote" resultType="org.zerock.persistence.Vote">
+		select * from voteTbl v left outer join userTbl u on v.vUser = u.email where vNo = #{vNo};
+	</select>
+	
+	<select id="viewVoteItems" resultType="org.zerock.persistence.Vote">
+		select * from voteItemTbl where vNo = #{vNo};
+	</select>
+	
+	<update id="icountUpdate">
+		UPDATE voteItemTbl SET icount = icount + 1 where iNo = #{iNo};
+	</update>
+	
+	<insert id="insertVoteUser" parameterType="org.zerock.persistence.Vote">
+		insert into voteUserTbl (vNo, iNo, email) values (#{vNo}, #{iNo}, #{email});
+	</insert>
+	
+	<select id="voteUser" resultType="org.zerock.persistence.Vote">
+		select * from voteUserTbl where email = #{email} and vNo = #{vNo};
+	</select>
+</mapper>

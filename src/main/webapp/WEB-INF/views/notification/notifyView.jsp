@@ -19,6 +19,15 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="ibox">
                 <div class="ibox-content">
+                	<c:set var="username" value="${notify.writeUser}"/>
+                	<c:set var="email" value="${param.email}"/>
+                	<c:if test="${username eq email}">
+	                	<div>
+	                		<a class="btn btn-white" href="notifyMod?email=${user.email}&nNo=${notify.nNo}">수정</a>
+	                		<a class="btn btn-white" onclick="deleteNotify(${notify.nNo})">삭제</a>
+	                		<form method="post" id="notifyForm"><input type="hidden" name="nNo" value="${notify.nNo}"></form>
+	                	</div>
+                	</c:if>
                 	<div class="pull-right">
                         <h5 class="text-muted">${notify.username}</h5>
                     </div>
@@ -32,26 +41,26 @@
                     	${notify.nText}
                     </p>
                     <div class="mail-attachment">
-                        <p>
-                            <span><i class="fa fa-paperclip"></i> ${list2.size()} attachments - </span>
-                        </p>
                         <div class="attachment">
                         	<c:forEach items="${list2}" var="notify">
-	                            <div class="file-box">
-	                                <div class="file">
-	                                    <a href="#">
-	                                        <span class="corner"></span>
-	                                        <div class="icon">
-                                            	<i class="fa fa-file"></i>
-                                        	</div>
-	                                        <div class="file-name">
-	                                            ${notify.nFileName}
-	                                            <br/>
-	                                            <small>${notify.nDate}</small>
-	                                        </div>
-	                                    </a>
-	                                </div>
-	                            </div>
+                        		<c:set var="num" value="${notify.fileNumber}"/>
+	                        	<c:if test="${num > 0}">
+		                            <div class="file-box">
+		                                <div class="file">
+		                                    <a href="#">
+		                                        <span class="corner"></span>
+		                                        <div class="icon">
+	                                            	<i class="fa fa-file"></i>
+	                                        	</div>
+		                                        <div class="file-name">
+		                                            ${notify.nFileName}
+		                                            <br/>
+		                                            <small>${notify.nDate}</small>
+		                                        </div>
+		                                    </a>
+		                                </div>
+		                            </div>
+	                        	</c:if>
                         	</c:forEach>
                             <div class="clearfix"></div>
                         </div>

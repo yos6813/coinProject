@@ -256,7 +256,7 @@ h5 {
 }
 body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level,
 .mini-navbar .nav li:focus > .nav-second-level {
-  display: block;
+  display: bl;
   border-radius: 0 2px 2px 0;
   min-width: 140px;
   height: auto;
@@ -8427,7 +8427,7 @@ body.md-skin {
 	border: 1px solid #dddddd;
 }
 
-#searchProject{
+#searchProject, #nText{
 	border-right:0px;
 	border-top:0px;
 	border-left: 0px;
@@ -8481,7 +8481,7 @@ body.md-skin {
 	border: none !important;
 }
 
-.projectTbl{
+.projectTbl, .voteItemsTbl{
 	margin-bottom: 0 !important;
 }
 
@@ -8561,4 +8561,9 @@ body.md-skin {
 	position: relative;
 	border-radius: 0.25em;
 	padding: 1em;
+}
+
+.img-size{
+	width:100px;
+	height:100px;
 }

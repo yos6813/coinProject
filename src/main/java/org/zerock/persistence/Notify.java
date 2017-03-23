@@ -36,6 +36,14 @@ public class Notify {
 	int countComment;
 	int fileCount;
 	
+	int fileNumber;
+	
+	public int getFileNumber() {
+		return fileNumber;
+	}
+	public void setFileNumber(int fileNumber) {
+		this.fileNumber = fileNumber;
+	}
 	public int getFileCount() {
 		return fileCount;
 	}
