@@ -9,7 +9,7 @@
    			<b>고객사 등록</b>
 	 	 </h1>
          <ol class="breadcrumb">
-		    <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i>Home</a></li>
+		    <li><a href="home?email=${user.email}"><i class="fa fa-home"></i>Home</a></li>
 		    <li><a href="/clientList?email=${user.email}"><i class="fa fa-group"></i>고객 관리</a></li>
 		    <li class="active">고객사 등록</li>
 	     </ol>

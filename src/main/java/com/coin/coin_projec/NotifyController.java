@@ -150,4 +150,22 @@ public class NotifyController {
 			
 		return "redirect:notifyList?email=" + email;
 	}
+	
+	@RequestMapping(value = "/modifyComments", method=RequestMethod.POST)
+	public String modifyComments(@RequestParam("email") String email, @RequestParam("coNo") int coNo, @RequestParam("nNo") int nNo,
+							   Locale locale, Model model, User user, Notify notify, HttpSession session) {
+			model.addAttribute(service.read(email));
+			nService.commentModify(notify);
+			
+		return "redirect:notifyView?email=" + email + "&nNo=" + nNo;
+	}
+	
+	@RequestMapping(value = "/deleteComments", method=RequestMethod.POST)
+	public String deleteComments(@RequestParam("email") String email, @RequestParam("coNo") int coNo, @RequestParam("nNo") int nNo,
+							   Locale locale, Model model, User user, Notify notify, HttpSession session) {
+			model.addAttribute(service.read(email));
+			nService.deleteComment(coNo);
+			
+		return "redirect:notifyView?email=" + email + "&nNo=" + nNo;
+	}
 }

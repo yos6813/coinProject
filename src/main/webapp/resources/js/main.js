@@ -304,7 +304,7 @@ $(document).ready(function(){
 	for(var i=0; i<$('.activeC').size(); i++){
 		var activeDay = $('.activeC').eq(i).children('td').eq(1).text().split('-');
 		
-		var aday1 = activeDay[1].split('/');
+		var aday1 = activeDay[1].split('.');
 		var active = new Date(aday1[0], aday1[1]-1, aday1[2]);
 		var today = new Date();
 		var aMs = today.getTime() - active.getTime() ;
@@ -413,7 +413,7 @@ $(document).ready(function(){
 	
 	var projectDay = $('#projectPday').text().split('-');
 	if($('#projectPday').text() != '' && $('#projectPday').text() != undefined){
-		var pday1 = projectDay[1].split('/');
+		var pday1 = projectDay[1].split('.');
 		var project = new Date(pday1[0], pday1[1]-1, pday1[2]);
 		var today = new Date();
 		var btMs = today.getTime() - project.getTime() ;
@@ -427,7 +427,7 @@ $(document).ready(function(){
 			$('#projectDday').addClass('text-danger');
 		}
 		
-		var pday2 = projectDay[0].split('/');
+		var pday2 = projectDay[0].split('.');
 		var start = new Date(pday2[0], pday2[1]-1, pday2[2]);
 		var btMs2 = today.getTime() - start.getTime();
 		var btDay2 = Math.floor(btMs2 / (1000*60*60*24));
@@ -480,7 +480,7 @@ $(document).ready(function(){
 			$('.tDdayText').eq(i).addClass('text-danger');
 		}
 		
-		var pday2 = tDay[0].split('/');
+		var pday2 = tDay[0].split('.');
 		var start1 = new Date(pday2[0], pday2[1]-1, pday2[2]);
 		var btMs2 = today.getTime() - start1.getTime();
 		var btDay2 = Math.floor(btMs2 / (1000*60*60*24));
@@ -1128,7 +1128,27 @@ $(document).ready(function(){
    $('img').error(function(){
      $(this).attr('src', '../img/photo.png');
    });
+   
+   $('.commentInput').hide();
+   
+   $('.modifyBtn').click(function(){
+	   $(this).hide();
+	   $(this).siblings('.deleteBtn').hide();
+	   $('.commentText').eq(this).hide();
+	   $('.commentInput').eq(this).show();
+   })
 })
+
+function deleteComments(nNo){
+	var result = confirm('댓글을 삭제하시겠습니까?');
+	if(result) {
+		//yes
+		$('#nCommentForm').attr('action',"/deleteComments?email=" + email + "&nNo=" + nNo);
+		$('#nCommentForm').submit();
+	} else { 
+		//no 
+	} 
+}
 
 function deleteNotify(nNo){
 	var result = confirm('글을 삭제하시겠습니까?');
@@ -1171,22 +1191,15 @@ $(document).ready(function(){
 	$('#vDate').val(year + '.' + month + '.' + day);
 	
 	$('#nText').focus(function(){
-		$('#nText').before('<input class="form-control iText" name="iText2" type="text"><input type="file" name="file">');
+		$('#nText').before('<input class="form-control iText" name="iText2" type="text">');
 		$('.iText').last().focus();
 		$('.body').css('height', $('.body').height() + 100);
 	})
 	
-	$('.img-size').error(function(){
-	     $(this).attr('src', 'resources/img/237033-file_document__text_word-512.png');
-	});	
-	
+	$('#voteSubmit').attr('disabled', true);
 	$('#voteSubmit').click(function(){
-		var param ="";
-		for(var i=0; i<=$('.voteResult').size(); i++){
-			if($('.voteResult').eq(i).is(":checked")){
-				param = param + "&iNo=" + $('.voteResult').eq(i).attr('value');
-			}
-		}
+		var param ="&iNo=" + $('.backgroundColor').attr('value');
+		
 		$.ajax({
 	        url : "updateIcount?email=" + email + "&vNo=" + vNo,
 	        type : 'post',
@@ -1226,4 +1239,14 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+	
+	for(var i=1; i<=$('.index').size(); i++){
+		$('.index').eq(i-1).text(i);
+	}
+	
+	$('.borderBox123').click(function(){
+		$('.borderBox123').removeClass('backgroundColor');
+		$(this).addClass('backgroundColor');
+		$('#voteSubmit').attr('disabled', false);
+	})
 })

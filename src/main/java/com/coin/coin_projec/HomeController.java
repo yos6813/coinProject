@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.persistence.Notify;
 import org.zerock.persistence.Project;
 import org.zerock.persistence.User;
+import org.zerock.persistence.Vote;
+import org.zerock.service.NotifyService;
 import org.zerock.service.ProjectService;
 import org.zerock.service.UserService;
+import org.zerock.service.VoteService;
 
 /**
  * Handles requests for the application home page.
@@ -30,17 +34,24 @@ public class HomeController {
 	@Inject
 	private UserService service;
 	
+	@Inject
+	private NotifyService nService;
+	
+	@Inject
+	private VoteService vService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home", method=RequestMethod.GET)
-	public String home(@RequestParam("email") String email, Locale locale, Model model, User user) {
+	public String home(@RequestParam("email") String email, Locale locale, Model model, User user, Notify notify, Vote vote) {
 		model.addAttribute(service.read(email));
-		model.addAttribute("list", service.listAll(email));
+		model.addAttribute("list", nService.homeList(notify));
+		model.addAttribute("list2", vService.homeList(vote));
 		
-		return "notifycation/notifyList";
+		return "/home";
 	}
 	
 	@RequestMapping(value="/exchange", method=RequestMethod.POST)

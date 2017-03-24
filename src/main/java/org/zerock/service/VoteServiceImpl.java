@@ -54,4 +54,19 @@ public class VoteServiceImpl implements VoteService{
 		return dao.voteUser(vote);
 	}
 
+	@Override
+	public List<Vote> homeList(Vote vote) {
+		return dao.homeList(vote);
+	}
+
+	@Override
+	public void icountUpdate2(int iNo) {
+		dao.icountUpdate2(iNo);
+	}
+
+	@Override
+	public void deleteVoteUser(int vuNo) {
+		dao.deleteVoteUser(vuNo);
+	}
+
 }

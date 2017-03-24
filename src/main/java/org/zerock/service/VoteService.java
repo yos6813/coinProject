@@ -13,4 +13,7 @@ public interface VoteService {
 	public void icountUpdate(int iNo);
 	public void insertVoteUser(Vote vote);
 	public List<Vote> voteUser(Vote vote);
+	public List<Vote> homeList(Vote vote);
+	public void icountUpdate2(int iNo);
+	public void deleteVoteUser(int vuNo);
 }

@@ -74,4 +74,19 @@ public class NotifyDAOImpl implements NotifyDAO {
 	public void deletenFile(int nNo) {
 		session.delete(namespace + ".deletenFile", nNo);
 	}
+
+	@Override
+	public List<Notify> homeList(Notify notify) {
+		return session.selectList(namespace + ".homeList", notify);
+	}
+
+	@Override
+	public void commentModify(Notify notify) {
+		session.update(namespace + ".commentModify", notify);
+	}
+
+	@Override
+	public void deleteComment(int coNo) {
+		session.delete(namespace + ".deleteComment", coNo);
+	}
 }

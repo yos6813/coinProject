@@ -7,7 +7,7 @@
 		<b>Activity 생성</b>
   	</h1>
     <ol class="breadcrumb">
-	    <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
+	    <li><a href="home?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 	    <li><a href="/task">업무관리</a></li>
 	    <li class="active">Activity 생성</li>
   	</ol>

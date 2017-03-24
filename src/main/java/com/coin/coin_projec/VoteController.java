@@ -56,19 +56,11 @@ public class VoteController {
 		model.addAttribute(service.read(email));
 		vService.insertVote(vote);
 		
-		String uploadPath = session.getServletContext().getRealPath("/resources/img");
 		List<String> vote1 = vote.getiText2();
-		List<MultipartFile> file = vote.getFile();
 		vote.setvNo(vote.getNo());
 		vote.setIcount(0);
 		
 		for(int i=0; i<vote1.size(); i++){
-			if(!file.get(i).isEmpty()){
-				FileCopyUtils.copy(file.get(i).getInputStream(), new FileOutputStream(uploadPath + "/" + file.get(i).getOriginalFilename()));
-				vote.setFileName(file.get(i).getOriginalFilename());
-			} else {
-				vote.setFileName("");
-			}
 			vote.setiText(vote1.get(i));
 			vService.insertVoteItems(vote);
 		}
@@ -128,5 +120,16 @@ public class VoteController {
 		} else {
 			return "redirect:/voteView?email=" + email + "&vNo=" + vNo;
 		}
+	}
+	
+	@RequestMapping(value = "/modVoteUser")
+	public String modVoteUser(@RequestParam("email") String email, @RequestParam("vNo") int vNo,
+							  @RequestParam("iNo") int iNo, @RequestParam("vuNo") int vuNo,
+						   	  Locale locale, Model model, User user, Vote vote) {
+		model.addAttribute(service.read(email));
+		vService.icountUpdate2(iNo);
+		vService.deleteVoteUser(vuNo);
+		
+		return "redirect:voteList?email=" + email;
 	}
 }

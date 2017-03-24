@@ -7,7 +7,7 @@
 			<b>수정</b>
 	    </h1>
 	    <ol class="breadcrumb">
-	      <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
+	      <li><a href="home?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 	      <li><a href="/viewTask?email=${user.email}&bNo=${board.bNo}">업무관리</a></li>
 	      <li class="active">수정</li>
 	    </ol>

@@ -49,6 +49,7 @@
                             F
                         </div>
                     </li>
+                    <li><a href="/home?email=${user.email}"><i class="fa fa-home"></i><span>HOME</span></a></li>
                     <li><a href="/notifyList?email=${user.email}"><i class="fa fa-bell-o"></i><span>공지사항</span></a></li>
                     <li><a href="/voteList?email=${user.email}"><i class="fa fa-bar-chart-o"></i><span>투표</span></a></li>
                     <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>업무관리</span></a></li>

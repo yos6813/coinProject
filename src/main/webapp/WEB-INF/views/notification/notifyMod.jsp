@@ -9,7 +9,7 @@
   			<b>공지사항 수정</b>
  	 	</h1>
         <ol class="breadcrumb">
-	    <li><a href="/notifyList?email=${user.email}"><i class="fa fa-bell-o"></i>List</a></li>
+	    <li><a href="home?email=${user.email}"><i class="fa fa-bell-o"></i>List</a></li>
 	    <li class="active">공지사항 수정</li>
      </ol>
     </div>

@@ -55,4 +55,19 @@ public class VoteDAOImpl implements VoteDAO{
 		return session.selectList(namespace + ".voteUser", vote);
 	}
 
+	@Override
+	public List<Vote> homeList(Vote vote) {
+		return session.selectList(namespace + ".homeList", vote);
+	}
+
+	@Override
+	public void icountUpdate2(int iNo) {
+		session.update(namespace + ".icountUpdate2", iNo);
+	}
+
+	@Override
+	public void deleteVoteUser(int vuNo) {
+		session.delete(namespace + ".deleteVoteUser", vuNo);
+	}
+
 }

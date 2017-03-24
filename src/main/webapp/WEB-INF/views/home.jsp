@@ -3,80 +3,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="include/header.jsp" %>
-<!-- Content Wrapper. Contains page content -->
- <div class="row wrapper border-bottom white-bg page-heading">
-    <!-- Content Header (Page header) -->
-      <h1>
-        Board Management
-        <small>Preview</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h1>
+  			<b>HOME</b>
+ 	 </h1>
     </div>
-    <div class="wrapper-content">
-	<div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box">
-					<div class="box-header text-center with-border">
-						<button id="coinbtn" class="btn btn-white" data-toggle="modal" data-target="#myModal">코인 교환</button>
-					</div>
+</div>
+ <div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="ibox">
+				<div class="ibox-title">
+					<strong class="leftFloat">공지사항</strong>
+					<p class="text-right text-primary"><a class="text-info" href="notifyList?email=${user.email}">리스트 보기</a></p>
+				</div>
+				<div class="ibox-content">
+					<table class="homeTable">
+						<c:forEach items="${list}" var="notify">
+							<tr>
+								<td>1</td>
+								<td class="text-center"><a class="text-primary" href="notifyView?email=${user.email}&nNo=${notify.nNo}">${notify.nTitle}</a></td>
+								<td class="text-right" style="padding-bottom:5px">
+									<small>${notify.nDate}</small><br>
+									<small>${notify.username}</small>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	  <form role="form" method="post">
-      	<input type="hidden" name="email" id="userEmail" />
-      </form>
-	  <form role="form" method="post" action="/exchange?email=${user.email}">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h5 class="modal-title" id="myModalLabel">코인 교환</h5>
-	      </div>
-	      <div class="modal-body">
-				<div>
-					내 코인: <label id="coin4">${user.coin}</label>
+		<div class="col-md-6">
+			<div class="ibox">
+				<div class="ibox-title">
+					<strong class="leftFloat">설문조사</strong>
+					<p class="text-right text-primary"><a class="text-info" href="voteList?email=${user.email}">리스트 보기</a></p>
 				</div>
-		      	<table class="text-center table table-bordered">
-		      		<tr>
-		      			<th></th>
-		      			<th></th>
-		      			<th>이름</th>
-		      			<th>slackID</th>
-		      			<th>보유 코인</th>
-		      		</tr>
-	      			<c:forEach items="${list}" var="user">
-		      			<tr>
-		      				<td>
-			      				<label>
-			                  		<input type="checkbox" value="${user.email}">
-			                  		<input type="text" style="display: none;" name="email2" value="'${user.email}'" />
-		                		</label>
-		                	</td>
-		      				<td><img src="${user.photoURL}" class="img-circle"></td>
-							<td class="username">${user.username}</td>
-							<td class="slackID">${user.slackID}</td>
-							<td class="coin">${user.coin}</td>
-		      			</tr>
-	      			</c:forEach>
-		      	</table>
-				선물 할 코인: <input type="text" id="coin" name="coin" />&nbsp;&nbsp;&nbsp;
-				남는 코인: <input id="coin1" name="coin2" />
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	        <button type="submit" id="exchange2" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">확인</button>
-	      </div>
-	    </div>
-	    </form>
-	  </div>
+				<div class="ibox-content">
+					<table class="homeTable">
+						<c:forEach items="${list2}" var="vote">
+							<tr>
+								<td>1</td>
+								<td class="text-center"><a class="text-primary" href="vote?email=${user.email}&vNo=${vote.vNo}">${vote.vTitle}</a></td>
+								<td class="text-right" style="padding-bottom:5px">
+									<small>${vote.vDate}</small><br>
+									<small>${vote.username}</small>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="ibox">
+				<div class="ibox-content">
+					
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <%@include file="include/footer.jsp" %>

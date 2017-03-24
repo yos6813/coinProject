@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Vote {
 	int vNo, iNo, vuNo, icount, no;
-	String vTitle, vText, vDate, vUser, email, iText, fileName;
+	String vTitle, vText, vDate, vUser, email, iText;
 	List<String> iText2;
 	
 	String username;
@@ -21,20 +21,7 @@ public class Vote {
 	String phone;
 	String coin;
 	String grade;
-	List<MultipartFile> file;
 	
-	public List<MultipartFile> getFile() {
-		return file;
-	}
-	public void setFile(List<MultipartFile> file) {
-		this.file = file;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
 	public String getUsername() {
 		return username;
 	}

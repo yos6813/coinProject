@@ -9,7 +9,7 @@
    			<b>상세보기</b>
 	 	 </h1>
          <ol class="breadcrumb">
-		    <li><a href="notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
+		    <li><a href="home?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 		    <li><a href="voteList?email=${user.email}"><i class="fa fa-bar-chart-o"></i> Vote List</a></li>
 		    <li class="active">상세보기</li>
 	     </ol>
@@ -50,7 +50,11 @@
 				    <hr>
 				    <div class="row">
 				    	<div class="text-right">
-				    		<a class="btn btn-success" id="voteSubmit">제출</a>
+				    		<a class="btn btn-success">설문 수정</a>
+<!-- 				    		<form> -->
+<%-- 				    			<input type="hidden" value="${vote.iNo}"> --%>
+<%-- 				    			<input type="hidden" value="${vote.vuNo}"> --%>
+<!-- 				    		</form> -->
 				    	</div>
 				    </div>
                 </div>

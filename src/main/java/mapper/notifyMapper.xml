@@ -21,6 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *, count(c.nNo) as countComment from notifyTbl n left outer join userTbl u on n.writeUser = u.email left outer join commenttbl c on c.nNo = n.nNo group by n.nNo;
 	</select>
 	
+	<select id="homeList" parameterType="list" resultType="org.zerock.persistence.Notify">
+		select *, count(c.nNo) as countComment from notifyTbl n left outer join userTbl u on n.writeUser = u.email left outer join commenttbl c on c.nNo = n.nNo group by n.nNo
+		limit 0, 5;
+	</select>
+	
 	<select id="notifyView" resultType="org.zerock.persistence.Notify">
 		select * from notifyTbl n left outer join userTbl u on n.writeUser = u.email where nNo = #{nNo};
 	</select>
@@ -55,5 +60,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deletenFile">
 		delete from nfiletbl where nNo = #{nNo};
+	</delete>
+	
+	<update id="commentModify">
+		UPDATE commentTbl SET coText = #{coText} WHERE coNo = #{coNo}; 
+	</update>
+	
+	<delete id="deleteComment">
+		delete from commentTbl where coNo = #{coNo};
 	</delete>
 </mapper>

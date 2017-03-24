@@ -17,4 +17,7 @@ public interface NotifyService {
 	public void deleteNotify(int nNo);
 	public void deleteComments(int nNo);
 	public void deletenFile(int nNo);
+	public List<Notify> homeList(Notify notify);
+	public void commentModify (Notify notify);
+	public void deleteComment(int coNo);
 }

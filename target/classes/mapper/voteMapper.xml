@@ -12,11 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertVoteItems" parameterType="org.zerock.persistence.Vote">
-		insert into voteItemTbl (vNo, icount, iText, fileName) values (#{vNo}, #{icount}, #{iText}, #{fileName});
+		insert into voteItemTbl (vNo, icount, iText) values (#{vNo}, #{icount}, #{iText});
 	</insert>
 	
 	<select id="listVote" resultType="org.zerock.persistence.Vote">
 		select * from voteTbl v left outer join userTbl u on v.vUser = u.email;
+	</select>
+	
+	<select id="homeList" resultType="org.zerock.persistence.Vote">
+		select * from voteTbl v left outer join userTbl u on v.vUser = u.email limit 0, 5;
 	</select>
 	
 	<select id="viewVote" resultType="org.zerock.persistence.Vote">
@@ -30,6 +34,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="icountUpdate">
 		UPDATE voteItemTbl SET icount = icount + 1 where iNo = #{iNo};
 	</update>
+	
+	<update id="icountUpdate2">
+		UPDATE voteItemTbl SET icount = icount - 1 where iNo = #{iNo};
+	</update>
+	
+	<delete id="deleteVoteUser">
+		delete from voteUserTbl where vNo = #{vNo} and vuNo = #{email};
+	</delete>
 	
 	<insert id="insertVoteUser" parameterType="org.zerock.persistence.Vote">
 		insert into voteUserTbl (vNo, iNo, email) values (#{vNo}, #{iNo}, #{email});

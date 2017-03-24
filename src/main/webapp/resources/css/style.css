@@ -8571,3 +8571,29 @@ body.md-skin {
 .hidden{
 	display: none;
 }
+
+.homeTable{
+/* 	border: 0 !important; */
+	width: 100%;
+}
+
+.homeTable tr{
+	border-top: 0;
+	border-right: 0;
+	border-left: 0;
+	border-bottom: 1px;
+}
+
+.borderBox123{
+	border: 1px solid #c0c0c0;
+}
+
+.text-gray{
+	color: #c0c0c0;
+}
+
+.backgroundColor{
+	background-color: #27ad90;
+	color: #fff;
+	border: 1px solid #27ad90;
+}

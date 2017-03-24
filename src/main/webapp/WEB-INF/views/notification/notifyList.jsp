@@ -9,6 +9,7 @@
   			<b>공지사항</b>
  	 	</h1>
         <ol class="breadcrumb">
+        <li><a href="home?email=${user.email}"><i class="fa fa-bell-o"></i>List</a></li>
 	    <li class="active">공지사항</li>
      </ol>
     </div>

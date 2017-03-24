@@ -74,4 +74,19 @@ public class NotifyServiceImpl implements NotifyService {
 		dao.deletenFile(nNo);
 	}
 
+	@Override
+	public List<Notify> homeList(Notify notify) {
+		return dao.homeList(notify);
+	}
+
+	@Override
+	public void commentModify(Notify notify) {
+		dao.commentModify(notify);
+	}
+
+	@Override
+	public void deleteComment(int coNo) {
+		dao.deleteComment(coNo);
+	}
+
 }

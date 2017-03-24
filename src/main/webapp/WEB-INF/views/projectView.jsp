@@ -10,7 +10,7 @@
    			<b>View Project</b>
 	 	 </h1>
          <ol class="breadcrumb">
-		    <li><a href="/notifyList?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
+		    <li><a href="/home?email=${user.email}"><i class="fa fa-home"></i> Home</a></li>
 		    <li class="active">View Project</li>
 	     </ol>
      </div>
