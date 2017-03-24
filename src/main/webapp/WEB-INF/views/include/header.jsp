@@ -55,7 +55,7 @@
 		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-credit-card"></i> <span>법인카드사용내역관리</span></a></li>
 		            <li>
                         <a><i class="fa fa-table"></i> <span>관리페이지</span></a>
-                        <ul class="nav nav-third-level">
+                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="/admit?email=${user.email}">프로젝트</a>
                             </li>
@@ -71,7 +71,7 @@
 
             </div>
         </nav>
-        <div id="page-wrapper" class="gray-bg dashbard-1" style="height:1500px">
+        <div id="page-wrapper" class="gray-bg dashbard-1 body">
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;">
         <div class="navbar-header">

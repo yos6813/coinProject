@@ -1173,6 +1173,7 @@ $(document).ready(function(){
 	$('#nText').focus(function(){
 		$('#nText').before('<input class="form-control iText" name="iText2" type="text"><input type="file" name="file">');
 		$('.iText').last().focus();
+		$('.body').css('height', $('.body').height() + 100);
 	})
 	
 	$('.img-size').error(function(){
@@ -1199,4 +1200,30 @@ $(document).ready(function(){
 	        error : function() { }
 		});
 	})
+	
+	
+	var result = [];
+	for(var i=0; i<$('.resultBox').size(); i++){
+		var text = $('.resultText').eq(i).text();
+		var count = parseInt($('.resultCount').eq(i).text());
+		
+		result.push({
+			text: text,
+			count: count
+		})
+	}
+	
+	$(function(){
+	    $("#resultChart").dxChart({
+	        dataSource: result, 
+	        palette: "Ocean",
+	        legend: { visible: false },
+	        rotated: true,
+	        series: {
+	            argumentField: "text",
+	            valueField: "count",
+	            type: "bar"
+	        }
+	    });
+	});
 })

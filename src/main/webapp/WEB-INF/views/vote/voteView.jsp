@@ -33,7 +33,8 @@
                     	${vote.vText}
                     </p>
                      <hr>
-				     <div class="row">
+                     <h4>투표 항목:</h4>
+				     <div class="row text-center">
 			        	<c:forEach items="${list}" var="vote">
 					        <div class="col-md-3">
 				        		<a href="resources/img/${vote.fileName}"><img src="resources/img/${vote.fileName}" alt="no-image" onerror="this.src='resources/img/237033-file_document__text_word-512.png'" class="img-size"></a><br>

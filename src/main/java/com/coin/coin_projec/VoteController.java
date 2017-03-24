@@ -83,7 +83,13 @@ public class VoteController {
 		model.addAttribute(vService.viewVote(vNo));
 		model.addAttribute("list", vService.viewVoteItems(vNo));
 		
-		return "vote/voteView";
+		List<Vote> redirect = vService.voteUser(vote);
+		
+		if(!redirect.isEmpty()){
+			return "vote/voteResult";
+		} else {
+			return "vote/voteView";
+		}
 	}
 	
 	@RequestMapping(value = "/updateIcount")
