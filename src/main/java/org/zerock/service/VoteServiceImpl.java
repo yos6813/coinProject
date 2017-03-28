@@ -40,8 +40,8 @@ public class VoteServiceImpl implements VoteService{
 	}
 
 	@Override
-	public void icountUpdate(int iNo) {
-		dao.icountUpdate(iNo);
+	public void icountUpdate(Vote vote) {
+		dao.icountUpdate(vote);
 	}
 
 	@Override
@@ -60,13 +60,33 @@ public class VoteServiceImpl implements VoteService{
 	}
 
 	@Override
-	public void icountUpdate2(int iNo) {
-		dao.icountUpdate2(iNo);
+	public void icountUpdate2(Vote vote) {
+		dao.icountUpdate2(vote);
 	}
 
 	@Override
 	public void deleteVoteUser(int vuNo) {
 		dao.deleteVoteUser(vuNo);
+	}
+
+	@Override
+	public List<Vote> commentList(Vote vote) {
+		return dao.commentList(vote);
+	}
+
+	@Override
+	public void commentWrite(Vote vote) {
+		dao.commentWrite(vote);
+	}
+
+	@Override
+	public void deleteComment(int coNo) {
+		dao.deleteComment(coNo);
+	}
+
+	@Override
+	public void updateComment(Vote vote) {
+		dao.updateComment(vote);
 	}
 
 }

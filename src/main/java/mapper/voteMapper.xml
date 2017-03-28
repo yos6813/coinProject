@@ -16,11 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="listVote" resultType="org.zerock.persistence.Vote">
-		select * from voteTbl v left outer join userTbl u on v.vUser = u.email;
+		select v.*, u.*, count(vc.vNo) as countComment, (select count(*) from voteUserTbl where vNo = v.vNo) as countJoinUser from voteTbl v
+													   left outer join userTbl u on v.vUser = u.email
+													   left outer join voteCommentTbl vc on v.vNo = vc.vNo
+                                                       group by v.vNo having workCondition = '재직';
 	</select>
 	
 	<select id="homeList" resultType="org.zerock.persistence.Vote">
-		select * from voteTbl v left outer join userTbl u on v.vUser = u.email limit 0, 5;
+		select * from voteTbl v left outer join userTbl u on v.vUser = u.email order by vNo desc limit 0, 5;
 	</select>
 	
 	<select id="viewVote" resultType="org.zerock.persistence.Vote">
@@ -28,19 +31,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="viewVoteItems" resultType="org.zerock.persistence.Vote">
-		select * from voteItemTbl where vNo = #{vNo};
+		select vi.iNo, vi.vNo, iText, icount, truncate((icount * 100 / t.total),0) as 'percentage', (select count(*) + 1 from voteitemtbl where voteitemtbl.icount > vi.icount) as rank,
+	   	voteusertbl.email from voteitemtbl vi cross join (select sum(icount) as total from voteitemtbl) t
+	   	left outer join voteusertbl on vi.vNo = voteusertbl.vNo
+		where vi.vNo = #{vNo};
 	</select>
 	
 	<update id="icountUpdate">
-		UPDATE voteItemTbl SET icount = icount + 1 where iNo = #{iNo};
+		UPDATE voteItemTbl SET icount = icount + 1 where iNo = #{iNo} and vNo = #{vNo};
 	</update>
 	
 	<update id="icountUpdate2">
-		UPDATE voteItemTbl SET icount = icount - 1 where iNo = #{iNo};
+		UPDATE voteItemTbl SET icount = icount - 1 where iNo = #{iNo} and iNo = #{iNo};
 	</update>
 	
 	<delete id="deleteVoteUser">
-		delete from voteUserTbl where vNo = #{vNo} and vuNo = #{email};
+		delete from voteUserTbl where vuNo = #{vuNo};
 	</delete>
 	
 	<insert id="insertVoteUser" parameterType="org.zerock.persistence.Vote">
@@ -50,4 +56,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="voteUser" resultType="org.zerock.persistence.Vote">
 		select * from voteUserTbl where email = #{email} and vNo = #{vNo};
 	</select>
+	
+	<select id="commentList" resultType="org.zerock.persistence.Vote">
+		select * from voteCommentTbl c left outer join userTbl u on c.coUser = u.email where vNo = #{vNo};
+	</select>
+	
+	<insert id="commentWrite">
+		insert into voteCommentTbl(vNo, coText, coUser, coDate) values (#{vNo}, #{coText}, #{email}, #{coDate});
+	</insert>
+	
+	<update id="updateComment">
+		UPDATE voteCommentTbl SET coText = #{coText} WHERE coNo = #{coNo}; 
+	</update>
+	
+	<delete id="deleteComment">
+		delete from voteCommentTbl where coNo = #{coNo};
+	</delete>
 </mapper>

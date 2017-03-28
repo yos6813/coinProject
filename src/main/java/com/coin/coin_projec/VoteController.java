@@ -40,6 +40,8 @@ public class VoteController {
 	public String voteList(@RequestParam("email") String email, Locale locale, Model model, User user, Vote vote) {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list", vService.listVote(vote));
+		model.addAttribute("list2", service.userListAll(user));
+		
 		return "vote/voteList";
 	}
 	
@@ -88,10 +90,10 @@ public class VoteController {
 	@ResponseBody
 	public String updateIcount(@RequestParam("email") String email, @RequestParam("iNo") List<Integer> iNo, @RequestParam("vNo") int vNo,
 						   Locale locale, Model model, User user, Vote vote) {
-		
 		for(int i=0; i<iNo.size(); i++){
 			model.addAttribute(service.read(email));
-			vService.icountUpdate(iNo.get(i));
+			vote.setiNo(iNo.get(i));
+			vService.icountUpdate(vote);
 			vService.insertVoteUser(vote);
 		}
 		
@@ -104,6 +106,8 @@ public class VoteController {
 		model.addAttribute(service.read(email));
 		model.addAttribute(vService.viewVote(vNo));
 		model.addAttribute("list", vService.viewVoteItems(vNo));
+		model.addAttribute("list2", vService.voteUser(vote));
+		model.addAttribute("list3", vService.commentList(vote));
 		
 		return "vote/voteResult";
 	}
@@ -126,10 +130,37 @@ public class VoteController {
 	public String modVoteUser(@RequestParam("email") String email, @RequestParam("vNo") int vNo,
 							  @RequestParam("iNo") int iNo, @RequestParam("vuNo") int vuNo,
 						   	  Locale locale, Model model, User user, Vote vote) {
-		model.addAttribute(service.read(email));
-		vService.icountUpdate2(iNo);
+		vService.icountUpdate2(vote);
 		vService.deleteVoteUser(vuNo);
 		
-		return "redirect:voteList?email=" + email;
+		return "redirect:voteView?email=" + email + "&vNo=" + vNo;
 	}
+	
+	@RequestMapping(value = "/commentWrite", method=RequestMethod.POST)
+	public String commentWrite(@RequestParam("email") String email, @RequestParam("vNo") int vNo,
+						   	  Locale locale, Model model, User user, Vote vote) {
+		model.addAttribute(service.read(email));
+		vService.commentWrite(vote);
+		
+		return "redirect:voteView?email=" + email + "&vNo=" + vNo;
+	}
+	
+	@RequestMapping(value = "/deleteVoteComments", method=RequestMethod.POST)
+	public String deleteVoteComments(@RequestParam("email") String email, @RequestParam("vNo") int vNo, @RequestParam("coNo") int coNo,
+						   	  Locale locale, Model model, User user, Vote vote) {
+		model.addAttribute(service.read(email));
+		vService.deleteComment(coNo);
+		
+		return "redirect:voteResult?email=" + email + "&vNo=" + vNo;
+	}
+	
+	@RequestMapping(value = "/modifyVoteComments", method=RequestMethod.POST)
+	public String modifyVoteComments(@RequestParam("email") String email, @RequestParam("vNo") int vNo, @RequestParam("coNo") int coNo,
+						   	  Locale locale, Model model, User user, Vote vote) {
+		model.addAttribute(service.read(email));
+		vService.updateComment(vote);
+		
+		return "redirect:voteResult?email=" + email + "&vNo=" + vNo;
+	}
+	
 }

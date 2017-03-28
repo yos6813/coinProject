@@ -21,7 +21,65 @@ public class Vote {
 	String phone;
 	String coin;
 	String grade;
+	int percentage;
+	int rank;
+
+	int coNo;
+	String coText;
+	String coUser;
+	String coDate;
 	
+	int countJoinUser;
+	int countComment;
+	
+	public int getCountJoinUser() {
+		return countJoinUser;
+	}
+	public void setCountJoinUser(int countJoinUser) {
+		this.countJoinUser = countJoinUser;
+	}
+	public int getCountComment() {
+		return countComment;
+	}
+	public void setCountComment(int countComment) {
+		this.countComment = countComment;
+	}
+	public int getCoNo() {
+		return coNo;
+	}
+	public void setCoNo(int coNo) {
+		this.coNo = coNo;
+	}
+	public String getCoText() {
+		return coText;
+	}
+	public void setCoText(String coText) {
+		this.coText = coText;
+	}
+	public String getCoUser() {
+		return coUser;
+	}
+	public void setCoUser(String coUser) {
+		this.coUser = coUser;
+	}
+	public String getCoDate() {
+		return coDate;
+	}
+	public void setCoDate(String coDate) {
+		this.coDate = coDate;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+	public int getPercentage() {
+		return percentage;
+	}
+	public void setPercentage(int percentage) {
+		this.percentage = percentage;
+	}
 	public String getUsername() {
 		return username;
 	}

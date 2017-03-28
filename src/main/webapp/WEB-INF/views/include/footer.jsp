@@ -10,9 +10,9 @@
 </div>
 <!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
-    
 
 <!-- Mainly scripts -->
+<script src="resources/js/plugins/fullcalendar/moment.min.js"></script>
 <script src="resources/js/jquery-2.1.1.js"></script>
 <script src="resources/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
@@ -64,7 +64,9 @@
 <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 <!-- Summer Note -->
 <script src="resources/js/plugins/summernote/summernote.min.js"></script>
+<script src="resources/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src="resources/js/main.js"></script>
+
 <script>
 $(document).ready(function () {
     $('.mine').iCheck({

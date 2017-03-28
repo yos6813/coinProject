@@ -9,7 +9,7 @@
   			<b>공지사항 보기</b>
  	 	</h1>
         <ol class="breadcrumb">
-	    <li><a href="home?email=${user.email}"><i class="fa fa-home"></i>List</a></li>
+	    <li><a href="home?email=${user.email}"><i class="fa fa-home"></i>Home</a></li>
 	    <li class="active">공지사항 보기</li>
      </ol>
     </div>
@@ -31,40 +31,43 @@
 	                	</c:if>
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-calendar-o"></i> ${notify.nDate}</span>
-                        <h1>
+                    <span class="text-muted">${notify.nDate}</span>
+                        <h2>
                             ${notify.nTitle}
-                        </h1>
+                        </h2>
                         <small class="text-muted">${notify.username}</small>
                     </div>
                     <p>
                     	${notify.nText}
                     </p>
-                    <div class="mail-attachment">
-                        <div class="attachment">
-                        	<c:forEach items="${list2}" var="notify">
-                        		<c:set var="num" value="${notify.fileNumber}"/>
-	                        	<c:if test="${num > 0}">
-		                            <div class="file-box">
-		                                <div class="file">
-		                                    <a href="#">
-		                                        <span class="corner"></span>
-		                                        <div class="icon">
-	                                            	<i class="fa fa-file"></i>
-	                                        	</div>
-		                                        <div class="file-name">
-		                                            ${notify.nFileName}
-		                                            <br/>
-		                                            <small>${notify.nDate}</small>
-		                                        </div>
-		                                    </a>
-		                                </div>
-		                            </div>
-	                        	</c:if>
-                        	</c:forEach>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                    <c:set var="listSize" value="${list3.size()}"/>
+                    <c:if test="${listSize ne 0}">
+	                    <div class="mail-attachment" style="padding-bottom:0;">
+	                        <div class="attachment">
+	                        	<c:forEach items="${list2}" var="notify">
+	                        		<c:set var="num" value="${notify.fileNumber}"/>
+		                        	<c:if test="${num > 0}">
+			                            <div class="file-box">
+			                                <div class="file">
+			                                    <a href="#">
+			                                        <span class="corner"></span>
+			                                        <div class="icon">
+		                                            	<i class="fa fa-file"></i>
+		                                        	</div>
+			                                        <div class="file-name">
+			                                            ${notify.nFileName}
+			                                            <br/>
+			                                            <small>${notify.nDate}</small>
+			                                        </div>
+			                                    </a>
+			                                </div>
+			                            </div>
+		                        	</c:if>
+	                        	</c:forEach>
+	                            <div class="clearfix"></div>
+	                        </div>
+	                    </div>
+                    </c:if>
                     <hr>
                     <div class="row">
                         <div class="col-lg-12">
@@ -81,11 +84,11 @@
 	                                    <a href="" class="pull-left">
 	                                        <img alt="image" src="${notify.photoURL}">
 	                                    </a>
-	                                    <div class="col-md-6">
-                                            <h4 class="ibox3">${notify.username}</h4>
+	                                    <div class="col-md-8">
+                                            <h5 class="ibox3">${notify.username}</h5>
 	                                        <small class="text-muted">${notify.coDate}</small>
 	                                    </div>
-	                                    <div class="col-md-5 text-right">
+	                                    <div class="col-md-3 text-right no-padding">
 	                                    	<c:set var="username" value="${notify.coUser}"/>
 						                	<c:set var="email" value="${param.email}"/>
 						                	<c:if test="${username eq email}">
@@ -95,8 +98,8 @@
 						                	</c:if>
 	                                    </div>
 	                                </div>
-	                                <div class="social-body">
-	                                    <p class="commentText">
+	                                <div class="social-body" >
+	                                    <p class="commentText" style="padding-top:50px;">
 	                                        ${notify.coText}
 	                                    </p>
 	                                    <form class="form-horizontal ng-pristine ng-valid" method="post" action="modifyComments?email=${user.email}&nNo=${notify.nNo}">
@@ -114,7 +117,7 @@
                         </div>
                     </div>
                     <div class="row">
-                       	<form class="form-horizontal ng-pristine ng-valid" method="post" action="commentWrite?email=${user.email}&nNo=${notify.nNo}">
+                       	<form class="form-horizontal ng-pristine ng-valid" method="post" action="commentWrite1?email=${user.email}&nNo=${notify.nNo}">
 	                       	<div class="col-lg-12">
 		                        <div class="input-group">
 		                        	<input class="input form-control" type="text" name="coText">

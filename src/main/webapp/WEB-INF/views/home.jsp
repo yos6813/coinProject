@@ -18,14 +18,16 @@
 					<strong class="leftFloat">공지사항</strong>
 					<p class="text-right text-primary"><a class="text-info" href="notifyList?email=${user.email}">리스트 보기</a></p>
 				</div>
-				<div class="ibox-content">
+				<div class="ibox-content" style="height:241px;">
 					<table class="homeTable">
 						<c:forEach items="${list}" var="notify">
 							<tr>
-								<td>1</td>
-								<td class="text-center"><a class="text-primary" href="notifyView?email=${user.email}&nNo=${notify.nNo}">${notify.nTitle}</a></td>
+								<td style="width:50px">
+									<span class="badge badge-primary hidden notifyNew">new</span>
+								</td>
+								<td class="text-left"><a class="text-primary" href="notifyView?email=${user.email}&nNo=${notify.nNo}">${notify.nTitle}</a></td>
 								<td class="text-right" style="padding-bottom:5px">
-									<small>${notify.nDate}</small><br>
+									<small class="notifyNDate">${notify.nDate}</small><br>
 									<small>${notify.username}</small>
 								</td>
 							</tr>
@@ -40,14 +42,16 @@
 					<strong class="leftFloat">설문조사</strong>
 					<p class="text-right text-primary"><a class="text-info" href="voteList?email=${user.email}">리스트 보기</a></p>
 				</div>
-				<div class="ibox-content">
+				<div class="ibox-content" style="height:241px;">
 					<table class="homeTable">
 						<c:forEach items="${list2}" var="vote">
 							<tr>
-								<td>1</td>
-								<td class="text-center"><a class="text-primary" href="vote?email=${user.email}&vNo=${vote.vNo}">${vote.vTitle}</a></td>
+								<td style="width:50px">
+									<span class="badge badge-primary hidden voteNew">new</span>
+								</td>
+								<td class="text-left"><a class="text-primary" href="vote?email=${user.email}&vNo=${vote.vNo}">${vote.vTitle}</a></td>
 								<td class="text-right" style="padding-bottom:5px">
-									<small>${vote.vDate}</small><br>
+									<small class="voteVDate">${vote.vDate}</small><br>
 									<small>${vote.username}</small>
 								</td>
 							</tr>

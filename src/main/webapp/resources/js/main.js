@@ -498,6 +498,17 @@ $(document).ready(function(){
 			$('.dayGap').eq(i).append("(<strong class='text-success'>" + btDay2 + "</strong>/" + dayGap + ")");
 		}
 	}
+	
+	$('#pDel1').click(function(){
+		var result = confirm('프로젝트를 삭제하시겠습니까?');
+		if(result) {
+			//yes
+			$('#projectForm').attr('action',"/deleteP?email=" + email);
+			$('#projectForm').submit();
+		} else { 
+			//no 
+		} 
+	})
 })
 
 
@@ -532,7 +543,7 @@ $(document).ready(function(){
 	var date = $('#pDate1').text();
 	var pdate = date.split('-');
 	 $('#projectDate1').daterangepicker({
-	     format: 'YYYY/MM/DD',
+	     format: 'YYYY.MM.DD',
 	     minDate: pdate[0],
          maxDate: pdate[1],
 	 });
@@ -1129,16 +1140,42 @@ $(document).ready(function(){
      $(this).attr('src', '../img/photo.png');
    });
    
-   $('.commentInput').hide();
-   
-   $('.modifyBtn').click(function(){
-	   $(this).hide();
-	   $(this).siblings('.deleteBtn').hide();
-	   $('.commentText').eq(this).hide();
-	   $('.commentInput').eq(this).show();
+   $('#searchTitle').click(function(){
+	   location.search = "?email=" + email + "&keyword=" + $('#titleInput').val();
    })
+   
+	$('.notifyList2').hide();
+	
+	for(var i=0; i<10; i++){
+		$('.notifyList2').eq(i).show();
+	}
+	
+	var show = 10;
+	$('#tenMore').click(function() {
+		show += 10;
+		for(var i=show - 10; i<show; i++){
+			$('.notifyList2').eq(i).show();
+		}
+
+		if(show>=$('.notifyList2').size()){
+			$('#tenMore').hide();
+		}
+		
+		if($('#notifyList1').height() + 300 > $('.body').height()){
+			$('.body').css('height', $('.body').height() + ($('#notifyList1').height() - $('.body').height() + 300));
+		}
+	})
 })
 
+$('.commentInput').hide();
+
+$('.modifyBtn').click(function(){
+	var i = $('.modifyBtn').index(this);
+	$(this).hide();
+	$(this).siblings('.deleteBtn').hide();
+	$('.commentText').eq(i).hide();
+	$('.commentInput').eq(i).show();
+})
 function deleteComments(nNo){
 	var result = confirm('댓글을 삭제하시겠습니까?');
 	if(result) {
@@ -1193,9 +1230,12 @@ $(document).ready(function(){
 	$('#nText').focus(function(){
 		$('#nText').before('<input class="form-control iText" name="iText2" type="text">');
 		$('.iText').last().focus();
-		$('.body').css('height', $('.body').height() + 100);
+		if($('#voteWrite').height() + 300 > $('.body').height()){
+			$('.body').css('height', $('.body').height() + 200);
+		}
 	})
 	
+
 	$('#voteSubmit').attr('disabled', true);
 	$('#voteSubmit').click(function(){
 		var param ="&iNo=" + $('.backgroundColor').attr('value');
@@ -1206,39 +1246,12 @@ $(document).ready(function(){
 	        data : param,
 	        dataType : 'text',
 	        success : function(data) {
-	          console.log(data);
 	          console.log("success");
 	          location.href="vote?email=" + email + "&vNo=" + vNo;
 	        }, 
 	        error : function() { }
 		});
 	})
-	
-	
-	var result = [];
-	for(var i=0; i<$('.resultBox').size(); i++){
-		var text = $('.resultText').eq(i).text();
-		var count = parseInt($('.resultCount').eq(i).text());
-		
-		result.push({
-			text: text,
-			count: count
-		})
-	}
-	
-	$(function(){
-	    $("#resultChart").dxChart({
-	        dataSource: result, 
-	        palette: "Ocean",
-	        legend: { visible: false },
-	        rotated: true,
-	        series: {
-	            argumentField: "text",
-	            valueField: "count",
-	            type: "bar"
-	        }
-	    });
-	});
 	
 	for(var i=1; i<=$('.index').size(); i++){
 		$('.index').eq(i-1).text(i);
@@ -1249,4 +1262,145 @@ $(document).ready(function(){
 		$(this).addClass('backgroundColor');
 		$('#voteSubmit').attr('disabled', false);
 	})
+	
+	$('.ResultcommentInput').hide();
+   
+   $('.modBtn').click(function(){
+	   var i = $('.modBtn').index(this);
+	   $(this).hide();
+	   $(this).siblings('.delBtn').hide();
+	   $('.resultCommentText').eq(i).hide();
+	   $('.ResultcommentInput').eq(i).show();
+   })
+   
+   $('.voteList1').hide();
+	
+	for(var i=0; i<10; i++){
+		$('.voteList1').eq(i).show();
+	}
+	
+	
+	var show = 10;
+	if(show>=$('.voteList1').size()){
+		$('#vTenMore').hide();
+	}
+	
+	$('#vTenMore').click(function() {
+		show += 10;
+		for(var i=show - 10; i<show; i++){
+			$('.voteList1').eq(i).show();
+		}
+
+		if(show>=$('.voteList1').size()){
+			$('#vTenMore').hide();
+		}
+		
+		if($('#voteList1').height() + 300 > $('.body').height()){
+			$('.body').css('height', $('.body').height() + ($('#voteList1').height() - $('.body').height() + 300));
+		}
+	})
+   
+})
+
+function deleteVoteComment(vNo){
+	var result = confirm('댓글을 삭제하시겠습니까?');
+	if(result) {
+		//yes
+		$('#voteCommentsForm').attr('action',"/deleteVoteComments?email=" + email + "&vNo=" + vNo);
+		$('#voteCommentsForm').submit();
+	} else { 
+		//no 
+	} 
+}
+
+/* home */
+$(document).ready(function(){
+	var today = new Date();
+	var month = today.getMonth() + 1;
+	var year = today.getFullYear();
+	var day = today.getDate();
+	
+	for(var i = 0; i<$('.notifyNDate').size(); i++){
+		var nWriteDate = $('.notifyNDate').eq(i).text().split('.');
+		
+		var yeargap = year - parseInt(nWriteDate[0]);
+		var monthgap = month - parseInt(nWriteDate[1]);
+		var daygap = day - parseInt(nWriteDate[2]);
+		
+		var totalgap = yeargap + monthgap + daygap
+		
+		if(totalgap < 3){
+			$('.notifyNew').eq(i).removeClass('hidden');
+		}
+	}
+	
+	for(var j = 0; j<$('.voteVDate').size(); j++){
+		var vWriteDate = $('.voteVDate').eq(j).text().split('.');
+		
+		var yeargap = year - parseInt(vWriteDate[0]);
+		var monthgap = month - parseInt(vWriteDate[1]);
+		var daygap = day - parseInt(vWriteDate[2]);
+		
+		var totalgap = yeargap + monthgap + daygap
+		
+		if(totalgap < 3){
+			$('.voteNew').eq(j).removeClass('hidden');
+		}
+	}
+})
+
+/* Calendar */
+
+$(document).ready(function() {
+     var date = new Date();
+     var d = date.getDate();
+     var m = date.getMonth();
+     var y = date.getFullYear();
+     var event = [];
+     
+     $.ajax({
+         "url" : "/test1?email=" + email,
+         "type" : "get",
+         "dataType": "json",
+         "success" : function(data){
+        	 var eventData = [];
+        	 for(var i = 0; i < data.length; i++){
+        		eventData.push({
+    	        title : data[i].title,
+    	        start : data[i].start,
+    	        end : data[i].end
+    	      });
+    	    } 
+        	 $('#calendar').fullCalendar({
+        		 header: {
+        			 left: 'prev,next today',
+        			 center: 'title',
+        			 right: 'month,agendaWeek,agendaDay'
+        		 },
+        		 editable: false,
+        		 droppable: false, // this allows things to be dropped onto the calendar
+        		 drop: function() {
+        			 // is the "remove after drop" checkbox checked?
+        			 if ($('#drop-remove').is(':checked')) {
+        				 // if so, remove the element from the "Draggable Events" list
+        				 $(this).remove();
+        			 }
+        		 },
+        		 events: eventData
+        	 });
+         }
+     });
+
+     
+	  
+  $('#startPicker').datepicker({
+		format: 'yyyy-mm-dd'
+	});
+    
+    $('#endPicker').datepicker({
+		format: 'yyyy-mm-dd'
+	});
+    
+    
+    
 })

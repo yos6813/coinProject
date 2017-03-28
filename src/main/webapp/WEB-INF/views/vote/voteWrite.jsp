@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="col-lg-12">
-    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="wrapper wrapper-content animated fadeInRight" id="voteWrite">
     	<div class="ibox">
     		<div class="ibox-content">
     			<form class="form-horizontal ng-pristine ng-valid" method="post" action="createVote?email=${user.email}" enctype="multipart/form-data">

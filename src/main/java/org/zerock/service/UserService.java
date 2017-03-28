@@ -17,4 +17,6 @@ public interface UserService {
 	public User read(String email);
 	
 	public List<User> listAll2(String email);
+	
+	public List<User> userListAll(User vo);
 }

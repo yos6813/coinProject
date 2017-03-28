@@ -30,6 +30,8 @@
     <link href="resources/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="resources/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
     <link href="resources/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="resources/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
+    <link href="resources/css/plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet"  media="print">
 </head>
 
 <body>
@@ -51,9 +53,10 @@
                     </li>
                     <li><a href="/home?email=${user.email}"><i class="fa fa-home"></i><span>HOME</span></a></li>
                     <li><a href="/notifyList?email=${user.email}"><i class="fa fa-bell-o"></i><span>공지사항</span></a></li>
-                    <li><a href="/voteList?email=${user.email}"><i class="fa fa-bar-chart-o"></i><span>투표</span></a></li>
+                    <li><a href="/voteList?email=${user.email}"><i class="fa fa-bar-chart-o"></i><span>설문조사</span></a></li>
                     <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>업무관리</span></a></li>
 		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-credit-card"></i> <span>법인카드사용내역관리</span></a></li>
+		            <li><a href="/test?email=${user.email}"><i class="fa fa-calendar"></i> <span>스케쥴표</span></a></li>
 		            <li>
                         <a><i class="fa fa-table"></i> <span>관리페이지</span></a>
                         <ul class="nav nav-second-level collapse">

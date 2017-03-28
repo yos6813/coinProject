@@ -88,11 +88,12 @@ public class NotifyController {
 			model.addAttribute(nService.notifyView(nNo));
 			model.addAttribute("list", nService.commentList(nNo));
 			model.addAttribute("list2", nService.fileList(nNo));
+			model.addAttribute("list3", nService.selectFileList(notify));
 			
 		return "notification/notifyView";
 	}
 	
-	@RequestMapping(value = "/commentWrite")
+	@RequestMapping(value = "/commentWrite1")
 	public String commentWrite(@RequestParam("email") String email, @RequestParam("nNo") int nNo,
 							 Locale locale, Model model, User user, Notify notify) {
 			model.addAttribute(service.read(email));

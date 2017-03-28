@@ -32,20 +32,21 @@
 	                	</c:if>
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i>${vote.vDate}</span>
-                        <h1>
+                    <span class="text-muted">${vote.vDate}</span>
+                        <h2>
                             ${vote.vTitle}
-                        </h1>
+                        </h2>
                     <small class="text-muted">작성자: ${vote.username}</small>
                     </div>
                     <p>
                     	${vote.vText}
                     </p>
+                    <hr>
 				     <div class="row">
 			        	<c:forEach items="${list}" var="vote">
 					        <div class="col-md-12 ibox1 borderBox123" value="${vote.iNo}">
-					        	<div class="col-md-3"><h2 class="index"></h2></div>
-				        		<h2 class="textIndex">${vote.iText}</h2>
+					        	<div class="col-md-3"><h3 class="index" style="margin-top: 10px;"></h3></div>
+				        		<h3 class="textIndex" style="margin-top: 10px;">${vote.iText}</h3>
 					        </div>
 			        	</c:forEach>
 				    </div>

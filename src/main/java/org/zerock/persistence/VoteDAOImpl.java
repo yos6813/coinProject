@@ -41,8 +41,8 @@ public class VoteDAOImpl implements VoteDAO{
 	}
 
 	@Override
-	public void icountUpdate(int iNo) {
-		session.update(namespace + ".icountUpdate", iNo);
+	public void icountUpdate(Vote vote) {
+		session.update(namespace + ".icountUpdate", vote);
 	}
 
 	@Override
@@ -61,13 +61,33 @@ public class VoteDAOImpl implements VoteDAO{
 	}
 
 	@Override
-	public void icountUpdate2(int iNo) {
-		session.update(namespace + ".icountUpdate2", iNo);
+	public void icountUpdate2(Vote vote) {
+		session.update(namespace + ".icountUpdate2", vote);
 	}
 
 	@Override
 	public void deleteVoteUser(int vuNo) {
 		session.delete(namespace + ".deleteVoteUser", vuNo);
+	}
+
+	@Override
+	public List<Vote> commentList(Vote vote) {
+		return session.selectList(namespace + ".commentList", vote);
+	}
+
+	@Override
+	public void commentWrite(Vote vote) {
+		session.insert(namespace + ".commentWrite", vote);
+	}
+
+	@Override
+	public void deleteComment(int coNo) {
+		session.delete(namespace + ".deleteComment", coNo);
+	}
+
+	@Override
+	public void updateComment(Vote vote) {
+		session.update(namespace + ".updateComment", vote);
 	}
 
 }

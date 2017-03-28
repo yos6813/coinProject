@@ -19,7 +19,14 @@ public class User {
 	String email2;
 	
 	String email3;
+	String workCondition;
 
+	public String getWorkCondition() {
+		return workCondition;
+	}
+	public void setWorkCondition(String workCondition) {
+		this.workCondition = workCondition;
+	}
 	public String getGrade() {
 		return grade;
 	}

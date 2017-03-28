@@ -47,4 +47,9 @@ public class UserDAOImpl implements UserDAO{
 	public List<User> listAll2(String email) {
 		return session.selectList(namespace + ".listAll2", email);
 	}
+
+	@Override
+	public List<User> userListAll(User vo) {
+		return session.selectList(namespace + ".userListAll", vo);
+	}
 }

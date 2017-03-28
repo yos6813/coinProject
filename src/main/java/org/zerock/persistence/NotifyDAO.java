@@ -18,4 +18,5 @@ public interface NotifyDAO {
 	public List<Notify> homeList(Notify notify);
 	public void commentModify(Notify notify);
 	public void deleteComment(int coNo);
+	public List<Notify> selectFileList(Notify notify);
 }

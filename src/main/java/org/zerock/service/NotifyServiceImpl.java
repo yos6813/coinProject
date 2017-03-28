@@ -89,4 +89,9 @@ public class NotifyServiceImpl implements NotifyService {
 		dao.deleteComment(coNo);
 	}
 
+	@Override
+	public List<Notify> selectFileList(Notify notify) {
+		return dao.selectFileList(notify);
+	}
+
 }

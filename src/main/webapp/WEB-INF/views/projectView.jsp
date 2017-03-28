@@ -21,10 +21,10 @@
 			<div class="ibox">
 		    	<div class="ibox-content">
 		        	<div>	
-		        		<form role="form" method="post">
+		        		<form role="form" method="post" id="projectForm">
 				    		<input type="hidden" id="bNo" name="bNo" value="${board.bNo}">
 				    	</form>
-                        <a id="pDel1" class="btn btn-white btn-sm pull-right">삭제</a><a id="pMod1" class="btn btn-white btn-sm pull-right">수정</a>
+                        <a id="pDel1" class="btn btn-white btn-sm pull-right">삭제</a><a href="modifyP?email=${user.email}&bNo=${board.bNo}" class="btn btn-white btn-sm pull-right">수정</a>
 				        <h3 style="float: left;" class="topmargin label" id="boardStatus">${board.status}</h3>
 			            <h3 class="no-margin">
 			                <strong>${board.pName}</strong>
