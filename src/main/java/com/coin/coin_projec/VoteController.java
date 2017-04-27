@@ -39,8 +39,11 @@ public class VoteController {
 	@RequestMapping(value = "/voteList")
 	public String voteList(@RequestParam("email") String email, Locale locale, Model model, User user, Vote vote) {
 		model.addAttribute(service.read(email));
-		model.addAttribute("list", vService.listVote(vote));
-		model.addAttribute("list2", service.userListAll(user));
+		
+		if(vService.listVote(vote) != null){
+			model.addAttribute("list", vService.listVote(vote));
+			model.addAttribute("list2", service.userListAll(user));
+		}
 		
 		return "vote/voteList";
 	}
@@ -48,6 +51,7 @@ public class VoteController {
 	@RequestMapping(value = "/voteWrite")
 	public String voteWrite(@RequestParam("email") String email, Locale locale, Model model, User user) {
 		model.addAttribute(service.read(email));
+		model.addAttribute("list", service.userListAll(user));
 			
 		return "vote/voteWrite";
 	}

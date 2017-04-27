@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where nTitle like CONCAT('%', #{keyword} , '%')
 		</if>
 		
-		group by n.nNo;
+		group by n.nNo order by n.nNo desc;
 	</select>
 	
 	<select id="homeList" parameterType="list" resultType="org.zerock.persistence.Notify">

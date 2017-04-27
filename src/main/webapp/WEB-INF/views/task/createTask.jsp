@@ -45,7 +45,7 @@
                                 <div class="col-lg-6" id="cluster_info">
                                     <dl class="dl-horizontal" >
                                         <dt>기간:</dt> <dd id="aDate1"> ${board.aDate} </dd>
-                                        <dt>Activity 매니저:</dt> <dd> ${board.aM}</dd>
+                                        <dt>Activity 매니저:</dt> <dd> ${board.aMName}</dd>
                                     </dl>
                                 </div>
                             </div>

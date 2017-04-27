@@ -52,4 +52,14 @@ public class UserDAOImpl implements UserDAO{
 	public List<User> userListAll(User vo) {
 		return session.selectList(namespace + ".userListAll", vo);
 	}
+
+	@Override
+	public void updateCoin(User vo) {
+		session.update(namespace + ".updateCoin", vo);
+	}
+
+	@Override
+	public void updateCoin2(User vo) {
+		session.update(namespace + ".updateCoin2", vo);
+	}
 }

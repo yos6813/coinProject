@@ -24,7 +24,7 @@ public interface BoardService {
 	public int listCountACriteria(Criteria cri);
 	public int listCountTCriteria(Criteria cri);
 	public int listCountWCriteria(Criteria cri);
-	public List<Board> ActivityList1(Board board);
+	public List<Board> ActivityList1(Criteria cri);
 	
 	public void insertTask(Board board);
 	public List<Board> listTask(Criteria cri);
@@ -44,6 +44,7 @@ public interface BoardService {
 	public void updateA(Board board);
 	public void updateT(Board board);
 	public List<Board> countPercent(int bNo);
+	public void updateProject(Board board);
 	
 	public List<Board> countOrderbyUser(String aNo);
 	public List<Board> joinUser(Board board);
@@ -51,7 +52,8 @@ public interface BoardService {
 	public void insertWorkLog(Board board);
 	public List<Board> selectWorkLog(Criteria cri);
 	
-	public List<Board> selectUserWorkLog(int tNo);
+	public List<Board> selectUserWorkLog(int aNo);
 	
 	public List<Board> infiniteScrollDown(String wNo);
+	public Board viewActivityLog(int aNo);
 }

@@ -45,13 +45,7 @@ public class taskController {
 	private static final Logger logger = LoggerFactory.getLogger(taskController.class);
 	
 	@RequestMapping(value = "/taskWrite", method=RequestMethod.GET)
-	public String taskWrite(@RequestParam (value="pNo",required=false) String pNo, @RequestParam ("email") String email, Locale locale, Model model, Board board, Project project, User user) {
-		if(pNo == null){
-			model.addAttribute("list", pService.viewList());
-		} else {
-			model.addAttribute("list", pService.listProject(pNo));
-			model.addAttribute(pService.readProject(pNo));
-		}
+	public String taskWrite(@RequestParam ("email") String email, Locale locale, Model model, Board board, Project project, User user) {
 		model.addAttribute(service.read(email));
 		model.addAttribute("list2", service.listAll2(email));
 		
@@ -60,8 +54,10 @@ public class taskController {
 	
 	 @RequestMapping(value="/taskWriteP", method=RequestMethod.POST)
 	 public String taskWriteP(Model model, @RequestParam ("email") String email, Board board, Project project, User user, HttpServletRequest request) {
+		 pService.insertProject(project);
+		 int i = project.getNo();
+		 board.setpNo(i);
 		 bService.insertBoard(board);
-		 logger.info(board.toString());
 		 
 		 return "redirect:projectList?email="+ email;
     }
@@ -84,9 +80,9 @@ public class taskController {
 	
 	@RequestMapping(value="/createTask")
 	 public String createTask(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo, Board board
-			 , @RequestParam (value="aNo", required=false) String aNo, Project project, User user, HttpServletRequest request) {
+			 , @RequestParam (value="aNo", required=false) String aNo, Project project, User user, HttpServletRequest request, Criteria cri) {
 		model.addAttribute(service.read(email));
-		model.addAttribute("list", bService.ActivityList1(board));
+		model.addAttribute("list", bService.ActivityList1(cri));
 		model.addAttribute("list2", service.listAll2(email));
 		if(aNo != null){
 			model.addAttribute(bService.viewActivity(aNo));
@@ -120,7 +116,6 @@ public class taskController {
 			 @RequestParam ("aNo") int aNo, Board board, User user, RedirectAttributes rttr) {
 		
 		bService.delA(aNo);
-		bService.delT(aNo);
 		
 		return "redirect:/projectView?email=" + email + "&bNo=" + bNo;
 	}
@@ -150,6 +145,7 @@ public class taskController {
 	 public String modifyBoard(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
 			Board board, User user, RedirectAttributes rttr) {
 		bService.updateP(board);
+		bService.updateProject(board);
 		
 		return "redirect:/projectView?email=" + email + "&bNo=" + bNo;
 	}
@@ -190,12 +186,12 @@ public class taskController {
 	}
 	
 	@RequestMapping(value="/taskView")
-	 public String taskView(Model model, @RequestParam("email") String email, @RequestParam ("bNo") int bNo,
-			 @RequestParam("aNo") String aNo, @RequestParam("tNo") int tNo,  Board board, User user, RedirectAttributes rttr,
+	 public String taskView(Model model, @RequestParam("email") String email,
+			 @RequestParam("aNo") int aNo,  Board board, User user, RedirectAttributes rttr,
 			 Criteria cri, @RequestParam (value="wNo", required=false) String wNo, Client client) {
 		model.addAttribute(service.read(email));
-		model.addAttribute(bService.viewTask(tNo));
-		model.addAttribute("list2", bService.selectUserWorkLog(tNo));
+		model.addAttribute(bService.viewActivityLog(aNo));
+		model.addAttribute("list2", bService.selectUserWorkLog(aNo));
 		model.addAttribute("list", bService.selectWorkLog(cri));
 		model.addAttribute("list3", ctService.clientList(client));
 		

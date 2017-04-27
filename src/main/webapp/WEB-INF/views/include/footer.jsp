@@ -1,12 +1,9 @@
-			<div class="footer">
-	            <div class="pull-right">
-	                10GB of <strong>250GB</strong> Free.
-	            </div>
-	            <div>
-	                <strong>Copyright</strong> Example Company &copy; 2014-2017
-	            </div>
-	        </div>
-	    </div>
+		<div class="footer">
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2017
+            </div>
+        </div>
+    </div>
 </div>
 <!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
@@ -45,8 +42,10 @@
 
 <!-- Toastr -->
 <script src="resources/js/plugins/toastr/toastr.min.js"></script>
-<script src="resources/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <script src="resources/js/plugins/daterangepicker/moment.min.js"></script>
+<script src="resources/js/bootstrap-datepicker.js"></script>
+<script src="resources/js/locales/bootstrap-datepicker.kr.min.js" charset="UTF-8"></script>
+<script src="resources/js/locales/bootstrap-datepicker.ko.min.js" charset="UTF-8"></script>
 <script src="resources/js/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="resources/js/plugins/iCheck/icheck.min.js"></script>
 <script src="resources/js/plugins/select2/select2.full.min.js"></script>
@@ -77,13 +76,8 @@ $(document).ready(function () {
 
 $('#registerDate').datepicker({
     autoclose: true,
-    format: 'yyyy.mm.dd'
-});
-
-$('#projectDate').daterangepicker({
- format: 'YYYY.MM.DD',
- timePicker: true,
-	 timePickerIncrement: 30
+    format: 'yyyy-mm-dd',
+    language: "ko"
 });
 
 $('input[type="checkbox"].minimal').iCheck({

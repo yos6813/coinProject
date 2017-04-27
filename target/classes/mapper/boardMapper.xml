@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- project write -->
 	<insert id="insertBoard" parameterType="org.zerock.persistence.Board">
 		insert into boardTbl(writeUser, writeDate, pNo, projectDate, text, budget, pm, status)
-		values(#{writeUser}, #{writeDate}, #{pNo}, #{projectDate}, #{text}, #{budget}, #{pm}, #{status});
+			values(#{writeUser}, #{writeDate}, #{pNo}, #{projectDate}, #{text}, #{budget}, #{pm}, "진행중");
 	</insert>
 	
 	<!-- project List & search -->
@@ -25,13 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- project view -->
 	<select id="viewBoard" resultType="org.zerock.persistence.Board">
-		select group_concat((a.aMName)) as aMName, b.*, (select count(distinct tMName) as joinUser from v_tasktbl) as joinUser
+		select group_concat(distinct(a.aMName)) as aMName, b.*, (select count(distinct tMName) as joinUser from v_tasktbl) as joinUser
 		from v_getBoard b left outer join v_activitytbl a on b.bNo = a.bNo where b.bNo = #{bNo};
 	</select>
 	
 	<insert id="insertActivity" parameterType="org.zerock.persistence.Board">
 		insert into activityTbl(bNo, aName, aDate, aM, aText, aWriteD, aWriteU, aStatus)
-		values(#{bNo}, #{aName}, #{aDate}, #{aM}, #{aText}, #{aWriteD}, #{aWriteU}, #{aStatus});
+		values(#{bNo}, #{aName}, #{aDate}, #{aM}, #{aText}, #{aWriteD}, #{aWriteU}, "진행중");
 	</insert>
 	
 	<select id="ActivityList" resultType="org.zerock.persistence.Board">
@@ -39,7 +39,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="ActivityList1" resultType="org.zerock.persistence.Board">
-		select * from v_activityTbl where bNo = #{bNo} order by aNo desc;
+		select * from v_activityTbl a left outer join userTbl u on u.email = a.aM where bNo = #{bNo}
+		<choose>
+			<when test="aStatus == '진행중'">
+				and aStatus = '진행중'
+			</when>
+			<when test="aStatus == '완료'">
+				and aStatus = '완료'
+			</when>
+		</choose>
+		order by aNo desc limit #{pageStart}, #{perPageNum};
 	</select>
 	
 	<select id="countList1" resultType="org.zerock.persistence.Board">
@@ -78,7 +87,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="countPaging" resultType="int">
-		select count(bNo) from v_getBoard where bNo > 0;
+		select count(bNo) from v_getBoard where bNo > 0
+		<choose>
+			<when test="type=='pName'">
+				and pName like CONCAT('%', #{keyword} , '%')
+			</when>
+			<when test="type=='pm'">
+				and pmName like CONCAT('%', #{keyword} , '%')
+			</when>
+		</choose>
 	</select>
 	
 	<select id="countAPaging" resultType="int">
@@ -103,6 +120,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from v_getBoard b left outer join v_getactivityTbl g on b.bNo = g.bNo left outer join v_taskTbl t on g.aNo = t.aNo
 								       left outer join worklogtbl w on w.tNo = t.tNo
 		where t.tNo = #{tNo};
+	</select>
+	
+	<select id="viewActivityLog" resultType="org.zerock.persistence.Board">
+		select * from v_getBoard g left outer join v_activityTbl a on g.bNo = a.bNo where aNo = #{aNo};
 	</select>
 	
 	<select id="countTask" resultType="org.zerock.persistence.Board">
@@ -139,13 +160,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateP">
 		update boardTbl set
-			projectDate=#{projectDate}, text=#{text}, budget=#{budget}, pm=#{pm}, status=#{status}
+			projectDate=#{projectDate}, text=#{text}, budget=#{budget}, pm=#{pm}
 		where bNo = #{bNo};
 	</update>
 	
+	<update id="updateProject">
+		update projectTbl set
+			pName=#{pName}, projectDate=#{projectDate}
+		where pNo = #{pNo};
+	</update>
+	
+	
 	<update id="updateA">
 		update activitytbl set
-			aName=#{aName}, aDate=#{aDate}, aM=#{aM}, aText=#{aText}, aStatus=#{aStatus}
+			aName=#{aName}, aDate=#{aDate}, aM=#{aM}, aText=#{aText}
 		where aNo =#{aNo};
 	</update>
 	
@@ -174,7 +202,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertWorkLog" parameterType="org.zerock.persistence.Board">
-		insert into worklogTbl (wDate, tNo, wText, wTimeH, wTimeM, wClient, wFileName, wWriteDate, wUser) values (#{wDate}, #{tNo}, #{wText}, #{wTimeH}, #{wTimeM}, #{wClient}, #{wFileName}, #{wWriteDate}, #{wUser});
+		insert into worklogTbl (wDate, aNo, wText, wTimeH, wTimeM, wClient, wFileName, wWriteDate, wUser) values (#{wDate}, #{aNo}, #{wText}, #{wTimeH}, #{wTimeM}, #{wClient}, #{wFileName}, #{wWriteDate}, #{wUser});
 	</insert>
 	
 	<select id="selectWorkLog" resultType="org.zerock.persistence.Board">
@@ -190,12 +218,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      			 end as day
      from worklogTbl w left outer join userTbl u on w.wUser = u.email
      				   left outer join clientTbl ct on ct.ctNo = w.wClient
-     where tNo =#{tNo} order by wDate desc
+     where aNo =#{aNo} order by wDate desc
 <!--       limit 0, 5; -->
 	</select>
 	
 	<select id="selectUserWorkLog" resultType="org.zerock.persistence.Board">
-		select distinct username from worklogTbl w left outer join userTbl u on w.wUser = u.email left outer join taskTbl t on t.tNo = w.tNo where w.tNo =#{tNo} and tm != email order by wDate desc;
+<!-- 		select distinct username from worklogTbl w left outer join userTbl u on w.wUser = u.email left outer join activityTbl a on a.aNo = w.aNo where w.aNo =#{aNo} and aM != email order by wDate desc; -->
+		select distinct username from worklogTbl w left outer join userTbl u on w.wUser = u.email where aNo = #{aNo} order by wDate desc;
 	</select>
 	
 	<select id="countWPaging" resultType="int">

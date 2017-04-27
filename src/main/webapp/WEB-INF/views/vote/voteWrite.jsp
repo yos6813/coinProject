@@ -15,11 +15,15 @@
      </ol>
     </div>
 </div>
+<c:forEach items="${list}" var="user">
+	<input type="text" class="hidden userListEmail" value="${user.email}">
+	<input type="text" class="hidden userListSlack" value="${user.slackID}">
+</c:forEach>
 <div class="col-lg-12">
     <div class="wrapper wrapper-content animated fadeInRight" id="voteWrite">
     	<div class="ibox">
     		<div class="ibox-content">
-    			<form class="form-horizontal ng-pristine ng-valid" method="post" action="createVote?email=${user.email}" enctype="multipart/form-data">
+    			<form class="form-horizontal ng-pristine ng-valid" id="voteWriteForm" method="post" action="createVote?email=${user.email}" enctype="multipart/form-data">
     				<div class="form-group">
 			 			<label class="col-sm-2 control-label">제목</label>
 			 			<div class="col-sm-10">
@@ -42,8 +46,8 @@
 			 			</div>
 			 		</div>
 			 		<div class="text-right">
-			 			<a class="btn btn-white">취소</a>
-			 			<button type=submit class="btn btn-primary">저장</button>
+			 			<a class="btn btn-white" id="voteCancel">취소</a>
+			 			<button type="button" id="voteWriteBtn" class="btn btn-primary">저장</button>
 			 		</div>
     			</form>
     		</div>

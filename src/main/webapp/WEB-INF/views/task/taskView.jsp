@@ -18,57 +18,63 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="ibox">
     	<div class="ibox-content" style="padding-bottom: 10px !important">
-            <a class="btn btn-white btn-sm pull-right" data-toggle="modal" data-target="#myModal5">추가</a>
-			<h2 style="float: left;" id="taskAStauts" class="label">${board.tStatus}</h2>
+	            <a class="btn btn-white btn-sm pull-right" data-toggle="modal" data-target="#myModal5">일지추가</a>
+	    		<a class="btn btn-white btn-sm pull-right" href="/modifyA?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}">수정</a>
+	    		<a class="btn btn-white btn-sm pull-right" id="activityDelete" value="${board.aNo}">삭제</a>
+			<h2 style="float: left;" id="taskAStauts" class="label">${board.aStatus}</h2>
             <h2 class="no-margin">
-              ${board.tName}
+              ${board.aName}
              </h2> 
              <h2 class="no-margin"><strong id="activityDday"></strong></h2>
              <table class="table m-b-xs no-margin2" style="margin-top: 35px">
                 <tbody>
 	                <tr>
-	                    <td class="text-right no-padding no-margins">
+	                	<td class="text-right no-padding no-margins">
 							<p style="color:#969696;">Project:</p>
 	                    </td>
 	                    <td class="no-padding1 no-margins">
-							<strong>${board.pName}</strong>
+							<a class="text-primary" href="projectView?email=${user.email}&bNo=${board.bNo}"><strong>${board.pName}</strong></a>
 	                    </td>
 	                    <td class="text-right no-padding no-margins">
 							<p style="color:#969696;">매니저: </p>
 	                    </td>
 	                    <td class="no-padding1 no-margins">
-							<strong>${board.tMName}</strong> 
+							<strong>${board.aMName}</strong> 
 	                    </td>
 	                   	<td class="text-right no-padding no-margins">
 							<p style="color:#969696;">기간: </p>
 	                    </td>
 	                    <td class="no-padding1 no-margins">
-							<strong id="projectTday">${board.tDate }</strong>
+							<strong id="projectTday">${board.aDate }</strong>
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td class="text-right no-padding no-margins">
-							<p style="color:#969696;">Activity:</p>
-	                    </td>
-	                    <td class="no-padding1 no-margins">
-							<strong>${board.aName}</strong>
-	                    </td>
 	                    <td class="text-right no-padding no-margins">
 							<p style="color:#969696;">헬퍼:  </p>
 	                    </td>
 	                    <td class="no-padding1 no-margins">
 							<strong>
-									<c:forEach items="${list2}" var="board">
-								  		${board.username} 
-								  	</c:forEach>
+								<c:forEach items="${list2}" var="board">
+							  		${board.username}
+							  	</c:forEach>
 					  	  	</strong>
 	                    </td>
 	                   	<td class="text-right no-padding no-margins">
 							<p style="color:#969696;">투입시간:</p>
 	                    </td>
 	                    <td class="no-padding1 no-margins">
-	                    	<strong id="wHtimetext" class="text-info">${board.wTimeH}h</strong>
-	                    	<strong id="wMtimetext" class="text-info"> ${board.wTimeM}m</strong>
+	                    	<c:if test="${board.wTimeH eq null}">
+     			            	<strong id="wHtimetext" class="text-info">0h</strong>
+	                    	</c:if>
+	                    	<c:if test="${board.wTimeM eq null}">
+	                    		<strong id="wMtimetext" class="text-info">0m</strong>
+	                    	</c:if>
+	                    	<c:if test="${board.wTimeH ne null}">
+		                    	<strong id="wHtimetext" class="text-info">${board.wTimeH}h</strong>
+	                    	</c:if>
+	                    	<c:if test="${board.wTimeM ne null}">
+		                    	<strong id="wMtimetext" class="text-info"> ${board.wTimeM}m</strong>
+	                    	</c:if>
 	                    </td>
 	                </tr>
                 </tbody>
@@ -123,12 +129,11 @@
     <div class="modal-dialog modal-size">
         <div class="modal-content">
             <div class="modal-header">
-<!--                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
                 <i class="fa fa-edit modal-icon"></i>
                 <h4 class="modal-title">업무일지</h4>
             </div>
             <div class="modal-body">
-            	<form class="form-horizontal wizard-big" method="post" enctype="multipart/form-data" action="/file?email=${user.email}&bNo=<%= request.getParameter("bNo") %>&aNo=<%= request.getParameter("aNo") %>&tNo=<%= request.getParameter("tNo") %>">
+            	<form class="form-horizontal wizard-big" method="post" enctype="multipart/form-data" action="/file?email=${user.email}&aNo=<%= request.getParameter("aNo") %>">
 					<div class="box-body">
 						<div class="form-group" style="display: none;">
 		                  <label for="writeUser" class="col-sm-2 control-label">날짜</label>

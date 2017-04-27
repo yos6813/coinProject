@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.persistence.UserDAO">
 	<insert id="create" parameterType="org.zerock.persistence.User">
-		insert into usertbl (email, username, photoURL, nickname, slackID, joinDate, address, address2, extension, workPhone, phone, coin, grade, workCondition) values
-		(#{email},#{username},#{photoURL},#{nickname},#{slackID},#{joinDate},#{address},#{address2},#{extension},#{workPhone},#{phone},"1000","2", "재직")
+		insert into usertbl (email, username, photoURL, nickname, slackID, joinDate, address, address2, extension, workPhone, phone, grade, workCondition, coin) values
+		(#{email},#{username},#{photoURL},#{nickname},#{slackID},#{joinDate},#{address},#{address2},#{extension},#{workPhone},#{phone},"1", "재직", "1000")
 	</insert>
 	
 	<select id="listAll" parameterType="map" resultType="org.zerock.persistence.User">
@@ -17,7 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="update">
-		update usertbl set coin=#{coin2} where email = #{email};
+		update usertbl set coin=#{coin} where email = #{email};
+	</update>
+	
+	<update id="updateCoin">
+		update usertbl set coin=#{coin} + coin where email = #{useText};
+	</update>
+	
+	<update id="updateCoin2">
+		update usertbl set coin= #{userCoin} where email = #{email};
 	</update>
 	
 	<update id="update2">

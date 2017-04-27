@@ -28,7 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertProject" parameterType="org.zerock.persistence.Project">
-		insert into projectTbl(pName, projectDate, adminUser, status) values(#{pName}, #{projectDate}, #{adminUser}, #{status});
+		insert into projectTbl(pName, projectDate, adminUser, status) values(#{pName}, #{projectDate}, #{adminUser}, "진행중");
+		
+		<selectKey keyProperty="no" resultType="int">
+			select last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<insert id="insertTOA" parameterType="org.zerock.persistence.Project">

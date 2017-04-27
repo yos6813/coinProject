@@ -48,4 +48,14 @@ public class UserServiceImpl implements UserService{
 	public List<User> userListAll(User vo) {
 		return dao.userListAll(vo);
 	}
+
+	@Override
+	public void updateCoin(User vo) {
+		dao.updateCoin(vo);
+	}
+
+	@Override
+	public void updateCoin2(User vo) {
+		dao.updateCoin2(vo);
+	}
 }

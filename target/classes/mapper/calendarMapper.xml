@@ -10,4 +10,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="scheduleList" resultType="org.zerock.persistence.Calendar">
 		select * from calendarTbl;
 	</select>
+	
+	<select id="scheduleList1" resultType="org.zerock.persistence.Calendar">
+		select * from calendarTbl where email = #{email};
+	</select>
+	
+	<select id="annualList" resultType="org.zerock.persistence.Calendar">
+		select a.id, a.email, a.annualNum, a.annual, u.username, u.photoURL, u.nickname, u.slackID, u.joinDate,
+			   u.address, u.address2, u.extension, u.workPhone, u.phone, u.coin, u.grade, u.workCondition,
+			   (select sum(annualNum) from requestTbl where email=#{email} and acceptcheck="승인") as useAnnual
+		from annualTbl a left outer join userTbl u on a.email = u.email
+		where u.email = #{email} order by a.email;
+	</select>
+	
+	<select id="annualListAll" resultType="org.zerock.persistence.Calendar">
+		select a.id, a.email, a.annualNum, a.annual, r.division, r.start, r.end, r.acceptcheck, u.username, u.photoURL, u.nickname, u.slackID, u.joinDate,
+			   u.address, u.address2, u.extension, u.workPhone, u.phone, u.coin, u.grade, u.workCondition, sum(r.annualNum) as useAnnual
+		from annualTbl a left outer join requesttbl r on a.email = r.email
+						 left outer join userTbl u on a.email = u.email
+        group by a.email having a.email != 'atnp9717@happypay.co.kr';
+	</select>
+	
+	<select id="searchUserAnnual" resultType="org.zerock.persistence.Calendar">
+		select a.id, a.email, a.annualNum, a.annual, r.division, r.start, r.end, r.acceptcheck, u.username, u.photoURL, u.nickname, u.slackID, u.joinDate,
+			   u.address, u.address2, u.extension, u.workPhone, u.phone, u.coin, u.grade, u.workCondition, sum(r.annualNum) as useAnnual
+		from annualTbl a left outer join requesttbl r on a.email = r.email
+						 left outer join userTbl u on a.email = u.email
+        group by a.email having a.id = #{id};
+	</select>
+	
+	<select id="holidayCount" resultType="org.zerock.persistence.Calendar">
+		select count(*) as count from holidayTbl where holiday >= #{start} and #{end} >= holiday;
+	</select>
+	
+	<insert id="annualRequest">
+		insert into requestTbl(email, division, start, end, acceptcheck, annualNum, requestDate)
+		values (#{email}, #{division}, #{start}, #{end}, "승인대기", #{annualNum}, #{requestDate});
+	</insert>
+	
+	<update id="updateAnnual">
+		update annualTbl set annualNum = #{annualNum} + annualNum, annual = #{annualNum} + annual where id = #{id};
+	</update>
+	
+	<select id="annualManager" resultType="org.zerock.persistence.Calendar">
+		select * from managerTbl m left outer join userTbl u on m.email = u.email where division = "연차";
+	</select>
+	
+	<select id="articleManager" resultType="org.zerock.persistence.Calendar">
+		select * from managerTbl m left outer join userTbl u on m.email = u.email where division = "물품구매신청";
+	</select>
+	
+	<select id="bookManager" resultType="org.zerock.persistence.Calendar">
+		select * from managerTbl m left outer join userTbl u on m.email = u.email where division = "도서";
+	</select>
 </mapper>

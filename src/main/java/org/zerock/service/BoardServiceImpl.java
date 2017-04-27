@@ -60,8 +60,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> ActivityList1(Board board) {
-		return dao.ActivityList1(board);
+	public List<Board> ActivityList1(Criteria cri) {
+		return dao.ActivityList1(cri);
 	}
 
 	@Override
@@ -185,8 +185,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> selectUserWorkLog(int tNo) {
-		return dao.selectUserWorkLog(tNo);
+	public List<Board> selectUserWorkLog(int aNo) {
+		return dao.selectUserWorkLog(aNo);
 	}
 
 	@Override
@@ -197,5 +197,15 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> infiniteScrollDown(String wNo) {
 		return dao.infiniteScrollDown(wNo);
+	}
+
+	@Override
+	public void updateProject(Board board) {
+		dao.updateProject(board);
+	}
+
+	@Override
+	public Board viewActivityLog(int aNo) {
+		return dao.viewActivityLog(aNo);
 	}
 }

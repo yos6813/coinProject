@@ -20,7 +20,22 @@ public class User {
 	
 	String email3;
 	String workCondition;
+	
+	int userCoin;
+	String useText;
 
+	public int getUserCoin() {
+		return userCoin;
+	}
+	public void setUserCoin(int userCoin) {
+		this.userCoin = userCoin;
+	}
+	public String getUseText() {
+		return useText;
+	}
+	public void setUseText(String useText) {
+		this.useText = useText;
+	}
 	public String getWorkCondition() {
 		return workCondition;
 	}

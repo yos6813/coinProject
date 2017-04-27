@@ -77,8 +77,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> ActivityList1(Board board) {
-		return session.selectList(namespace + ".ActivityList1", board);
+	public List<Board> ActivityList1(Criteria cri) {
+		return session.selectList(namespace + ".ActivityList1", cri);
 	}
 
 	@Override
@@ -197,8 +197,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> selectUserWorkLog(int tNo) {
-		return session.selectList(namespace + ".selectUserWorkLog", tNo);
+	public List<Board> selectUserWorkLog(int aNo) {
+		return session.selectList(namespace + ".selectUserWorkLog", aNo);
 	}
 
 	@Override
@@ -209,5 +209,15 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<Board> infiniteScrollDown(String wNo) {
 		return session.selectList(namespace+ ".infiniteScrollDown", wNo);
+	}
+
+	@Override
+	public void updateProject(Board board) {
+		session.update(namespace + ".updateProject", board);
+	}
+
+	@Override
+	public Board viewActivityLog(int aNo) {
+		return session.selectOne(namespace + ".viewActivityLog", aNo);
 	}
 }

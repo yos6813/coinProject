@@ -37,23 +37,26 @@
 							</div>
 						<table class="table">
 							<tr>
-								<th style="width:50px">#</th>
 								<th style="width:100px">상태</th>
-								<th style="width: 200px">기간</th>
 								<th>프로젝트명</th>
-								<th>관리자</th>
-								<th>프로젝트 매니저</th>
-								<th style="width: 150px">일자</th>
+								<th>매니저</th>
+								<th style="width: 200px">기간</th>
+								<th>전체</th>
+								<th>진행</th>
+								<th>완료</th>
 							</tr>
 							<c:forEach items="${list}" var="board">
 								<tr class="projectList" value="${board.bNo}">
-									<td style="width:50px">${board.bNo}</td>
 									<td><p class="label boardStatus">${board.status}</p></td>
-									<td style="width: 200px">${board.projectDate}<br/><small></small></td>
 									<td style="width: 150px">${board.pName}</td>
-									<td><img class="img-circle" src="${board.writePhoto}"><br/><small>${board.writeName}</small> </td>
 									<td><img class="img-circle" src="${board.pmPhoto}"><br/><small>${board.pmName}</small></td>
-									<td style="width: 150px">${board.writeDate}</td>
+									<td style="width: 200px">
+										<strong class="projectDday"></strong><br/>
+										<small class="projectDay">${board.projectDate}</small>
+									</td>
+									<td><a href="projectView?email=<%= request.getParameter("email") %>&bNo=${board.bNo}" class="text-primary">${board.listAll}</a></td>
+									<td><a href="projectView?email=<%= request.getParameter("email") %>&bNo=${board.bNo}&aStatus=진행중" class="text-danger">${board.ongoing}</a></td>
+									<td><a href="projectView?email=<%= request.getParameter("email") %>&bNo=${board.bNo}&aStatus=완료" class="text-success">${board.success}</a></td>
 								</tr>
 							</c:forEach>
 						</table>

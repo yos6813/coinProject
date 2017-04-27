@@ -45,25 +45,27 @@ public class Board {
 	String aStatus;
 	String aMName;
 	
-	//Task
-	int tNo;
-	String tName;
-	String tDate;
-	String tStatus;
-	String tM;
-	String tText;
-	String tWriteD;
-	String tWriteU;
-	String tMName;
-	String tWriteName;
-	String tMPhoto;
-	String tWritePhoto;
+//	//Task
+//	int tNo;
+//	String tName;
+//	String tDate;
+//	String tStatus;
+//	String tM;
+//	String tText;
+//	String tWriteD;
+//	String tWriteU;
+//	String tMName;
+//	String tWriteName;
+//	String tMPhoto;
+//	String tWritePhoto;
 	
 	//view Project
 	int ongoing;
 	int standby;
 	int complete;
 	int defer;
+	int listAll;
+	int success;
 	
 	//view Project
 	int ongoing1;
@@ -78,6 +80,18 @@ public class Board {
 	String wDate, wText, wTimeH, wTimeM, wWriteDate, wUser, wFileName, day, time, ctName;
 	MultipartFile wfile;
 	
+	public int getSuccess() {
+		return success;
+	}
+	public void setSuccess(int success) {
+		this.success = success;
+	}
+	public int getListAll() {
+		return listAll;
+	}
+	public void setListAll(int listAll) {
+		this.listAll = listAll;
+	}
 	public String getCtName() {
 		return ctName;
 	}
@@ -222,78 +236,78 @@ public class Board {
 	public void setDefer(int defer) {
 		this.defer = defer;
 	}
-	public String gettMName() {
-		return tMName;
-	}
-	public void settMName(String tMName) {
-		this.tMName = tMName;
-	}
-	public String gettWriteName() {
-		return tWriteName;
-	}
-	public void settWriteName(String tWriteName) {
-		this.tWriteName = tWriteName;
-	}
-	public String gettMPhoto() {
-		return tMPhoto;
-	}
-	public void settMPhoto(String tMPhoto) {
-		this.tMPhoto = tMPhoto;
-	}
-	public String gettWritePhoto() {
-		return tWritePhoto;
-	}
-	public void settWritePhoto(String tWritePhoto) {
-		this.tWritePhoto = tWritePhoto;
-	}
-	public int gettNo() {
-		return tNo;
-	}
-	public void settNo(int tNo) {
-		this.tNo = tNo;
-	}
-	public String gettName() {
-		return tName;
-	}
-	public void settName(String tName) {
-		this.tName = tName;
-	}
-	public String gettDate() {
-		return tDate;
-	}
-	public void settDate(String tDate) {
-		this.tDate = tDate;
-	}
-	public String gettStatus() {
-		return tStatus;
-	}
-	public void settStatus(String tStatus) {
-		this.tStatus = tStatus;
-	}
-	public String gettM() {
-		return tM;
-	}
-	public void settM(String tM) {
-		this.tM = tM;
-	}
-	public String gettText() {
-		return tText;
-	}
-	public void settText(String tText) {
-		this.tText = tText;
-	}
-	public String gettWriteD() {
-		return tWriteD;
-	}
-	public void settWriteD(String tWriteD) {
-		this.tWriteD = tWriteD;
-	}
-	public String gettWriteU() {
-		return tWriteU;
-	}
-	public void settWriteU(String tWriteU) {
-		this.tWriteU = tWriteU;
-	}
+//	public String gettMName() {
+//		return tMName;
+//	}
+//	public void settMName(String tMName) {
+//		this.tMName = tMName;
+//	}
+//	public String gettWriteName() {
+//		return tWriteName;
+//	}
+//	public void settWriteName(String tWriteName) {
+//		this.tWriteName = tWriteName;
+//	}
+//	public String gettMPhoto() {
+//		return tMPhoto;
+//	}
+//	public void settMPhoto(String tMPhoto) {
+//		this.tMPhoto = tMPhoto;
+//	}
+//	public String gettWritePhoto() {
+//		return tWritePhoto;
+//	}
+//	public void settWritePhoto(String tWritePhoto) {
+//		this.tWritePhoto = tWritePhoto;
+//	}
+//	public int gettNo() {
+//		return tNo;
+//	}
+//	public void settNo(int tNo) {
+//		this.tNo = tNo;
+//	}
+//	public String gettName() {
+//		return tName;
+//	}
+//	public void settName(String tName) {
+//		this.tName = tName;
+//	}
+//	public String gettDate() {
+//		return tDate;
+//	}
+//	public void settDate(String tDate) {
+//		this.tDate = tDate;
+//	}
+//	public String gettStatus() {
+//		return tStatus;
+//	}
+//	public void settStatus(String tStatus) {
+//		this.tStatus = tStatus;
+//	}
+//	public String gettM() {
+//		return tM;
+//	}
+//	public void settM(String tM) {
+//		this.tM = tM;
+//	}
+//	public String gettText() {
+//		return tText;
+//	}
+//	public void settText(String tText) {
+//		this.tText = tText;
+//	}
+//	public String gettWriteD() {
+//		return tWriteD;
+//	}
+//	public void settWriteD(String tWriteD) {
+//		this.tWriteD = tWriteD;
+//	}
+//	public String gettWriteU() {
+//		return tWriteU;
+//	}
+//	public void settWriteU(String tWriteU) {
+//		this.tWriteU = tWriteU;
+//	}
 	public String getaStatus() {
 		return aStatus;
 	}

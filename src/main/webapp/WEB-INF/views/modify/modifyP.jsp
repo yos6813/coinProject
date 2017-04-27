@@ -20,18 +20,12 @@
 					<div class="ibox-content">
 						<form class="form-horizontal wizard-big" method="post" action="/modifyBoard?email=${user.email}&bNo=${board.bNo}">
 			              <div class="box-body">
-			                <div class="form-group">
-			                  <label for="status" class="col-sm-2 control-label">상태</label>
-			                  <div class="col-sm-10">
-			                    <input type="hidden" class="form-control" id="status" value="${board.status}" readonly="readonly">
-			                    <select id="pStatusSel" name="status" class="form-control">
-			                    	<option value="진행중">진행중</option>
-			                    	<option value="완료">완료</option>
-			                    	<option value="대기">대기</option>
-			                    	<option value="보류">보류</option>
-			                    	<option value="기간초과">기간초과</option>
-			                    </select>
-			                  </div>
+			              	<div class="form-group">
+		                		<label class="col-sm-2 control-label">프로젝트명</label>
+			                 	<div class="col-sm-10">
+			                 	<input type="hidden" class="form-control" name="pNo" value="${board.pNo}">
+			                		<input type="text" class="form-control" name="pName" value="${board.pName}">
+			                  	</div>
 			                </div>
 			                <div class="form-group">
 								<label for="projectDate" class="col-sm-2 control-label">기간</label>
@@ -46,12 +40,6 @@
 			                  	</div>
 			                </div>
 			                <div class="form-group">
-		                		<label class="col-sm-2 control-label">예산</label>
-			                 	<div class="col-sm-10">
-			                 		 <input name="budget" type="text" value="${board.budget}" class="form-control">
-			                  	</div>
-			                </div>
-			                <div class="form-group">
 		                		<label class="col-sm-2 control-label">프로젝트 매니저</label>
 			                 	<div class="col-sm-10">
 			                 		<input type="hidden" class="form-control" id="pM1" value="${board.pm}" readonly="readonly">
@@ -62,11 +50,17 @@
 					                </select>
 			                  	</div>
 			                </div>
+			                <div class="form-group">
+		                		<label class="col-sm-2 control-label">예산</label>
+			                 	<div class="col-sm-10">
+			                 		 <input name="budget" type="text" value="${board.budget}" class="form-control" placeholder="필요 시 작성">
+			                  	</div>
+			                </div>
 			              </div>
 			              <!-- /.box-body -->
-			              <div class="box-footer">
-			                <button class="btn btn-default">Cancel</button>
-			                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+			              <div class="box-footer text-right">
+			                <button class="btn btn-default">취소</button>
+			                <button type="submit" class="btn btn-info">수정</button>
 			              </div>
 			              <!-- /.box-footer -->
 			            </form>

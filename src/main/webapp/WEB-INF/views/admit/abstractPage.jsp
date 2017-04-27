@@ -13,7 +13,7 @@
         <li class="active">admit</li>
       </ol>
 </div>
-   <div class="wrapper-content">
+<div class="wrapper-content">
     <div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<!-- 적요1 -->	

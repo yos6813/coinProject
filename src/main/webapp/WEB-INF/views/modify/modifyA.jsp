@@ -60,19 +60,6 @@
 						<form class="form-horizontal wizard-big" method="post" action="/modifyActivity?email=${user.email}&bNo=${board.bNo}&aNo=${board.aNo}">
 			              <div class="box-body">
 			                <div class="form-group">
-			                  <label for="status" class="col-sm-2 control-label">상태</label>
-			                  <div class="col-sm-10">
-			                    <input type="hidden" class="form-control" id="aStatus" value="${board.aStatus}" readonly="readonly">
-			                    <select id="aStatusSel" name="aStatus" class="form-control">
-			                    	<option value="진행중">진행중</option>
-			                    	<option value="완료">완료</option>
-			                    	<option value="대기">대기</option>
-			                    	<option value="보류">보류</option>
-			                    	<option value="기간초과">기간초과</option>
-			                    </select>
-			                  </div>
-			                </div>
-			                <div class="form-group">
 								<label for="projectDate" class="col-sm-2 control-label">기간</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" value="${board.aDate}" name="aDate" id="projectDate1">
@@ -103,9 +90,9 @@
 			                </div>
 			              </div>
 			              <!-- /.box-body -->
-			              <div class="box-footer">
-			                <button class="btn btn-default">Cancel</button>
-			                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+			              <div class="box-footer text-right">
+			                <button class="btn btn-default">취소</button>
+			                <button type="submit" class="btn btn-info">수정</button>
 			              </div>
 			              <!-- /.box-footer -->
 			            </form>

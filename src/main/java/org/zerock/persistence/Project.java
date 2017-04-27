@@ -12,7 +12,14 @@ public class Project {
 	int standby1;
 	int complete1;
 	int bNo;
+	int no;
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public int getbNo() {
 		return bNo;
 	}

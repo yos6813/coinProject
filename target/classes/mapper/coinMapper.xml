@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.persistence.CoinDAO">
+	<insert id="productInsert" parameterType="org.zerock.persistence.Coin">
+		insert into productTbl (name, text, price) values (#{name}, #{text}, #{price});
+	</insert>
+	
+	<select id="productList" resultType="org.zerock.persistence.Coin">
+		select * from productTbl;
+	</select>
+	
+	<select id="productSelect" resultType="org.zerock.persistence.Coin">
+		select * from productTbl where id = #{id};
+	</select>
+	
+	<insert id="shoppingList" parameterType="org.zerock.persistence.Coin">
+		insert into useCoinTbl(useText, useDate, etc, useCoin, email, division)
+		values(#{useText}, #{useDate}, #{etc}, #{useCoin}, #{email}, #{division});
+	</insert>
+	
+	<update id="updateCoin">
+		update userTbl set coin = #{tradeCoin} where email = #{email};
+	</update>
+	
+	<select id="useCoinList" resultType="org.zerock.persistence.Coin">
+		select * from useCoinTbl where email = #{email};
+	</select>
+	
+	<select id="useCoinSum" resultType="org.zerock.persistence.Coin">
+		select u.*, (select sum(useCoin) from useCoinTbl c where c.email = #{email} and (division="출금" or  division = "상품구매")) as useCoin
+						 from userTbl u where email = #{email};
+	</select>
+</mapper>

@@ -8490,7 +8490,7 @@ body.md-skin {
 	border: none !important;
 }
 
-#wText, #fText{
+#wText, #fText, #productText, #breason, #rReason, #coinText{
 	width: 100%;
 	height:200px;
 	resize:none;
@@ -8514,6 +8514,11 @@ body.md-skin {
   margin-bottom: 10px;
   margin-top: 0;
   padding: 0;
+}
+
+.ibox_1 {
+  clear: both;
+  margin-bottom: 10px;
 }
 
 .ibox2 {
@@ -8585,6 +8590,18 @@ body.md-skin {
 	border-bottom: 1px;
 }
 
+.annualTable{
+/* 	border: 0 !important; */
+	width: 95%;
+}
+
+.annualTable tr{
+	border-top: 0;
+	border-right: 0;
+	border-left: 0;
+	border-bottom: 1px;
+}
+
 .borderBox123, .borderBox{
 	border: 1px solid #c0c0c0;
 }
@@ -8599,6 +8616,11 @@ body.md-skin {
 	border: 1px solid #27ad90;
 }
 
+.backgroundColor1{
+	background-color: #c0c0c0;
+	color: #fff;
+}
+
 .marginTopnBottom{
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -8610,4 +8632,24 @@ body.md-skin {
  	margin-bottom: 0;
   	margin-top: 10px;
   	padding: 0;
+}
+
+.numInput{
+	background-color: #FFFFFF;
+	background-image: none;
+	border: 1px solid #e5e6e7;
+	border-radius: 1px;
+	color: inherit;
+	display: block;
+	padding: 6px 12px;
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	font-size: 14px;
+}
+
+.marginRight{
+	margin-right: 10px;
+}
+
+.img-circle1 {
+  border-radius: 50%;
 }

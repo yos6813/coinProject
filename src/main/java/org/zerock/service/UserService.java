@@ -19,4 +19,7 @@ public interface UserService {
 	public List<User> listAll2(String email);
 	
 	public List<User> userListAll(User vo);
+	
+	public void updateCoin(User vo);
+	public void updateCoin2(User vo);
 }

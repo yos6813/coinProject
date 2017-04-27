@@ -8,10 +8,37 @@ public class Criteria {
 	int aNo;
 	int tNo;
 	int wNo;
+	int id;
+	String check;
 	
 	String keyword;
 	String type;
+	String aStatus;
 	
+	public String getaStatus() {
+		return aStatus;
+	}
+
+	public void setaStatus(String aStatus) {
+		this.aStatus = aStatus;
+	}
+
+	public String getCheck() {
+		return check;
+	}
+
+	public void setCheck(String check) {
+		this.check = check;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getKeyword() {
 		return keyword;
 	}
@@ -62,7 +89,7 @@ public class Criteria {
 
 	public Criteria(){
 		this.page = 1;
-		this.perPageNum = 5;
+		this.perPageNum = 10;
 	}
 	
 	public void setPage(int page){
@@ -78,7 +105,7 @@ public class Criteria {
 	public void setPerPageNum(int perPageNum){
 		
 		if(perPageNum <= 0 || perPageNum > 100){
-			this.perPageNum = 5;
+			this.perPageNum = 10;
 			return;
 		}
 		

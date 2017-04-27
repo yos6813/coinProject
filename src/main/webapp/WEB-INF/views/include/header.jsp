@@ -23,7 +23,7 @@
 
     <link href="resources/css/animate.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet">
-    <link href="resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="resources/css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
     <link href="resources/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
     <link href="resources/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
     <link href="resources/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -56,23 +56,66 @@
                     <li><a href="/voteList?email=${user.email}"><i class="fa fa-bar-chart-o"></i><span>설문조사</span></a></li>
                     <li><a href="/projectList?email=${user.email}"><i class="fa fa-home"></i><span>업무관리</span></a></li>
 		            <li><a href="/cardList?email=${user.email}"><i class="fa fa-credit-card"></i> <span>법인카드사용내역관리</span></a></li>
-		            <li><a href="/test?email=${user.email}"><i class="fa fa-calendar"></i> <span>스케쥴표</span></a></li>
 		            <li>
-                        <a><i class="fa fa-table"></i> <span>관리페이지</span></a>
+                        <a><i class="fa fa-calendar"></i> <span>휴가</span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="/admit?email=${user.email}">프로젝트</a>
-                            </li>
-                            <li>
-                                <a href="/abstractPage?email=${user.email}&abNo=1&page=1">적요</a>
-                            </li>
-                            <li>
-                                <a href="/clientList?email=${user.email}">고객관리</a>
+                                <a href="/calendar?email=${user.email}">휴직관리</a>
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a><i class="fa fa-pencil-square"></i> <span>각종신청</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/book?email=${user.email}">도서 구매 신청</a>
+                            </li>
+                            <li>
+                                <a href="/article?email=${user.email}">물품 구매 신청</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-krw"></i> <span>코인관리</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/coinmall?email=${user.email}">코인몰</a>
+                            </li>
+                            <li>
+                                <a href="/coinTrade?email=${user.email}">코인송금</a>
+                            </li>
+                            <li>
+                                <a href="/myCoin?email=${user.email}">나의 코인현황</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <c:set value="${user.grade}" var="grade"></c:set>
+					<c:if test="${grade > 1 }">
+	                    <li>
+	                        <a><i class="fa fa-table"></i> <span>관리페이지</span></a>
+	                        <ul class="nav nav-second-level collapse">
+<!-- 	                            <li> -->
+<%-- 	                                <a href="/admit?email=${user.email}">프로젝트</a> --%>
+<!-- 	                            </li> -->
+	                            <li>
+	                                <a href="/abstractPage?email=${user.email}&abNo=1&page=1">적요</a>
+	                            </li>
+	                            <li>
+	                                <a href="/clientList?email=${user.email}">고객관리</a>
+	                            </li>
+	                            <li>
+	                                <a href="/annual?email=${user.email}">연차관리</a>
+	                            </li>
+	                            <li>
+	                                <a href="/requestAdmit?email=${user.email}">결재 요청 현황</a>
+	                            </li>
+	                            <li>
+	                                <a href="/managers?email=${user.email}">담당자관리</a>
+	                            </li>
+	                        </ul>
+	                    </li>
+                    </c:if>
                 </ul>
-
             </div>
         </nav>
         <div id="page-wrapper" class="gray-bg dashbard-1 body">

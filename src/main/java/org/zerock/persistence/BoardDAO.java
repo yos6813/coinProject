@@ -23,7 +23,7 @@ public interface BoardDAO {
 	public int countTPaging(Criteria cri);
 	public int countWPaging(Criteria cri);
 	
-	public List<Board> ActivityList1(Board board);
+	public List<Board> ActivityList1(Criteria cri);
 	
 	public void insertTask(Board board);
 	public List<Board> listTask(Criteria cri);
@@ -43,6 +43,7 @@ public interface BoardDAO {
 	public void updateP(Board board);
 	public void updateA(Board board);
 	public void updateT(Board board);
+	public void updateProject(Board board);
 	
 	public List<Board> countPercent(int bNo);
 	
@@ -52,7 +53,9 @@ public interface BoardDAO {
 	public void insertWorkLog(Board board);
 	public List<Board> selectWorkLog(Criteria cri);
 	
-	public List<Board> selectUserWorkLog(int tNo);
+	public List<Board> selectUserWorkLog(int aNo);
 	
 	public List<Board> infiniteScrollDown(String wNo);
+	
+	public Board viewActivityLog(int aNo);
 }

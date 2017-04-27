@@ -82,7 +82,8 @@
 <script src="/resources/js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script>
 $('#joinDate').datepicker({
-    autoclose: true
+    autoclose: true,
+    format: 'yyyy-mm-dd'
 });
 
 firebase.auth().onAuthStateChanged(function(user){
@@ -92,7 +93,6 @@ firebase.auth().onAuthStateChanged(function(user){
 		var email = user.email;
 		var imageUrl = user.photoURL;
 		writeUserInfo(userId, name, email, imageUrl);
-		console.log("test");
 	}
 })
 </script>

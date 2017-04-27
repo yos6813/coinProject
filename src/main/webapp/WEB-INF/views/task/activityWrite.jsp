@@ -84,17 +84,6 @@
 								</div>
 			                </div>
 			                <div class="form-group">
-			                	<label for="projectDate" class="col-sm-2 control-label">상태</label>
-			                	<div class="col-sm-10">
-									<select class="form-control" name="aStatus">
-										<option value="진행중">진행중</option>
-										<option value="대기">대기</option>
-										<option value="완료">완료</option>
-										<option value="보류">보류</option>
-									</select>
-								</div>
-							</div>
-			                <div class="form-group">
 		                		<label class="col-sm-2 control-label">액티비티 매니저</label>
 			                 	<div class="col-sm-10">
 			                 		<select class="form-control" name="aM" style="width: 100%;">

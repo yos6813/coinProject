@@ -2,11 +2,8 @@ package com.coin.coin_projec;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,13 +20,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.persistence.Admit;
 import org.zerock.persistence.Card;
-import org.zerock.persistence.PageMaker;
 import org.zerock.persistence.User;
 import org.zerock.service.AdmitService;
 import org.zerock.service.CardService;
 import org.zerock.service.UserService;
-import org.zerock.util.ExcelRead;
-import org.zerock.util.ExcelReadOption;
 
 @Controller
 public class cardController {

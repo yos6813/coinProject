@@ -35,38 +35,20 @@
 			                <div class="form-group">
 		                		<label class="col-sm-2 control-label">프로젝트명</label>
 			                 	<div class="col-sm-10">
-			                 		<select class="form-control" id="projectName" name="pNo" style="width: 100%;">
-			                 				<option id="select">선택</option>	
-			                 			<c:forEach items="${list}" var="project">
-					                		<option value="${project.pNo}">${project.pName}</option>
-					                	</c:forEach>
-					                </select>
+			                		<input type="text" class="form-control" name="pName">
+			                		<input type="hidden" value="${user.email}" name="adminUser">
 			                  	</div>
 			                </div>
 			                <div class="form-group">
-			                  <label for="status" class="col-sm-2 control-label">상태</label>
-			                  <div class="col-sm-10">
-			                    <input type="text" class="form-control" id="status" name="status" value="${project.status}" readonly="readonly">
-			                  </div>
-			                </div>
-			                <div class="form-group" id="startDateForm">
 								<label for="projectDate" class="col-sm-2 control-label">기간</label>
 								<div class="col-sm-10">
-									<c:if test="${project.pNo>0}">
-										<input type="text" class="form-control" value="${project.projectDate}" name="projectDate" id="projectDate1" readonly="readonly">
-									</c:if>
+									<input type="text" class="form-control" name="projectDate" id="projectDate1">
 								</div>
 			                </div>
 			                <div class="form-group">
 		                		<label class="col-sm-2 control-label">설명</label>
 			                 	<div class="col-sm-10">
 			                 		 <textarea name="text" id="pText" placeholder="내역을 적어주세요."></textarea>
-			                  	</div>
-			                </div>
-			                <div class="form-group">
-		                		<label class="col-sm-2 control-label">예산</label>
-			                 	<div class="col-sm-10">
-			                 		 <input name="budget" type="text" class="form-control">
 			                  	</div>
 			                </div>
 			                <div class="form-group">
@@ -79,11 +61,17 @@
 					                </select>
 			                  	</div>
 			                </div>
+			                <div class="form-group">
+		                		<label class="col-sm-2 control-label">예산</label>
+			                 	<div class="col-sm-10">
+			                 		 <input name="budget" type="text" class="form-control" value="0">
+			                  	</div>
+			                </div>
 			              </div>
 			              <!-- /.box-body -->
-			              <div class="box-footer">
-			                <a class="cancel btn btn-default">Cancel</a>
-			                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+			              <div class="box-footer text-right">
+			                <a class="cancel btn btn-default">취소</a>
+			                <button type="submit" class="btn btn-info">생성하기</button>
 			              </div>
 			              <!-- /.box-footer -->
 			            </form>

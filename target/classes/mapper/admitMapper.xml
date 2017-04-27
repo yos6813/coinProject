@@ -26,4 +26,125 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countPaging" resultType="int">
 		select count(abNo) from abstractTbl where abNo > 0;
 	</select>
+	
+	<select id="annualList" resultType="org.zerock.persistence.Admit">
+		select * from annualTbl a left outer join userTbl u on a.email = u.email;
+	</select>
+	
+	<insert id="insertAnnual" parameterType="org.zerock.persistence.Admit">
+		insert into annualTbl (email, annualNum, annual) values (#{email1}, #{annualNum}, #{annualNum});
+	</insert>
+	
+	<update id="updateAnnual">
+		update annualTbl set annualNum = annualNum + #{annualNum} where email = #{email1};
+	</update>
+	
+	<select id="managerList" resultType="org.zerock.persistence.Admit">
+		select * from managerTbl m left outer join userTbl u on m.email = u.email;
+	</select>
+	
+	<insert id="holidayInsert" parameterType="org.zerock.persistence.Admit">
+		insert into holidayTbl (holiday, holidayName) values (#{holiday}, #{holidayName});
+	</insert>
+	
+	<insert id="divisionInsert" parameterType="org.zerock.persistence.Admit">
+		insert into managerTbl (email, division) values (#{email1}, #{division});
+	</insert>
+	
+	<update id="userGradeUpdate">
+		update userTbl set grade = '2' where email = #{email1};
+	</update>
+	
+	<update id="userGradeUpdate2">
+		update userTbl set grade = '1' where email in (select email from manager where id = #{id});
+	</update>
+	
+	<update id="managerUpdate">
+		update managerTbl set division = #{division} where id = #{id};
+	</update>
+	
+	<delete id="managerDelete">
+		delete from managerTbl where id = ${id};
+	</delete>
+	
+	<select id="managerSelect" resultType="org.zerock.persistence.Admit">
+		select * from managerTbl m left outer join userTbl u on m.email = u.email where id = #{id};
+	</select>
+	
+	<select id="requestList" parameterType="list" resultType="org.zerock.persistence.Admit">
+		select * from requestTbl r left outer join userTbl u on r.email = u.email 
+		<if test="check != null">
+			<if test="check != '전체'">
+				where acceptcheck = #{check}
+			</if>
+		</if>
+		order by id desc;
+	</select>
+	
+	<select id="requestInfo" resultType="org.zerock.persistence.Admit">
+		select * from requestTbl r left outer join userTbl u on r.email = u.email where id = #{id};
+	</select>
+	
+	<select id="bookRequestList" parameterType="list" resultType="org.zerock.persistence.Admit">
+		select * from bookRequestTbl b left outer join userTbl u on b.email = u.email
+		<if test="check != null">
+			<if test="check != '전체'">
+				where acceptcheck = #{check}
+			</if>
+		</if>
+		order by id desc;
+	</select>
+	
+	<select id="bookInfo" resultType="org.zerock.persistence.Admit">
+		select * from bookRequestTbl r left outer join userTbl u on r.email = u.email where id = #{id};
+	</select>
+
+	<select id="articleRequestList" parameterType="list" resultType="org.zerock.persistence.Admit">
+		select * from goodsRequestTbl g left outer join userTbl u on g.email = u.email
+		<if test="check != null">
+			<if test="check != '전체'">
+				where acceptcheck = #{check}
+			</if>
+		</if>
+		order by id desc;
+	</select>
+	
+	<select id="articleInfo" resultType="org.zerock.persistence.Admit">
+		select * from goodsRequestTbl r left outer join userTbl u on r.email = u.email where id = #{id};
+	</select>
+	
+	<update id="annualAccept">
+		UPDATE requestTbl SET acceptcheck = '승인' where id = #{id};
+	</update>
+	
+	<update id="requestDeny">
+		update requestTbl set acceptcheck = '거절' where id = #{id};
+	</update>
+	
+	<update id="bookAccept">
+		UPDATE bookRequestTbl SET acceptcheck = '승인' where id = #{id};
+	</update>
+	
+	<update id="bookDeny">
+		update bookRequestTbl set acceptcheck = '거절' where id = #{id};
+	</update>
+	
+	<update id="articleAccept">
+		UPDATE goodsRequestTbl SET acceptcheck = '승인' where id = #{id};
+	</update>
+	
+	<update id="articleDeny">
+		update goodsRequestTbl set acceptcheck = '거절' where id = #{id};
+	</update>
+	
+	<update id="userAnnualUpdate">
+		update annualTbl a left outer join requestTbl r on a.email = r.email set a.annualNum = a.annualNum - r.annualNum where r.id = #{id};
+	</update>
+	
+	<insert id="insertCalendar">
+		insert into calendarTbl(title, start, end, division)
+		values ((select username from requestTbl r left outer join userTbl u on r.email = u.email where id = #{id}),
+				(select start from requestTbl where id = #{id}), (select end from requestTbl where id = #{id}),
+				(select division from requestTbl where id = #{id}));
+	</insert>
 </mapper>

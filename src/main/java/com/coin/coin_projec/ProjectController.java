@@ -51,29 +51,15 @@ public class ProjectController {
 			User user, Project project, Criteria cri, @RequestParam (value="aNo", required=false) String aNo) {
 		model.addAttribute(service.read(email));
 		
-		if(aNo != null){
-			model.addAttribute(bService.viewActivity(aNo));
-		} else {
+		if(bService.viewBoard(bNo) != null){
 			model.addAttribute(bService.viewBoard(bNo));
 		}
-		model.addAttribute("list", bService.listBoard(board));
-		model.addAttribute("list2", bService.ActivityList1(board));
 		
-		model.addAttribute("list3", bService.countList1(board));
-		model.addAttribute("list4", bService.countList2(board));
-		model.addAttribute("list5", bService.countList3(board));
-		model.addAttribute("list6", bService.countList4(board));
-		
-		model.addAttribute("list1", bService.countTask(board));
-		model.addAttribute("list9", bService.countPercent(bNo));
-		
-		model.addAttribute("list7", bService.listTask(cri));
-		
-		model.addAttribute("list10", bService.countOrderbyUser(aNo));
+		model.addAttribute("list2", bService.ActivityList1(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCountTCriteria(cri));
+		pageMaker.setTotalCount(bService.listCountACriteria(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
@@ -94,11 +80,10 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/file", method=RequestMethod.POST)
-	public String fileSubmit(Board board, @RequestParam ("email") String email, @RequestParam ("bNo") int bNo, Model model,
-							 @RequestParam ("aNo") int aNo, @RequestParam ("tNo") int tNo, HttpSession session){
+	public String fileSubmit(Board board, @RequestParam ("email") String email, Model model,
+							 @RequestParam ("aNo") int aNo, HttpSession session){
 		
 		String uploadPath = session.getServletContext().getRealPath("resources/img");
-		System.out.println("upload path=" + uploadPath);
 		
 		MultipartFile file = board.getWfile();
 		
@@ -116,7 +101,7 @@ public class ProjectController {
 		board.setwFileName(file.getOriginalFilename());
 		bService.insertWorkLog(board);
 		
-		return "redirect:taskView?email=" + email + "&bNo=" + bNo + "&aNo=" + aNo + "&tNo=" + tNo;
+		return "redirect:taskView?email=" + email + "&aNo=" + aNo;
 	}
 
 	public String getCurrentDayTime(){

@@ -47,6 +47,7 @@ public class NotifyController {
 	@RequestMapping(value = "/notifyWrite")
 	public String notifyWrite(@RequestParam("email") String email, Locale locale, Model model, User user) {
 			model.addAttribute(service.read(email));
+			model.addAttribute("list", service.userListAll(user));
 			
 		return "notification/notifyWrite";
 	}
@@ -57,7 +58,6 @@ public class NotifyController {
 			nService.insertNotify(notify);
 			
 			String uploadPath = session.getServletContext().getRealPath("/resources/img");
-			System.out.println("upload path=" + uploadPath);
 			
 			List<MultipartFile> file = notify.getnFile();
 			
