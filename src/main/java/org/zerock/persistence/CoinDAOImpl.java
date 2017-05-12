@@ -49,4 +49,19 @@ public class CoinDAOImpl implements CoinDAO {
 		return session.selectOne(namespace + ".useCoinSum", email);
 	}
 
+	@Override
+	public void productDelete(Coin coin) {
+		session.delete(namespace + ".productDelete", coin);
+	}
+
+	@Override
+	public Coin productList1(int id) {
+		return session.selectOne(namespace + ".productList1", id);
+	}
+
+	@Override
+	public void productModify(Coin coin) {
+		session.update(namespace + ".productModify", coin);
+	}
+
 }

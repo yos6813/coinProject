@@ -32,4 +32,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select u.*, (select sum(useCoin) from useCoinTbl c where c.email = #{email} and (division="출금" or  division = "상품구매")) as useCoin
 						 from userTbl u where email = #{email};
 	</select>
+	
+	<delete id="productDelete">
+		delete from productTbl where id = #{id};
+	</delete>
+	
+	<select id="productList1" resultType="org.zerock.persistence.Coin">
+		select * from productTbl where id = #{id};
+	</select>
+	
+	<update id="productModify">
+		update productTbl set name = #{name}, text = #{text}, price = #{price} where id = #{id};
+	</update>
 </mapper>

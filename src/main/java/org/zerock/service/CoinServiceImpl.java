@@ -49,4 +49,19 @@ public class CoinServiceImpl implements CoinService{
 		return dao.useCoinSum(email);
 	}
 
+	@Override
+	public void productDelete(Coin coin) {
+		dao.productDelete(coin);
+	}
+
+	@Override
+	public Coin productList1(int id) {
+		return dao.productList1(id);
+	}
+
+	@Override
+	public void productModify(Coin coin) {
+		dao.productModify(coin);
+	}
+
 }

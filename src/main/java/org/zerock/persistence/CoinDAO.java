@@ -11,4 +11,8 @@ public interface CoinDAO {
 	public void updateCoin(Coin coin);
 	public List<Coin> useCoinList(String email);
 	public Coin useCoinSum(String email);
+	
+	public void productDelete(Coin coin);
+	public Coin productList1(int id);
+	public void productModify(Coin coin);
 }

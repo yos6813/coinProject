@@ -18,7 +18,9 @@
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
            <div class="ibox">
-           	   <a class="btn btn-white pull-right ibox_1" href="/product?email=${param.email}">상품 추가</a>
+				<c:if test="${user.grade > 1}">
+	           	   <a class="btn btn-white pull-right ibox_1" href="/product?email=${param.email}">상품 추가</a>
+				</c:if>
            	   <c:forEach items="${list1}" var="coin">
 	               <div class="ibox-content">
 	                   <div class="table-responsive">
@@ -27,7 +29,7 @@
 		                           <tr>
 		                               <td class="desc">
 	                                       <h3 class="text-success">
-	                                           ${coin.name}
+	                                           ${coin.name} 
 	                                       </h3>
 		                                   <dl class="small m-b-none">
 		                                       <dd>${coin.text}</dd>
@@ -38,11 +40,19 @@
 		                                       ${coin.price}코인
 		                                   </h3>
 		                                   <div class="m-t-sm text-right">
-		                                       <a class="btn btn-white btn-sm modalProduct" value="${coin.id}">
+		                                       <a class="btn btn-white btn-sm leftFloat modalProduct" value="${coin.id}">
 		                                       <i class="fa fa-krw"></i>구매하기</a>
 		                                   </div>
 		                               </td>
 		                           </tr>
+		                           <c:if test="${user.grade > 1}">
+		                           <tr>
+                                   		<td colspan="2">
+	                                   		<a class="btn btn-sm btn-white productDel" value="${coin.id}">상품 삭제</a>
+	                                   		<a class="btn btn-sm btn-white" href="productModify?email=${user.email}&id=${coin.id}">상품 수정</a>
+                                   		</td>
+									</tr>
+                                   </c:if>
 	                           </tbody>
 	                       </table>
 	                   </div>

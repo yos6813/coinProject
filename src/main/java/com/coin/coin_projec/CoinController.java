@@ -41,15 +41,41 @@ public class CoinController {
 	
 	@RequestMapping(value = "/product")
 	public String product(@RequestParam("email") String email, Locale locale, Model model, User user) {
-		model.addAttribute("list", service.read(email));
+		model.addAttribute(service.read(email));
 		
 		return "/coin/product";
 	}
 	
+	@RequestMapping(value = "/productModify")
+	public String productModify(@RequestParam("email") String email, @RequestParam("id") int id,
+								Locale locale, Model model, User user, Coin coin) {
+		model.addAttribute(service.read(email));
+		model.addAttribute(cService.productList1(id));
+		
+		return "/coin/modifyProduct";
+	}
+	
+	@RequestMapping(value = "/productUpdate", method=RequestMethod.POST)
+	public String productUpdate(@RequestParam("email") String email, @RequestParam("id") int id,
+								Locale locale, Model model, User user, Coin coin) {
+		model.addAttribute(service.read(email));
+		cService.productModify(coin);
+		
+		return "redirect:/coinmall?email=" + email;
+	}
+	
 	@RequestMapping(value = "/productInsert", method=RequestMethod.POST)
 	public String productInsert(@RequestParam("email") String email, Locale locale, Model model, User user, Coin coin) {
-		model.addAttribute("list", service.read(email));
+		model.addAttribute(service.read(email));
 		cService.productInsert(coin);
+		
+		return "redirect:/coinmall?email=" + email;
+	}
+	
+	@RequestMapping(value = "/productDelete", method=RequestMethod.POST)
+	public String productDelete(@RequestParam("email") String email, Locale locale, Model model, User user, Coin coin) {
+		model.addAttribute(service.read(email));
+		cService.productDelete(coin);
 		
 		return "redirect:/coinmall?email=" + email;
 	}
@@ -65,7 +91,7 @@ public class CoinController {
 	
 	@RequestMapping(value = "/shop", method=RequestMethod.POST)
 	public String shop(@RequestParam("email") String email, Locale locale, Model model, User user, Coin coin) {
-		model.addAttribute("list", service.read(email));
+		model.addAttribute(service.read(email));
 		cService.shoppingList(coin);
 		service.update(user);
 		
@@ -84,7 +110,7 @@ public class CoinController {
 	@ResponseBody
 	public String tradeCoin(@RequestParam("email") String email, @RequestParam("useText2") List<String> useText2,
 							Locale locale, Model model, User user, Coin coin) {
-		model.addAttribute("list", service.read(email));
+		model.addAttribute(service.read(email));
 		
 		for(int i=0; i<useText2.size(); i++){
 			coin.setUseText(useText2.get(i));
@@ -101,7 +127,7 @@ public class CoinController {
 	@ResponseBody
 	public String coinUpdate(@RequestParam("email") String email, @RequestParam("useText2") List<String> useText2,
 							Locale locale, Model model, User user, Coin coin) {
-		model.addAttribute("list", service.read(email));
+		model.addAttribute(service.read(email));
 		for(int i=0; i<useText2.size(); i++){
 			user.setUseText(useText2.get(i));
 			service.updateCoin(user);

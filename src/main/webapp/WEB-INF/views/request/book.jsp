@@ -74,7 +74,7 @@
 						</div>
 		 			</div>
 		 			<div class="text-right">
-		 				<button type="button" id="bookRequestBtn" class="btn btn-success">추가</button>
+		 				<button type="button" id="bookRequestBtn" class="btn btn-success">신청</button>
 		 			</div>
 				</form>
 			</div>

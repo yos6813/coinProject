@@ -22,7 +22,7 @@ var vNo = getParameterByName('vNo');
 var id = getParameterByName('id');
 
 
-  // Initialize Firebase
+// Initialize Firebase
   var config = {
     apiKey: "AIzaSyDp2pj6WSvpKOtnnRp9NwdTVZAgUalNNa8",
     authDomain: "yeta-cscenter.firebaseapp.com",
@@ -57,21 +57,6 @@ $('#signout').click(function(){
 	firebase.auth().signOut();
 	location.href="/"
 })
-
-function writeUserInfo(userId, name, email, imageUrl){
-	var infoData = {
-			name: name,
-			email: email,
-			imageUrl: imageUrl
-	};
-	
-	var newInfoKey = firebase.database().ref().child('users').push().key;
-	
-	var updates = {};
-	updates['/users/' + userId] = infoData;
-	
-	return firebase.database().ref().update(updates);
-}
 
 /* register */
 $(document).ready(function(){
@@ -326,7 +311,7 @@ $(document).ready(function(){
 		var result = confirm('글 작성을 취소하시겠습니까?');
 		if(result) {
 			//yes
-			location.replace('/cardList?email=' + email);
+			location.replace('/projectView?email=' + email + "&bNo=" + bno);
 		} else { 
 			//no 
 		} 
@@ -1824,15 +1809,44 @@ $(document).ready(function(){
 })
 
 /* product */
-
 $('#cancelProduct').click(function(){
 	var result = confirm('글 작성을 취소하시겠습니까?');
-		if(result) {
-			//yes
-			location.href="/coinmall?email=" + email;
-		} else { 
-			//no 
-		} 
+	if(result) {
+		//yes
+		location.href="/coinmall?email=" + email;
+	} else { 
+		//no 
+	} 
+})
+
+$('#cancelModify').click(function(){
+	var result = confirm('상품 수정을 취소하시겠습니까?');
+	if(result) {
+		//yes
+		location.href="/coinmall?email=" + email;
+	} else { 
+		//no 
+	} 
+})
+
+$('.productDel').click(function(){
+	var result = confirm('상품을 삭제하시겠습니까?');
+	if(result) {
+		//yes
+		var param ="&id=" + $(this).attr('value');
+		$.ajax({
+	        url : "/productDelete?email=" + email,
+	        type : 'post',
+	        data : param,
+	        dataType : 'text',
+	        success : function(data) {
+	          console.log("success");
+	          location.reload();
+	        }
+		});
+	} else { 
+		//no 
+	} 
 })
 
 $('.modalProduct').click(function(){

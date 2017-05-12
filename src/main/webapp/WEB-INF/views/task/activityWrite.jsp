@@ -102,8 +102,8 @@
 			              </div>
 			              <!-- /.box-body -->
 			              <div class="box-footer text-right">
-			                <button class="btn btn-default" id="cancel">Cancel</button>
-			                <button type="submit" class="btn btn-info">Sign in</button>
+			                <button class="btn btn-default" id="cancel">취소</button>
+			                <button type="submit" class="btn btn-info">생성</button>
 			              </div>
 			              <!-- /.box-footer -->
 			            </form>
